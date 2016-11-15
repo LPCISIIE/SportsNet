@@ -19,7 +19,8 @@ return [
             'files' => [
                 'app',
                 'auth',
-                'evenement'
+                'evenement',
+                'user'
             ]
         ],
 
