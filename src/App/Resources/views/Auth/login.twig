@@ -11,7 +11,7 @@
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
                     <form action="{{ path_for('login') }}" method="POST">
-                        {{ form.group('username', null, 'username', 'Username') }}
+                        {{ form.group('email', null, 'email', 'Email', null, 'email') }}
                         {{ form.group('password', null, 'password', 'Password', null, 'password') }}
                         <div class="checkbox">
                             <label>

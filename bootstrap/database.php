@@ -26,7 +26,6 @@ Manager::schema('default')->dropIfExists('user');
 
 Manager::schema('default')->create('user', function (Blueprint $table) {
     $table->increments('id');
-    $table->string('username')->unique();
     $table->string('email')->unique();
     $table->string('password');
     $table->string('last_name')->nullable();

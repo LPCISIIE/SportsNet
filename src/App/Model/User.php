@@ -11,13 +11,10 @@ class User extends EloquentUser
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'username',
         'email',
         'password',
         'last_name',
         'first_name',
         'permissions',
     ];
-
-    protected $loginNames = ['username', 'email'];
 }

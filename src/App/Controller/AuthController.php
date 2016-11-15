@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         if ($request->isPost()) {
             $credentials = [
-                'username' => $request->getParam('username'),
+                'email' => $request->getParam('email'),
                 'password' => $request->getParam('password')
             ];
             $remember = $request->getParam('remember') ? true : false;
@@ -38,20 +38,14 @@ class AuthController extends Controller
     public function register(Request $request, Response $response)
     {
         if ($request->isPost()) {
-            $username = $request->getParam('username');
             $email = $request->getParam('email');
             $password = $request->getParam('password');
 
             $this->validator->validate($request, [
-                'username' => V::length(6, 25)->alnum('_')->noWhitespace(),
                 'email' => V::noWhitespace()->email(),
                 'password' => V::noWhitespace()->length(6, 25),
                 'password-confirm' => V::equals($password)
             ]);
-
-            if ($this->auth->findByCredentials(['login' => $username])) {
-                $this->validator->addError('username', 'User already exists with this username.');
-            }
 
             if ($this->auth->findByCredentials(['login' => $email])) {
                 $this->validator->addError('email', 'User already exists with this email address.');
@@ -61,7 +55,6 @@ class AuthController extends Controller
                 $role = $this->auth->findRoleByName('User');
 
                 $user = $this->auth->registerAndActivate([
-                    'username' => $username,
                     'email' => $email,
                     'password' => $password,
                     'permissions' => [
