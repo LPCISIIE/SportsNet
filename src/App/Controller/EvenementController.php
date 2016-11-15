@@ -24,7 +24,8 @@ class EvenementController extends Controller
                 'date_debut' => V::date('d/m/Y'),
                 'date_fin' => V::date('d/m/Y'),
                 'telephone' => V::phone(),
-                'discipline' => V::length(1, 50)
+                'discipline' => V::length(1, 50),
+                'description' => V::notBlank()
             ]);
 
             if ($this->validator->isValid()) {
@@ -34,7 +35,8 @@ class EvenementController extends Controller
                     'date_debut' => \DateTime::createFromFormat('d/m/Y', $request->getParam('date_debut')),
                     'date_fin' => \DateTime::createFromFormat('d/m/Y', $request->getParam('date_fin')),
                     'telephone' => $request->getParam('telephone'),
-                    'discipline' => $request->getParam('discipline')
+                    'discipline' => $request->getParam('discipline'),
+                    'description' => $request->getParam('description')
                 ]);
 
                 $evenement->save();
