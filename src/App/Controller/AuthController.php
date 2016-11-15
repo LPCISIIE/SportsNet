@@ -45,8 +45,8 @@ class AuthController extends Controller
             $prenom = $request->getParam('prenom');
 
             $this->validator->validate($request, [
-                'nom' => V::noWhitespace(),
-                'prenom' => V::noWhitespace(),
+                'nom' => V::length(1,50),
+                'prenom' => V::length(1,50),
                 'email' => V::noWhitespace()->email(),
                 'password' => V::noWhitespace()->length(6, 25),
                 'password-confirm' => V::equals($password)
