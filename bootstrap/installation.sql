@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 
 
 
-CREATE TABLE `activations` (
+CREATE TABLE IF NOT EXISTS `activations` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `code` varchar(255) NOT NULL,
@@ -29,7 +29,13 @@ CREATE TABLE `activations` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `epreuve` (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `epreuve`
+--
+
+CREATE TABLE IF NOT EXISTS `epreuve` (
   `id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `capacite` int(11) NOT NULL,
@@ -40,7 +46,13 @@ CREATE TABLE `epreuve` (
   `prix` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `evenement` (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `evenement`
+--
+
+CREATE TABLE IF NOT EXISTS `evenement` (
   `id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `adresse` text NOT NULL,
@@ -52,7 +64,13 @@ CREATE TABLE `evenement` (
   `etat` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `organisateur` (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `organisateur`
+--
+
+CREATE TABLE IF NOT EXISTS `organisateur` (
   `id` int(11) NOT NULL,
   `user_id` int(10) NOT NULL,
   `nom` varchar(255) NOT NULL,
@@ -60,13 +78,25 @@ CREATE TABLE `organisateur` (
   `paypal` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `participe` (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `participe`
+--
+
+CREATE TABLE IF NOT EXISTS `participe` (
   `id_sportif` int(11) NOT NULL,
   `id_evenement` int(11) NOT NULL,
   `numero_participant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `persistences` (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `persistences`
+--
+
+CREATE TABLE IF NOT EXISTS `persistences` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `code` varchar(255) NOT NULL,
@@ -74,7 +104,13 @@ CREATE TABLE `persistences` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `reminders` (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reminders`
+--
+
+CREATE TABLE IF NOT EXISTS `reminders` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `code` varchar(255) NOT NULL,
@@ -85,7 +121,7 @@ CREATE TABLE `reminders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `roles` (
+CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(10) UNSIGNED NOT NULL,
   `slug` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -94,14 +130,34 @@ CREATE TABLE `roles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `role_users` (
+--
+-- Contenu de la table `roles`
+--
+
+INSERT INTO `roles` (`id`, `slug`, `name`, `permissions`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'Admin', '{"user.create":true,"user.update":true,"user.delete":true}', '2016-11-15 08:35:30', '2016-11-15 08:35:30'),
+(2, 'user', 'User', '{"user.update":true}', '2016-11-15 08:35:30', '2016-11-15 08:35:30');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `role_users`
+--
+
+CREATE TABLE IF NOT EXISTS `role_users` (
   `user_id` int(10) UNSIGNED NOT NULL,
   `role_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `sportif` (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sportif`
+--
+
+CREATE TABLE IF NOT EXISTS `sportif` (
   `id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
@@ -109,7 +165,13 @@ CREATE TABLE `sportif` (
   `birthday` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `throttle` (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `throttle`
+--
+
+CREATE TABLE IF NOT EXISTS `throttle` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
   `type` varchar(255) NOT NULL,
@@ -118,7 +180,13 @@ CREATE TABLE `throttle` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `user` (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
