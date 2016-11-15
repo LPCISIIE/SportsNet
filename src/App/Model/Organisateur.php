@@ -9,7 +9,9 @@ class Organisateur extends Model
     protected $table = 'organisateur';
 
     protected $primaryKey = 'id';
+
     public $timestamps = false;
+
     protected $fillable = [
         'nom',
         'prenom',
