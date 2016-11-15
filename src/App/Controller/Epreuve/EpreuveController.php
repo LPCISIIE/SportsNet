@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Epreuve;
 
+use App\Controller\Controller;
 use Respect\Validation\Validator as V;
-use App\Model\Epreuve as Epreuve;
+use App\Model\Epreuve;
 
-class AuthController extends Controller
+class EpreuveController extends Controller
 {
     public function getAddEpreuve($request, $response, $args) {
         return $this->view->render($response, 'Epreuve/add.twig');

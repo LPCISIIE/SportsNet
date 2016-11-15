@@ -7,3 +7,7 @@ $container['AppController'] = function ($container) {
 $container['AuthController'] = function ($container) {
     return new App\Controller\AuthController($container);
 };
+
+$container['EpreuveController'] = function ($container) {
+    return new App\Controller\Epreuve\EpreuveController($container);
+};
