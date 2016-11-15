@@ -14,4 +14,5 @@ $container['EvenementController'] = function ($container) {
 
 $container['EpreuveController'] = function ($container) {
     return new App\Controller\EpreuveController($container);
+
 };
