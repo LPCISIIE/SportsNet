@@ -1,0 +1,118 @@
+/**
+* Maestro Framework
+* Preset de navbar
+* @author: Xavier CHOPIN
+*/
+
+@mixin navbar($couleurBg,$hauteur,$fixed,$couleurActif) {
+    background-color :$couleurBg;
+    position: if($fixed, fixed, relative);
+    height: $hauteur;
+    top :0;
+    z-index: 99;
+    width: 100%;
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 5px black;
+
+    & > nav {
+     	float: right;
+        padding: 20px;
+    }
+    ul {
+    	display: inline-flex;
+    	flex-direction: row;
+    	float: right;
+    	font-size : 14px;
+    	& > li {
+    		list-style: none;
+    		align-items: flex-end;
+    		white-space:nowrap;
+    		border:none;
+    		line-height:5px;
+    		font-family: $police1,$police2;
+    		font-weight: 500;
+    		a {
+    			text-transform: uppercase;
+    			@include transition(0.3s);
+    			&.disabled {
+    				cursor: not-allowed;
+    				color: darken($gris,40);
+    			}
+    			&.active,&:focus { color: $couleurActif; }
+    			&:not(.disabled):not(.active):hover {
+    				color: $couleurActif;
+    				-webkit-tap-highlight-color: transparent;
+    				@include transition(0.3s);
+    			}
+    		}
+    	}
+    }
+
+    .logo-header {
+        font-family: maestro;
+        font-size : 24px;
+        vertical-align:middle;
+        line-height: $hauteur;
+        margin-left: 2%;
+    }
+
+    .menu-icon {
+    	display: none;
+    	width: 40px;
+    	height: 40px;
+        color: white;
+    	background-color: darken($couleurBg,5);
+
+        a:before {
+            background-color: #444;
+        	border-radius: 4px 4px 0 0;
+        }
+    }
+
+
+
+    @media #{$mq-tablette} {
+    	position: if($fixed, fixed, relative);
+        height: $hauteur;
+
+
+    	.menu-icon {
+            display: inline-block;
+            &:before {
+        	  content: "";
+        	  position: absolute;
+        	  margin-left: 12px;
+        	  top: $hauteur / 2.1;
+        	  width: 1em;
+        	  height: 0.1em;
+        	  background: white;
+        	  box-shadow: 0 0.25em 0 0 white, 0 0.5em 0 0 white;
+        	}
+        }
+
+    	nav ul, nav:active ul {
+    		display: none;
+    		position: fixed;
+    		padding: 20px;
+    		background:  $couleurBg;
+    		border: 5px solid darken($couleurBg,5);
+    		left: 0px;
+    		top: $hauteur - 8;
+    		width: 90%;
+    		border-radius: 4px 0 4px 4px;
+    	}
+
+    	nav li {
+    		text-align: center;
+    		width: 100%;
+    		padding: 10px 0;
+    		margin: 0;
+    	}
+
+    	nav:hover ul { display: block; }
+    }
+
+
+
+
+}

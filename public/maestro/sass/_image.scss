@@ -1,0 +1,29 @@
+
+
+.remplir {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+
+.remplir img {
+    flex-shrink: 0;
+    min-width: 100%;
+}
+
+.img-25 {
+    width:25%;
+}
+
+.img-50 {
+    width:50%;
+}
+
+.img-75 {
+    width:75%;
+}
+
+.img-100 {
+    width:100%;
+}

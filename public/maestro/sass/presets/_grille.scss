@@ -1,0 +1,159 @@
+/**
+* Maestro Framework
+* Fichier des grilles
+* @author: Xavier CHOPIN
+*/
+
+@mixin generateurGrilleFloat($nbColonnes,$largeurGoutiere) {
+  /** Variables */
+  $marge : ($largeurGoutiere * ($nbColonnes - 1));
+  $largeur1 : (100 - $marge) / $nbColonnes;
+  $largeur2 : 100% / $nbColonnes;
+
+  /** Styles */
+  width : 100%;
+  margin-bottom: 1em;
+  display:inline-block;
+
+  div.row {
+      &:before , &:after {
+          content: "";
+          display: table ;
+          clear:both;
+      }
+
+
+    [class*="span-"]{
+      box-sizing: border-box;
+      float: left;
+      min-height: 1px;
+      padding: 2%;
+      margin-left: $largeurGoutiere;
+      &:first-child {margin-left: 0;}
+        & > p {
+         padding: 0;
+         margin: 0;
+         text-align: center;
+       }
+    }
+
+    @for $i from 1 through $nbColonnes {
+
+      $remove : (($nbColonnes / $i) - 1) * $largeurGoutiere;
+      $width : ((100 - $remove) / $nbColonnes * $i);
+
+      .span-#{$i} { width: $width ; }
+
+      .offset-#{$i} {
+          @if $i < $nbColonnes {
+                margin-left: $width;
+                &:first-child { margin-left: $width + $largeurGoutiere; }
+          }
+      }
+
+      @media #{$mq-tablette} {
+        @if ($i == 1) {
+         .span-#{$i}{ width: 50%;  margin-left: 0; }
+        }@else{
+          .span-#{$i}{ width: 100%;  margin-left: 0; }
+        }
+      }
+    }
+
+    @media all and (max-width:1000px) {
+      [class*='offset-'] {
+        margin-left: 0;
+        &:first-child { margin-left: 0;}
+      }
+    }
+  }
+}
+
+@mixin flex-premier($goutiere) {
+    order:-1;
+    margin-right: $goutiere;
+    margin-left:0;
+}
+
+%flex-dernier { order: 1; }
+
+@mixin generateurGrilleFlex($nbColonnes,$largeurGoutiere) {
+    $min : ($nbColonnes - 1) * $largeurGoutiere;
+    $min : (100 - $min) / $nbColonnes;
+    margin-bottom: 1em;
+
+
+
+    div.row {
+        display: -ms-flexbox;
+        display: -moz-flex;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        &:before , &:after {
+            content: "";
+            display: table ;
+            clear:both;
+        }
+
+
+        div.span-flex {
+            box-sizing: border-box;
+            padding: 2%;
+            flex-grow: 1;
+            flex:1;
+            margin-left: $largeurGoutiere;
+            min-width: $min;
+            &:first-child { margin-left: 0; }
+            &:before , &:after {
+                content: "";
+                display: table ;
+                clear:both;
+            }
+
+        }
+
+        div.flex-premier { @include flex-premier($largeurGoutiere); }
+        div.flex-dernier { @extend %flex-dernier; }
+
+        @for $i from 1 through $nbColonnes {
+          $remove : (($nbColonnes / $i) - 1) * $largeurGoutiere;
+          $width : ((100 - $remove) / $nbColonnes * $i);
+
+          div.offset-#{$i} {
+                @if $i < $nbColonnes {
+                    margin-left: $width;
+                    &:first-child { margin-left: $width + $largeurGoutiere; }
+                }
+            }
+        }
+
+    }
+
+    @media all and (max-width:1000px) {
+      overflow:auto; // Fixation provisoire pour webkit;
+       div.span-flex{
+          min-width: 100% !important ;
+          margin-left: 0 !important;
+       }
+       [class*='offset-'] {
+        margin-left: 0 !important;
+       }
+
+       @for $i from 1 through $nbColonnes {
+
+         div.span-ligne-#{$i} {
+            $largeur : 100% / $i;
+            min-width: $largeur!important;  margin-left: 0 !important;
+        }
+
+       }
+    }
+}
+
+%encadre {
+    outline: 1px solid #BCAAA4;
+}

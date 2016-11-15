@@ -1,0 +1,55 @@
+@import 'presets/tableau';
+
+
+    table {
+
+      width: 100%;
+      text-align: left;
+      overflow-x: auto;
+      display:table;
+
+      @media #{$mq-tablette}{
+          display:block !important;
+      }
+
+      &.alternatif tr:nth-child(2n)  {
+         @extend %fondGris;
+      }
+
+      &.bordure td, &.bordure th{
+        border: 1px solid black;
+      }
+
+      &.survol tr {
+          @include transition(0.3s);
+      }
+
+      &.survol tr:hover  {
+        @extend %fondGris;
+      }
+
+      @media #{$mq-tablette} {
+            font-size: 90%;
+      }
+
+    }
+
+    tbody {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+
+    th, td {
+
+        padding: 1.2em 1em;
+        vertical-align: middle;
+        display:table-cell;
+        border-radius: 1px;
+    }
+
+    th {
+        border-bottom: 1px solid black;
+        font-weight: bold;
+        text-align: left;
+    }

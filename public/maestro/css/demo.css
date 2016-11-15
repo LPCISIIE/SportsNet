@@ -1,0 +1,61 @@
+
+
+.preambule  {
+    top:0px;left:0px;
+    text-align:center;
+    background-color:#C0DEED;
+    background: url(../ressources/background.png) center top repeat-x;
+    background-size:cover;
+    animation: animation-nuages         50s linear infinite;
+    -ms-animation: animation-nuages     50s linear infinite;
+    -moz-animation: animation-nuages    50s linear infinite;
+    -webkit-animation: animation-nuages 50s linear infinite;
+    padding-top:  4%;
+    padding-bottom: 17vh;
+}
+
+
+#presentation  {
+    margin-bottom:2em;
+}
+
+.preambule > p {
+    font-size: 35px;
+    font-weight: bolder;
+    vertical-align: middle;
+    margin-top: 4vh;
+    text-align: center;
+    color:white;
+}
+
+@keyframes animation-nuages {
+    from {
+        background-position: 0 0;
+    }
+    to {  background-position: 100% 0;  }
+}
+
+
+#decouvrir {
+    margin-top: 5.5vh;
+}
+
+#debut {
+    margin-bottom: -70px;
+}
+
+.theme-principal {
+    color: #607D8B;
+}
+
+/** Spécifique à la démo */
+.demo [class*="span-"] {
+    background-color: #EFEBE9;
+}
+.demo [class*="span-"] > p {
+            background-color: #D7CCC8;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            color: white;
+}
