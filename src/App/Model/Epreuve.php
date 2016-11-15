@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Model;
+
 class Epreuve extends Model{
 	protected $table = 'epreuve';
     protected $primaryKey = 'epreuve_id';
