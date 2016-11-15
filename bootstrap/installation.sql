@@ -5,8 +5,8 @@ SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
   WHERE table_schema = 'nom de la table'; -- specify DB name here.
 
 SET @tables = CONCAT('DROP TABLE IF EXISTS ', @tables);
-PREPARE stmt FROM @tables;
-EXECUTE stmt;
+-- PREPARE stmt FROM @tables;
+-- EXECUTE stmt;
 SET FOREIGN_KEY_CHECKS = 1;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -56,9 +56,9 @@ CREATE TABLE IF NOT EXISTS `evenement` (
   `id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `adresse` text NOT NULL,
-  `date_debut` datetime NOT NULL,
-  `date_fin` datetime NOT NULL,
-  `telephone` int(10) NOT NULL,
+  `date_debut` date NOT NULL,
+  `date_fin` date NOT NULL,
+  `telephone` varchar(10) NOT NULL,
   `discipline` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `etat` tinyint(1) NOT NULL
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `organisateur` (
   `user_id` int(10) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
-  `paypal` varchar(255) NOT NULL
+  `paypal` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -85,8 +85,8 @@ CREATE TABLE IF NOT EXISTS `organisateur` (
 --
 
 CREATE TABLE IF NOT EXISTS `participe` (
-  `id_sportif` int(11) NOT NULL,
-  `id_evenement` int(11) NOT NULL,
+  `sportif_id` int(11) NOT NULL,
+  `evenement_id` int(11) NOT NULL,
   `numero_participant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -129,14 +129,6 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `roles`
---
-
-INSERT INTO `roles` (`id`, `slug`, `name`, `permissions`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Admin', '{"user.create":true,"user.update":true,"user.delete":true}', '2016-11-15 08:35:30', '2016-11-15 08:35:30'),
-(2, 'user', 'User', '{"user.update":true}', '2016-11-15 08:35:30', '2016-11-15 08:35:30');
 
 -- --------------------------------------------------------
 
@@ -216,7 +208,7 @@ ALTER TABLE `organisateur`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `participe`
-  ADD PRIMARY KEY (`id_sportif`,`id_evenement`);
+  ADD PRIMARY KEY (`sportif_id`,`evenement_id`);
 
 ALTER TABLE `persistences`
   ADD PRIMARY KEY (`id`),
