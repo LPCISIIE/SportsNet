@@ -5,6 +5,7 @@ namespace App\Controller;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use App\Model\Organisateur as Organisateur;
 use Respect\Validation\Validator as V;
 
 class AuthController extends Controller
@@ -40,8 +41,12 @@ class AuthController extends Controller
         if ($request->isPost()) {
             $email = $request->getParam('email');
             $password = $request->getParam('password');
+            $nom = $request->getParam('nom');
+            $prenom = $request->getParam('prenom');
 
             $this->validator->validate($request, [
+                'nom' => V::noWhitespace(),
+                'prenom' => V::noWhitespace(),
                 'email' => V::noWhitespace()->email(),
                 'password' => V::noWhitespace()->length(6, 25),
                 'password-confirm' => V::equals($password)
@@ -61,7 +66,11 @@ class AuthController extends Controller
                         'user.delete' => 0
                     ]
                 ]);
-
+                $organisateur = new Organisateur([
+                    'nom' => $nom,
+                    'prenom' => $prenom
+                ]);
+                $user->organisateur()->save($organisateur);
                 $role->users()->attach($user);
 
                 $this->flash('success', 'Your account has been created.');
