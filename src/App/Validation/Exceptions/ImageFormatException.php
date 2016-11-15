@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Validation\Exceptions;
+
 use Respect\Validation\Exceptions\ValidationException;
+
 class ImageFormatException extends ValidationException
 {
 	public static $defaultTemplates = [
@@ -9,3 +12,4 @@ class ImageFormatException extends ValidationException
 			],
 	];
 }
+
