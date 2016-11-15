@@ -5,16 +5,18 @@
 {% block body %}
 
 <div class="container">
-    <form action="{{ path_for('evenement.edit') }}" method="POST" enctype="multipart/form-data">
-        {{ form.group('date_debut', evenement.date_debut, 'date_debut', 'Début', null, 'date') }}
-        {{ form.group('date_fin', evenement.date_fin, 'date_fin', 'Fin', null, 'date') }}
+    <form action="{{ path_for('evenement.edit', {'id': evenement.id}) }}" method="POST" enctype="multipart/form-data">
+        {{ form.group('nom', evenement.nom, 'nom', 'Nom') }}
+        {{ form.group('date_debut', evenement.date_debut|date('d/m/Y'), 'date_debut', 'Début', null, 'date') }}
+        {{ form.group('date_fin', evenement.date_fin|date('d/m/Y'), 'date_fin', 'Fin', null, 'date') }}
         {{ form.group('adresse', evenement.adresse, 'adresse', 'Lieu') }}
         {{ form.group('discipline', evenement.discipline, 'discipline', 'Discipline') }}
+        {{ form.group('telephone', evenement.telephone, 'telephone', 'Téléphone', null, 'tel') }}
 
-        <textarea name="description" id="description" class="form-control" placeholder="Description"></textarea>
+        <textarea name="description" id="description" class="form-control" placeholder="Description">{{ evenement.description }}</textarea>
 
         {{ csrf() }}
-        <input type="submit">
+        <input type="submit" class="btn btn-primary">
     </form>
 </div>
 
