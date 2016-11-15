@@ -13,8 +13,6 @@ class User extends EloquentUser
     protected $fillable = [
         'email',
         'password',
-        'last_name',
-        'first_name',
         'permissions',
     ];
 }
