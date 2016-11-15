@@ -1,0 +1,39 @@
+/**
+* Maestro Framework
+* Fichier des variables globales
+* @author: Xavier CHOPIN
+*/
+
+
+/**  1. Police d'écriture : */
+$police1 : 'Roboto';
+$police2 : sans-serif;
+
+/**  2. Couleurs : */
+
+$couleurTheme : #607D8B ; $couleurThemeLeger : #78909C ; $couleurThemeFonce : #37474F;
+$gris : #ECEFF1; $grisFlat: #cbcbcb; $grisLeger : #eeeeee;
+$couleurSousTitre : #9c9c9c;
+$orange : #FFB300; $orangeLeger : #FFB74D;
+$rouge : #F44336 ; $rougeLeger : #E57373 ;
+$vert : #4CAF50; $vertLeger :  #81C784;
+$blancEffet :  #f0f0f0;
+
+
+/** 3. Media Queries */
+
+$break-petit: 350px;
+$break-moyen: 800px;
+$break-large: 1200px;
+
+$mq-telephone: "all and (max-width : " + $break-petit + ")";
+$mq-tablette: "all and (max-width : " + $break-moyen + ")";
+$mq-desktop: "all and (max-width : " + $break-large + ")";
+
+// Petit bonus
+$mq-iPhone: "only screen and (max-width : 370px)";
+$mq-iPad: "only screen and (min-device-width : 768px) and (max-device-width : 1025px)";
+
+/** 4. Variables autres */
+
+$navbar-hauteur : 75px;
