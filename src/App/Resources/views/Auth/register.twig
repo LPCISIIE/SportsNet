@@ -11,6 +11,8 @@
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
                     <form action="{{ path_for('register') }}" method="POST">
+                        {{ form.group('nom', null, 'nom', 'Nom', null, 'nom') }}
+                        {{ form.group('prenom', null, 'prenom', 'Prenom', null, 'prenom') }}
                         {{ form.group('email', null, 'email', 'Email', null, 'email') }}
                         {{ form.group('password', null, 'password', 'Password', null, 'password') }}
                         {{ form.group('password-confirm', null, 'password-confirm', 'Confirm password', null, 'password') }}
