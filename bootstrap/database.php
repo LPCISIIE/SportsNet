@@ -16,15 +16,15 @@ $capsule->bootEloquent();
 
 $sentinel = (new Sentinel(new SentinelBootstrapper(__DIR__ . '/sentinel.php')))->getSentinel();
 
-Manager::schema()->dropIfExists('activations');
-Manager::schema()->dropIfExists('persistences');
-Manager::schema()->dropIfExists('reminders');
-Manager::schema()->dropIfExists('role_users');
-Manager::schema()->dropIfExists('throttle');
-Manager::schema()->dropIfExists('roles');
-Manager::schema()->dropIfExists('user');
+Manager::schema('default')->dropIfExists('activations');
+Manager::schema('default')->dropIfExists('persistences');
+Manager::schema('default')->dropIfExists('reminders');
+Manager::schema('default')->dropIfExists('role_users');
+Manager::schema('default')->dropIfExists('throttle');
+Manager::schema('default')->dropIfExists('roles');
+Manager::schema('default')->dropIfExists('user');
 
-Manager::schema()->create('user', function (Blueprint $table) {
+Manager::schema('default')->create('user', function (Blueprint $table) {
     $table->increments('id');
     $table->string('username')->unique();
     $table->string('email')->unique();
@@ -36,7 +36,7 @@ Manager::schema()->create('user', function (Blueprint $table) {
     $table->timestamps();
 });
 
-Manager::schema()->create('activations', function (Blueprint $table) {
+Manager::schema('default')->create('activations', function (Blueprint $table) {
     $table->increments('id');
     $table->integer('user_id')->unsigned();
     $table->string('code');
@@ -46,7 +46,7 @@ Manager::schema()->create('activations', function (Blueprint $table) {
     $table->foreign('user_id')->references('id')->on('user');
 });
 
-Manager::schema()->create('persistences', function (Blueprint $table) {
+Manager::schema('default')->create('persistences', function (Blueprint $table) {
     $table->increments('id');
     $table->integer('user_id')->unsigned();
     $table->string('code')->unique();
@@ -54,7 +54,7 @@ Manager::schema()->create('persistences', function (Blueprint $table) {
     $table->foreign('user_id')->references('id')->on('user');
 });
 
-Manager::schema()->create('reminders', function (Blueprint $table) {
+Manager::schema('default')->create('reminders', function (Blueprint $table) {
     $table->increments('id');
     $table->integer('user_id')->unsigned();
     $table->string('code');
@@ -64,7 +64,7 @@ Manager::schema()->create('reminders', function (Blueprint $table) {
     $table->foreign('user_id')->references('id')->on('user');
 });
 
-Manager::schema()->create('roles', function (Blueprint $table) {
+Manager::schema('default')->create('roles', function (Blueprint $table) {
     $table->increments('id');
     $table->string('slug')->unique();
     $table->string('name');
@@ -72,7 +72,7 @@ Manager::schema()->create('roles', function (Blueprint $table) {
     $table->timestamps();
 });
 
-Manager::schema()->create('role_users', function (Blueprint $table) {
+Manager::schema('default')->create('role_users', function (Blueprint $table) {
     $table->integer('user_id')->unsigned();
     $table->integer('role_id')->unsigned();
     $table->timestamps();
@@ -81,7 +81,7 @@ Manager::schema()->create('role_users', function (Blueprint $table) {
     $table->foreign('role_id')->references('id')->on('roles');
 });
 
-Manager::schema()->create('throttle', function (Blueprint $table) {
+Manager::schema('default')->create('throttle', function (Blueprint $table) {
     $table->increments('id');
     $table->integer('user_id')->unsigned()->nullable();
     $table->string('type');
