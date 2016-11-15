@@ -8,6 +8,7 @@
             <div class="col-xs-12">
                 <h2>{{ event.nom }} <small>{{ event.discipline }}</small></h2>
                 <p>{{ event.description }}</p>
+                <a href="{{ path_for('evenement.edit', {'id': event.id}) }}" class="btn btn-default">Modifier</a>
             </div>
         </div>
     {% endfor %}
