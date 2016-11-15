@@ -8,6 +8,7 @@
 
 namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
+use App\Model\Epreuve as Epreuve;
 
 class Evenement extends Model
 {
@@ -35,5 +36,8 @@ class Evenement extends Model
     public function ouvrir()
     {
         $this->etat = 1;
+    }
+    public function epreuves(){
+      return $this->hasMany('App\Model\Epreuve');
     }
 }
