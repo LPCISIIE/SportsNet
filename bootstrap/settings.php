@@ -18,7 +18,8 @@ return [
             'dir' => __DIR__ . '/../src/App/Resources/routes',
             'files' => [
                 'app',
-                'auth'
+                'auth',
+                'evenement'
             ]
         ],
 
