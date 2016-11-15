@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `epreuve` (
   `date_debut` datetime NOT NULL,
   `date_fin` datetime NOT NULL,
   `etat` tinyint(1) NOT NULL,
+  `evenement_id` int(10) NOT NULL
   `description` text NOT NULL,
   `prix` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
