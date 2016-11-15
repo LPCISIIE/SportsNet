@@ -7,3 +7,8 @@ $container['AppController'] = function ($container) {
 $container['AuthController'] = function ($container) {
     return new App\Controller\AuthController($container);
 };
+
+
+$container['EvenementController'] = function ($container) {
+    return new App\Controller\EvenementController($container);
+};
