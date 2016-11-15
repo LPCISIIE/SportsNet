@@ -61,7 +61,8 @@ CREATE TABLE IF NOT EXISTS `evenement` (
   `telephone` varchar(10) NOT NULL,
   `discipline` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `etat` tinyint(1) NOT NULL
+  `etat` tinyint(1) NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
