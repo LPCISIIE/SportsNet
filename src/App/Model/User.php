@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Cartalyst\Sentinel\Users\EloquentUser;
-use App\Model\Organisateur as Organisateur;
 
 class User extends EloquentUser
 {
@@ -17,7 +16,13 @@ class User extends EloquentUser
         'permissions',
     ];
 
-    public function organisateur(){
+    public function organisateur()
+    {
       return $this->hasOne('App\Model\Organisateur');
+    }
+
+    public function evenements()
+    {
+        return $this->hasMany('App\Model\Evenement');
     }
 }

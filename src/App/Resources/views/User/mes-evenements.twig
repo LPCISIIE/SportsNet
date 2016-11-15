@@ -1,0 +1,17 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+<div class="container">
+    {% for event in evenements %}
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>{{ event.nom }} <small>{{ event.discipline }}</small></h2>
+                <p>{{ event.description }}</p>
+                <a href="{{ path_for('evenement.edit', {'id': event.id}) }}" class="btn btn-default">Modifier</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
