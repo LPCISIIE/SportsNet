@@ -27,8 +27,6 @@ class Evenement extends Model
         'etat',
     ];
 
-
-
     public function cloturer()
     {
         $this->etat = 0;
