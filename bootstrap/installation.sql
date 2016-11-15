@@ -36,6 +36,7 @@ CREATE TABLE `epreuve` (
   `date_debut` datetime NOT NULL,
   `date_fin` datetime NOT NULL,
   `etat` tinyint(1) NOT NULL,
+  `description` text NOT NULL,
   `prix` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -47,6 +48,7 @@ CREATE TABLE `evenement` (
   `date_fin` datetime NOT NULL,
   `telephone` int(10) NOT NULL,
   `discipline` varchar(255) NOT NULL,
+  `description` text NOT NULL,
   `etat` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
