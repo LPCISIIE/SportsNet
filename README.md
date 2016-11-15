@@ -9,7 +9,6 @@ SportsNet is a web application to create and manage sports events.
 ## Installation
 ```
 $ git@github.com:TPCISIIE/SportsNet.git
-
 ```
 
 ### 2. Download vendors
@@ -43,7 +42,7 @@ or import `bootstrap/installation.sql` in your database manager
 SportsNet is open-sourced software licensed under the MIT license.
 
 ## Credits 
- Xavier CHOPIN
- Corentin LABROCHE
- David LEBRUN
+ Xavier CHOPIN  <br>
+ Corentin LABROCHE <br>
+ David LEBRUN <br>
  Alexis WURTH
