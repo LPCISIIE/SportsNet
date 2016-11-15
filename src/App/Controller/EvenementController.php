@@ -31,8 +31,8 @@ class EvenementController extends Controller
                 $evenement->fill([
                     'nom' => $request->getParam('nom'),
                     'adresse' => $request->getParam('adresse'),
-                    'date_debut' => $request->getParam('date_debut'),
-                    'date_fin' => $request->getParam('date_fin'),
+                    'date_debut' => \DateTime::createFromFormat('d/m/Y', $request->getParam('date_debut')),
+                    'date_fin' => \DateTime::createFromFormat('d/m/Y', $request->getParam('date_fin')),
                     'telephone' => $request->getParam('telephone'),
                     'discipline' => $request->getParam('discipline')
                 ]);
