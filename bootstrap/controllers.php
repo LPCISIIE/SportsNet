@@ -11,3 +11,7 @@ $container['AuthController'] = function ($container) {
 $container['EvenementController'] = function ($container) {
     return new App\Controller\EvenementController($container);
 };
+
+$container['EpreuveController'] = function ($container) {
+    return new App\Controller\EpreuveController($container);
+};
