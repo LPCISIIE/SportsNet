@@ -18,5 +18,8 @@ class Epreuve extends Model{
         'description',
         'prix'
     ];
-}
 
+      public function epreuves(){
+         return $this->belongsToMany('App\Model\Sportif', "participe");
+      }
+}

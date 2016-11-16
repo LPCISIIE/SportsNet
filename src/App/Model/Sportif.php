@@ -18,4 +18,9 @@ class Sportif extends Model
         'email',
         'birthday'
     ];
+
+    public function epreuves()
+    {
+       return $this->belongsToMany('App\Model\Epreuve', "participe");
+    }
 }
