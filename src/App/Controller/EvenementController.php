@@ -14,6 +14,7 @@ class EvenementController extends Controller
         $id_evenement = $args["id_evenement"];
         $evenement = Evenement::find($id_evenement);
         $epreuves = $evenement->epreuves()->get()->toArray();
+
         $evenement = $evenement->toArray();
         return $this->view->render($response, 'Evenement/show.twig', compact('evenement', 'epreuves'));
     }
