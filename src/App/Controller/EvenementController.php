@@ -207,18 +207,21 @@ class EvenementController extends Controller
         //on récupère la liste des personne participants à l'évènement
         $epreuve_by_id = Epreuve::where('evenement_id','like',$args['id'])->get();
         $tab_csv = array();
+        $tab_csv[0] = array();
+        $tab_csv[1] = array();
         foreach($epreuve_by_id as $epreuve) {
-            array_push($tab_csv,array($epreuve['nom']));
-            array_push($tab_csv,array('---'));
+            array_push($tab_csv[0],$epreuve['nom']);
+            array_push($tab_csv[1],'---');
             $participants = $epreuve->sportifs()->get();
+            $nb = 2;
             foreach ($participants as $participant) {
-                array_push($tab_csv,array($participant['nom']." ".$participant['prenom']));
+                if(sizeof($tab_csv) < ($nb+1)) {
+                    $tab_csv[$nb] = array();
+                }
+                array_push($tab_csv[$nb],$participant['nom']." ".$participant['prenom']);
+                $nb+=1;
             }
-            array_push($tab_csv,array('   '));
         }
-        //echo "<pre>";
-        //print_r($tab_csv);
-        //exit();
 
         $filename = "liste_participant.csv";
         $delimiter = ",";
@@ -226,8 +229,6 @@ class EvenementController extends Controller
         header('Content-Type: application/csv');
         header('Content-Disposition: attachment; filename="'.$filename.'";');
 
-        // open the "output" stream
-        // see http://www.php.net/manual/en/wrappers.php.php#refsect2-wrappers.php-unknown-unknown-unknown-descriptioq
         $f = fopen('php://output', 'w');
 
         foreach ($tab_csv as $line) {
