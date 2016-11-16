@@ -141,7 +141,7 @@ class EpreuveController extends Controller
             foreach ($epreuves as $epreuve) {
                 try{
                     $sportif->epreuves()->attach($epreuve);
-                    $prixTotal+=Epreuve::find($epreuve)->first()->prix;
+                    $prixTotal+=Epreuve::find($epreuve)->prix;
                 }
                 catch (QueryException $e){
                     $errorCode = $e->errorInfo[1];
@@ -151,7 +151,7 @@ class EpreuveController extends Controller
                     }
                 }
             }
-            
+
             return $this->view->render($response, 'Epreuve/payment.twig',compact('prixTotal','evenement_id'));
 
 
