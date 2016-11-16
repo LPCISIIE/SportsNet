@@ -6,6 +6,7 @@ use App\Model\Epreuve;
 
 class EpreuveController extends Controller
 {
+
     public function getFolderUpload(Epreuve $epreuve)
     {
         $id = $epreuve->evenement->id;
