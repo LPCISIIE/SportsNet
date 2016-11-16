@@ -13,7 +13,7 @@
 
         {{ form.group('nom', evenement.nom, 'nom', 'Nom') }}
         {{ form.group('date_debut', evenement.date_debut|date('d/m/Y'), 'date_debut', 'Début', null, 'date') }}
-        {{ form.group('date_fin', evenement.date_fin|date('d/m/Y'), 'date_fin', 'Fin', null, 'date') }}
+        {{ form.group('date_fin', evenement.date_fin|date('d/m/Y'), 'date_fin', 'Fin', null, 'number') }}
         {{ form.group('adresse', evenement.adresse, 'adresse', 'Lieu') }}
         {{ form.group('discipline', evenement.discipline, 'discipline', 'Discipline') }}
         {{ form.group('telephone', evenement.telephone, 'telephone', 'Téléphone', null, 'tel') }}
