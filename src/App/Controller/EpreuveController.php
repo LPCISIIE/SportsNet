@@ -43,10 +43,10 @@ class EpreuveController extends Controller
 
         $file->addValidations(array(
             //You can also add multi mimetype validation
-            new \Upload\Validation\Mimetype(array('image/png', 'image/jpeg'))
+            new \Upload\Validation\Mimetype(array('image/png', 'image/jpeg')),
 
             // Ensure file is no larger than 5M (use "B", "K", M", or "G")
-            new \Upload\Validation\Size('2M')
+            new \Upload\Validation\Size('2M'),
         ));
 
         $dated = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
