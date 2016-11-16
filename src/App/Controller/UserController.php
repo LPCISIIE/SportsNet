@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\User;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Respect\Validation\Validator as V;
@@ -39,6 +40,20 @@ class UserController extends Controller
 
         return $this->view->render($response, 'User/mon-compte.twig', [
             'organisateur' => $organisateur
+        ]);
+    }
+
+    public function profil(Request $request, Response $response, array $args)
+    {
+        $user = User::find($args['id']);
+
+        if (!$user) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        return $this->view->render($response, 'User/profil.twig', [
+            'user' => $user,
+            'organisateur' => $user->organisateur
         ]);
     }
 

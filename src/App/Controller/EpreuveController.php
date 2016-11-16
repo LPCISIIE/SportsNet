@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller;
-use App\Controller\Controller;
+use App\Model\Evenement;
 use Respect\Validation\Validator as v;
 use Illuminate\Database\QueryException;
 use App\Model\Epreuve;
@@ -9,6 +9,21 @@ use App\Model\Sportif;
 use App\Model\Participe;
 class EpreuveController extends Controller
 {
+
+    public function getFolderUpload(Epreuve $epreuve)
+    {
+        $id = $epreuve->evenement->id;
+        return $this->settings['events_upload'] . $id . '/epreuves/';
+    }
+
+    public function getPicture(Epreuve $epreuve)
+    {
+        if ( file_exists($this->getFolderUpload($epreuve) . $epreuve->id . '.jpg') ) {
+            return $this->getFolderUpload($epreuve) . $epreuve->id . '.jpg';
+        }
+
+        return $this->getFolderUpload($epreuve) . $epreuve->id . '.png';
+    }
 
 
     public function getAddEpreuve($request, $response, $args)
@@ -37,9 +52,7 @@ class EpreuveController extends Controller
             return $this->view->render($response, 'Epreuve/add.twig');
         }
 
-        //on créer l'image et sa destination de stockage
-        $storage = new \Upload\Storage\FileSystem(__DIR__.'/../../../public/uploads/evenements/'.$args['id_evenement'].'/epreuves');
-        $file = new \Upload\File('epreuve_pic_link', $storage);
+
 
         $file->addValidations(array(
             //You can also add multi mimetype validation
@@ -49,6 +62,7 @@ class EpreuveController extends Controller
             new \Upload\Validation\Size('2M'),
         ));
 
+
         $dated = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
         $datef = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
         $epreuve = new Epreuve();
@@ -56,41 +70,44 @@ class EpreuveController extends Controller
         $epreuve->capacite=$request->getParam('capacite');
         $epreuve->date_debut=$dated;
         $epreuve->date_fin=$datef;
-        /*
-        0 - fermé
-        1 - ouvert
-        2 - annulé
-        */
-        $epreuve->etat=1;
+        $epreuve->etat=Epreuve::CREE;
         $epreuve->description=$request->getParam('epreuve_description');
         $epreuve->prix=$request->getParam('prix');
         $epreuve->evenement_id=$args['id_evenement'];
         $epreuve->save();
 
-        //on donne un nom à l'image à upload
+        $storage = new \Upload\Storage\FileSystem($this->getFolderUpload($epreuve));
+        $file = new \Upload\File('epreuve_pic_link', $storage);
+
+
+        $file->addValidations(array(
+            new \Upload\Validation\Mimetype(array('image/png', 'image/jpeg')),
+            new \Upload\Validation\Size('2M'),
+        ));
+
+
+
         $new_filename = $epreuve->id;
         $file->setName($new_filename);
 
-        // on tente l'upload d'image
         try {
-            // Success!
             $file->upload();
         } catch (\Exception $e) {
-            // Fail!
             $this->validator->addErrors('epreuve_pic_link',$file->getErrors());
         }
-
 
         return $this->view->render($response, 'Evenement/edit.twig');
     }
 
 
-    public function editTrial($request, $response)
+    public function edit($request, $response)
     {
 
         if ($request->isPost()) {
 
-            $epreuve = Epreuve::find($arg['id_epreuve']);
+            $epreuve = Epreuve::find($args['id_epreuve']);
+            $evenement = Evenement::find($args['id_evenement']);
+
             if (!$epreuve) {
                 throw $this->notFoundException($request, $response);
             }
@@ -99,9 +116,9 @@ class EpreuveController extends Controller
 
             $validation = $this->validator->validate($request, [
                 'epreuve_name' => v::notEmpty(),
-                'date_debut' => v::date('d-m-Y'),
+                'date_debut' => v::date('d/m/Y'),
                 'heure_debut' => v::date('H:i'),
-                'date_fin' => v::date('d-m-Y'),
+                'date_fin' => v::date('d/m/Y'),
                 'heure_fin' => v::date('H:i'),
                 'epreuve_pic_link' => v::ImageFormat()->ImageSize(),
                 'epreuve_description' => v::notEmpty(),
@@ -112,8 +129,8 @@ class EpreuveController extends Controller
 
 
             if ($validation->isValid()) {
-                    $dated = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
-                    $datef = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
+                    $dated = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
+                    $datef = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
 
                     $epreuve->fill([
                         'nom' => $request->getParam('nom'),
@@ -132,7 +149,7 @@ class EpreuveController extends Controller
             }
         }
 
-        return $this->view->render($response, 'Epreuve/edit.twig');
+        return $this->view->render($response, 'Epreuve/edit.twig',['evenement' => $epreuve, 'evenement' => $epreuve ]);
 
     }
 

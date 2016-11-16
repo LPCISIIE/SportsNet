@@ -13,7 +13,7 @@
 
         {{ form.group('nom', evenement.nom, 'nom', 'Nom') }}
         {{ form.group('date_debut', evenement.date_debut|date('d/m/Y'), 'date_debut', 'Début', null, 'date') }}
-        {{ form.group('date_fin', evenement.date_fin|date('d/m/Y'), 'date_fin', 'Fin', null, 'date') }}
+        {{ form.group('date_fin', evenement.date_fin|date('d/m/Y'), 'date_fin', 'Fin', null, 'number') }}
         {{ form.group('adresse', evenement.adresse, 'adresse', 'Lieu') }}
         {{ form.group('discipline', evenement.discipline, 'discipline', 'Discipline') }}
         {{ form.group('telephone', evenement.telephone, 'telephone', 'Téléphone', null, 'tel') }}
@@ -21,7 +21,7 @@
         <div class="form-group">
             <label for="etat">État</label>
             <select name="etat" id="etat">
-                <option value="0"{% if evenement.etat == 0 %} selected{% endif %}>Choisir un état</option>
+                <option value="0" disabled {% if evenement.etat == 0 %} selected{% endif %}>Choisir un état</option>
                 <option value="1"{% if evenement.etat == 1 %} selected{% endif %}>Validé</option>
                 <option value="2"{% if evenement.etat == 2 %} selected{% endif %}>Ouvert à l'inscription</option>
                 <option value="4"{% if evenement.etat == 4 %} selected{% endif %}>Clos à l'inscription</option>
