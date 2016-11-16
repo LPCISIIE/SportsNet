@@ -30,6 +30,7 @@ class EvenementController extends Controller
 
     public function create(Request $request, Response $response)
     {
+
         if ($request->isPost()) {
             $this->validator->validate($request, [
                 'nom' => V::length(1, 100),
@@ -42,7 +43,7 @@ class EvenementController extends Controller
             ]);
 
             if ($this->validator->isValid()) {
-                $evenement = new Evenement ([
+                $evenement = new Evenement([
                     'nom' => $request->getParam('nom'),
                     'adresse' => $request->getParam('adresse'),
                     'date_debut' => \DateTime::createFromFormat('d/m/Y', $request->getParam('date_debut')),
@@ -50,7 +51,7 @@ class EvenementController extends Controller
                     'telephone' => $request->getParam('telephone'),
                     'discipline' => $request->getParam('discipline'),
                     'description' => $request->getParam('description'),
-                    'etat' => 1,
+                    'etat' => Evenement::CREE,
                 ]);
                 $evenement->user()->associate($this->user());
                 $evenement->save();
@@ -58,7 +59,6 @@ class EvenementController extends Controller
                 mkdir($this->getFolderUpload($evenement).'epreuves',0777,true);
 
                 $this->flash('success', 'L\'événement "' . $request->getParam('nom') . '" a bien été crée !');
-
                 return $this->redirect($response, 'home');
             }
         }
@@ -73,7 +73,10 @@ class EvenementController extends Controller
         $evenement = Evenement::find($id_evenement);
         $epreuves = $evenement->epreuves()->get()->toArray();
         $evenement = $evenement->toArray();
-        return $this->view->render($response, 'Evenement/show.twig', compact('evenement', 'epreuves'));
+        return $this->view->render($response, 'Evenement/show.twig', [
+            'evenement' => $evenement,
+            'epreuves' => $epreuves
+        ]);
     }
 
     public function edit(Request $request, Response $response, array $args)
@@ -157,5 +160,43 @@ class EvenementController extends Controller
         ]);
     }
 
+    public function cancel(Request $request, Response $response, array $args)
+    {
+        $evenement = Evenement::find($args['id']);
 
+        if (!$evenement) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        if ($evenement->user->id !== $this->user()->id) {
+            $this->flash('danger', 'Cet événement ne vous appartient pas !');
+            return $this->redirect($response, 'user.events');
+        }
+
+        $evenement->etat = Evenement::ANNULE;
+        $evenement->save();
+
+        $this->flash('success', 'L\'événement "' . $evenement->nom . '" a été annulé.');
+        return $this->redirect($response, 'user.events');
+    }
+
+    public function delete(Request $request, Response $response, array $args)
+    {
+        $evenement = Evenement::find($args['id']);
+
+        if (!$evenement) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        if ($evenement->user->id !== $this->user()->id) {
+            $this->flash('danger', 'Cet événement ne vous appartient pas !');
+            return $this->redirect($response, 'user.events');
+        }
+
+        $evenement->epreuves()->delete();
+        $evenement->delete();
+
+        $this->flash('success', 'L\'événement "' . $evenement->nom . '" a été supprimé.');
+        return $this->redirect($response, 'user.events');
+    }
 }

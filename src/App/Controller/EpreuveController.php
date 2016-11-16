@@ -51,6 +51,15 @@ class EpreuveController extends Controller
 
 
 
+        $file->addValidations(array(
+            //You can also add multi mimetype validation
+            new \Upload\Validation\Mimetype(array('image/png', 'image/jpeg')),
+
+            // Ensure file is no larger than 5M (use "B", "K", M", or "G")
+            new \Upload\Validation\Size('2M'),
+        ));
+
+
         $dated = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
         $datef = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
         $epreuve = new Epreuve();
@@ -94,8 +103,8 @@ class EpreuveController extends Controller
 
         if ($request->isPost()) {
 
-            $epreuve = Epreuve::find($arg['id_epreuve']);
-            $evenement = Evenement::find($arg['id_evenement']);
+            $epreuve = Epreuve::find($args['id_epreuve']);
+            $evenement = Evenement::find($args['id_evenement']);
 
             if (!$epreuve) {
                 throw $this->notFoundException($request, $response);
