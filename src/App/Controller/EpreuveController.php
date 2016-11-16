@@ -4,6 +4,7 @@ use App\Controller\Controller;
 use Respect\Validation\Validator as v;
 use App\Model\Epreuve;
 use App\Model\Evenement;
+use App\Model\Sportif;
 class EpreuveController extends Controller
 {
 
@@ -108,6 +109,28 @@ class EpreuveController extends Controller
 
     }
     public function join($request, $response,$args){
+        if ($request->isPost()) {
+            $nom = $request->getParam('nom');
+            $prenom = $request->getParam('prenom');
+            $email = $request->getParam('email');
+            $birthday = $request->getParam('birthday');
+
+            $this->validator->validate($request, [
+                'nom' => V::length(1,50),
+                'prenom' => V::length(1,50),
+                'email' => V::noWhitespace()->email(),
+                'birthday' => v::date('d-m-Y'),
+            ]);
+
+            $birthday = \DateTime::createFromFormat("d-m-Y",$birthday);
+            $sportif=new Sportif();
+            $sportif->nom=$nom;
+            $sportif->prenom=$prenom;
+            $sportif->email=$email;
+            $sportif->birthday=$birthday;
+            $sportif->save();
+
+        }
         $evenement=Evenement::find($args["id_evenement"]);
         $epreuves = $evenement->epreuves()->get()->toArray();
         $evenement= $evenement->toArray();
