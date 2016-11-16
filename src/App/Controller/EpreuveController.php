@@ -34,7 +34,7 @@ class EpreuveController extends Controller
         $datef = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
         $epreuve = new Epreuve();
         $epreuve->nom=$request->getParam('epreuve_name');
-        $epreuve->epreuve_capacite=$request->getParam('capacite');
+        $epreuve->capacite=$request->getParam('capacite');
         $epreuve->date_debut=$dated;
         $epreuve->date_fin=$datef;
         /*  
@@ -43,12 +43,15 @@ class EpreuveController extends Controller
         2 - annulé
         */
         $epreuve->etat=1;
-        $epreuve->epreuve_description=$request->getParam('epreuve_description');
-        $epreuve->epreuve_prix=$request->getParam('prix');
-        //$epreuve->save();
-        echo "<pre>";
-        print_r($dated);
-        exit();
-        return $this->view->render($response, 'Organisateur/dashboard.twig');
+        $epreuve->description=$request->getParam('epreuve_description');
+        $epreuve->prix=$request->getParam('prix');
+        //TODO LATER AJOUTER ID D'EVENEMENT
+        //temporaire
+        $epreuve->evenement_id=1;
+        //
+        $epreuve->save();
+        
+
+        return $this->view->render($response, 'Evenement/edit.twig');
     }
 }
