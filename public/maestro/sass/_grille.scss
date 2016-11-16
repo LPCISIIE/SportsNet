@@ -1,0 +1,21 @@
+@import 'presets/grille';
+
+.outline, .outline *{
+    @extend %encadre;
+}
+
+.grille {
+    @include generateurGrilleFloat(8,2%);
+}
+
+.grille-flex {
+    @include generateurGrilleFlex(8,2%);
+}
+
+.grille-mixin {
+    @include generateurGrilleFloat(12,2%);
+}
+
+.grille-mixin2 {
+    @include generateurGrilleFlex(5,20%);
+}

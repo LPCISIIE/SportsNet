@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\User;
 use App\Service\Validator;
 use Cartalyst\Sentinel\Sentinel;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -80,6 +81,16 @@ class Controller
     public function notFoundException(ServerRequestInterface $request, Response $response)
     {
         return new NotFoundException($request, $response);
+    }
+
+    /**
+     * Get current user
+     *
+     * @return User
+     */
+    public function user()
+    {
+        return $this->auth->getUser();
     }
 
     public function __get($property)

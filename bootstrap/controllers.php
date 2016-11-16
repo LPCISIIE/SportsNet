@@ -16,3 +16,7 @@ $container['EpreuveController'] = function ($container) {
     return new App\Controller\EpreuveController($container);
 
 };
+
+$container['UserController'] = function ($container) {
+    return new App\Controller\UserController($container);
+};

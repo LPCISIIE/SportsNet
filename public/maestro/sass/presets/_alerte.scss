@@ -1,0 +1,14 @@
+/**
+* Maestro Framework
+* Preset d'alerte
+* @author: Xavier CHOPIN
+*/
+
+@mixin alerte($couleur) {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    color: white;
+    background-color: $couleur;
+}
