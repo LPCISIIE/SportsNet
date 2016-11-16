@@ -39,4 +39,39 @@ class Epreuve extends Model
     {
         return $this->belongsTo('App\Model\Evenement');
     }
+
+    public function getStateFromValue($state)
+    {
+        switch ($state) {
+            case self::CREE:
+                return 'Créé';
+            case self::VALIDE:
+                return 'Validé';
+            case self::OUVERT:
+                return 'Ouvert à l\'inscription';
+            case self::EN_COURS:
+                return 'Validé';
+            case self::CLOS:
+                return 'Clos à l\'inscription';
+            case self::EXPIRE:
+                return 'Expiré';
+            case self::ANNULE:
+                return 'Annulé';
+
+            default:
+                return '';
+        }
+    }
+
+    public function getState()
+    {
+        return $this->getStateFromValue($this->etat);
+    }
+
+    public function getWebPath()
+    {
+        $webPath = 'uploads/evenements/' . $this->evenement_id . '/epreuves/' . $this->id;
+        $rootPath =  __DIR__ . '/../../../public/' . $webPath;
+        return file_exists($rootPath . '.jpg') ? $webPath . '.jpg' : $webPath . '.png';
+    }
 }
