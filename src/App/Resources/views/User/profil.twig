@@ -1,0 +1,18 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <h2>{{ organisateur.prenom }} {{ organisateur.nom }}</h2>
+    <h3>Événements organisés</h3>
+    {% for event in user.evenements %}
+        <div class="row">
+            <div class="col-xs-12">
+                <h4>{{ event.nom }}</h4>
+                <p>{{ event.description }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
