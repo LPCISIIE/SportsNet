@@ -3,3 +3,5 @@ vendor/
 cache/*
 !cache/.gitkeep
 bootstrap/db.php
+public/uploads/evenements/*
+!public/uploads/evenements/.gitkeep
