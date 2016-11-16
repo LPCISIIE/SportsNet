@@ -1,0 +1,27 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <h2>Épreuve : {{ epreuve.nom }}</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Début</h3>
+            <p>{{ epreuve.date_debut|date('d M Y') }}</p>
+            <p>{{ epreuve.date_debut|date('h') }}h{{ epreuve.date_debut|date('mm') }} }}</p>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+            <h3>Fin</h3>
+            <p>{{ epreuve.date_debut|date('d M Y') }}</p>
+            <p>{{ epreuve.date_debut|date('h') }}h{{ epreuve.date_debut|date('mm') }} }}</p>
+        </div>
+        <div class="col-xs-12">
+            <p>État de l'épreuve : {{ epreuve.etat }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
