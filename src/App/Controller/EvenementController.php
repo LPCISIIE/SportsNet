@@ -59,8 +59,6 @@ class EvenementController extends Controller
         ]);
     }
 
-
-
     public function create(Request $request, Response $response)
     {
 
@@ -98,5 +96,4 @@ class EvenementController extends Controller
         return $this->view->render($response, 'Evenement/create.twig');
 
     }
-
 }

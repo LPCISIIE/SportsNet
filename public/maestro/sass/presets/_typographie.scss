@@ -1,0 +1,26 @@
+/**
+* Maestro Framework
+* Fichier typographique
+* @author: Xavier CHOPIN
+*/
+
+%sub {
+    font-size: 90%;
+    color: $couleurSousTitre;
+    letter-spacing: 1px;
+}
+
+%gauche { text-align: left;  }
+%droite { text-align: right; }
+%centre { text-align: center; }
+%justifie{ text-align: justify; }
+%majuscule { text-transform: uppercase; }
+%minuscule { text-transform: lowercase; }
+%gras { font-weight:bolder;}
+%forcer-droite {float:right;}
+%forcer-gauche {float:left;}
+%noir { color:black;}
+%blanc { color:white; }
+%rouge {  color: $rouge; }
+%vert {  color: $vert; }
+%orange {  color: orange; }

@@ -15,4 +15,14 @@ class User extends EloquentUser
         'password',
         'permissions',
     ];
+
+    public function organisateur()
+    {
+      return $this->hasOne('App\Model\Organisateur');
+    }
+
+    public function evenements()
+    {
+        return $this->hasMany('App\Model\Evenement');
+    }
 }

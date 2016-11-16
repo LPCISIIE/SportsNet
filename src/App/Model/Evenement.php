@@ -8,6 +8,7 @@
 
 namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
+use App\Model\Epreuve as Epreuve;
 
 class Evenement extends Model
 {
@@ -48,6 +49,9 @@ class Evenement extends Model
     {
         $this->etat = 1;
     }
+    public function epreuves(){
+      return $this->hasMany('App\Model\Epreuve');
+    }
 
     public function enCours()
     {
@@ -58,5 +62,4 @@ class Evenement extends Model
     {
         $this->etat = 4;
     }
-
 }

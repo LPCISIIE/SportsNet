@@ -1,0 +1,90 @@
+/**
+* Maestro Framework
+* Fichier des inputs
+* @author: Xavier CHOPIN
+*/
+
+@mixin inputSimple($couleur) {
+    background: rgba(255,255,255,0.5);
+    border: 2px solid $couleur;
+    border-radius:2px;
+    height:2em;
+    width:97%;
+    margin-bottom:2em;
+    outline-color: darken($couleur,30);
+    font-size:1em;
+    font-family: $police1,$police2;
+    padding-left:0.3em;
+}
+
+@mixin formulaire($couleur) {
+  position:relative;
+  margin-bottom:2em;
+
+  input {
+    font-size: 1em;
+    display:block;
+    padding: 10px 10px 10px 5px;
+    width: 97%;
+    border:none; // réinitialisation
+    border-bottom:1px solid #6e6e6e;
+    &:focus { outline:none; }
+  }
+
+  label {
+    @include transition(0.3s);
+    color:#969696;
+    font-size: 1em;
+    font-weight:normal;
+    position:absolute;
+    left:5px;
+    top:10px;
+  }
+
+  input:focus ~ label {
+    top:-20px;
+    color: $couleur;
+  }
+
+  .barre {
+      position:relative;
+      display:block;
+      width:100%;
+      &:before, &:after 	{
+        @include transition(0.3s);
+        content:'';
+        height:2px;
+        width:0;
+        bottom:1px;
+        position:absolute;
+        background:$couleur;
+      }
+      &:before { left:50%; }
+      &:after { right:50%; }
+   }
+
+   input:focus ~ .barre:before, input:focus ~ .barre:after { width:50%; }
+
+   .selection {
+     opacity:0.6;
+     position:absolute;
+     height:60%;
+     width:100px;
+     top:25%;
+     left:0;
+   }
+
+   input:focus ~ .selection {
+     -webkit-animation:materialAnimation 0.3s ease;
+     -moz-animation:materialAnimation 0.3s ease;
+     animation:materialAnimation 0.3s ease;
+   }
+
+   @keyframes materialAnimation {
+   	   from { background: $couleur; }
+       to  {
+           background:transparent;
+           width:0;
+       }
+   }
+}
