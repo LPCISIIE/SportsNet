@@ -31,7 +31,7 @@ class EpreuveController extends Controller
         ]);
 
         if (!($validation->isValid())) {
-            return $this->view->render($response, 'Epreuve/edit.twig');
+            return $this->view->render($response, 'Epreuve/add.twig');
         }
         $dated = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
         $datef = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
@@ -48,7 +48,7 @@ class EpreuveController extends Controller
         $epreuve->evenement_id=$args['id_evenement'];
         $epreuve->save();
 
-        return $this->view->render($response, 'Epreuve/edit.twig');
+        return $this->view->render($response, 'Evenement/edit.twig');
     }
 
 
