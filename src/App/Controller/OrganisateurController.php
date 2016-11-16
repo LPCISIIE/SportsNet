@@ -15,7 +15,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class OrganisateurController
 {
-    public function creerEpreuve(Request $request, Response $response)
+    public function creerEvenement(Request $request, Response $response)
     {
         $nom = $request->getParam('nom');
         $dateDebut = $request->getParam('dateDebut');
@@ -23,7 +23,7 @@ class OrganisateurController
         $adresse = $request->getParam('adresse');
         $telephone = $request->getParam('telephone');
         $discipline = $request->getParam('discipline');
-        $description = $request->getParam('discipline');
+        $description = $request->getParam('description');
         $etat = $request->getParam('etat');
 
         Evenement::create(
