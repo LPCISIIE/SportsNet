@@ -2,9 +2,11 @@
 namespace App\Controller;
 use App\Controller\Controller;
 use Respect\Validation\Validator as v;
+use Illuminate\Database\QueryException;
 use App\Model\Epreuve;
 use App\Model\Evenement;
 use App\Model\Sportif;
+use App\Model\Participe;
 class EpreuveController extends Controller
 {
 
@@ -114,7 +116,7 @@ class EpreuveController extends Controller
             $prenom = $request->getParam('prenom');
             $email = $request->getParam('email');
             $birthday = $request->getParam('birthday');
-
+            $epreuves = $request->getParam('epreuves');
             $this->validator->validate($request, [
                 'nom' => V::length(1,50),
                 'prenom' => V::length(1,50),
@@ -122,13 +124,34 @@ class EpreuveController extends Controller
                 'birthday' => v::date('d-m-Y'),
             ]);
 
-            $birthday = \DateTime::createFromFormat("d-m-Y",$birthday);
-            $sportif=new Sportif();
-            $sportif->nom=$nom;
-            $sportif->prenom=$prenom;
-            $sportif->email=$email;
-            $sportif->birthday=$birthday;
-            $sportif->save();
+            /*Test si pas deja inscrit*/
+            $sportif = Sportif::where('email',$email)->first();
+
+            if ($sportif!=null) {
+                foreach ($epreuves as $epreuve) {
+                    try{
+                        $sportif->epreuves()->attach($epreuve);
+                    }
+                    catch (QueryException $e){
+                        $errorCode = $e->errorInfo[1];
+                        if($errorCode == 1062){
+                            $this->flash('error', 'Vous vous êtes déjà inscrit à l\'épreuve '.Epreuve::find($epreuve)->first()->nom);
+                            header("Refresh:0");
+                        }
+                    }
+                }
+            }
+            else{
+                $birthday = \DateTime::createFromFormat("d-m-Y",$birthday);
+                $sportif=new Sportif();
+                $sportif->nom=$nom;
+                $sportif->prenom=$prenom;
+                $sportif->email=$email;
+                $sportif->birthday=$birthday;
+                $sportif->save();
+            }
+
+
 
         }
         $evenement=Evenement::find($args["id_evenement"]);
