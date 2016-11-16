@@ -111,6 +111,7 @@ class EpreuveController extends Controller
 
     }
     public function join($request, $response,$args){
+        $evenement_id=$args['id_evenement'];
         if ($request->isPost()) {
             $nom = $request->getParam('nom');
             $prenom = $request->getParam('prenom');
@@ -127,21 +128,7 @@ class EpreuveController extends Controller
             /*Test si pas deja inscrit*/
             $sportif = Sportif::where('email',$email)->first();
 
-            if ($sportif!=null) {
-                foreach ($epreuves as $epreuve) {
-                    try{
-                        $sportif->epreuves()->attach($epreuve);
-                    }
-                    catch (QueryException $e){
-                        $errorCode = $e->errorInfo[1];
-                        if($errorCode == 1062){
-                            $this->flash('error', 'Vous vous êtes déjà inscrit à l\'épreuve '.Epreuve::find($epreuve)->first()->nom);
-                            header("Refresh:0");
-                        }
-                    }
-                }
-            }
-            else{
+            if ($sportif==null) {
                 $birthday = \DateTime::createFromFormat("d-m-Y",$birthday);
                 $sportif=new Sportif();
                 $sportif->nom=$nom;
@@ -150,7 +137,22 @@ class EpreuveController extends Controller
                 $sportif->birthday=$birthday;
                 $sportif->save();
             }
-
+            $prixTotal=0;
+            foreach ($epreuves as $epreuve) {
+                try{
+                    $sportif->epreuves()->attach($epreuve);
+                    $prixTotal+=Epreuve::find($epreuve)->first()->prix;
+                }
+                catch (QueryException $e){
+                    $errorCode = $e->errorInfo[1];
+                    if($errorCode == 1062){
+                        $this->flash('error', 'Vous vous êtes déjà inscrit à l\'épreuve '.Epreuve::find($epreuve)->first()->nom);
+                        header("Refresh:0");
+                    }
+                }
+            }
+            
+            return $this->view->render($response, 'Epreuve/payment.twig',compact('prixTotal','evenement_id'));
 
 
         }
