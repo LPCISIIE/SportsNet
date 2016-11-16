@@ -1,12 +1,12 @@
 
 /**SET FOREIGN_KEY_CHECKS = 0;
---SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
+SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
   FROM information_schema.tables
   WHERE table_schema = 'nom de la table'; -- specify DB name here.
 
 SET @tables = CONCAT('DROP TABLE IF EXISTS ', @tables);
--- PREPARE stmt FROM @tables;
--- EXECUTE stmt;
+PREPARE stmt FROM @tables;
+EXECUTE stmt;
 SET FOREIGN_KEY_CHECKS = 1; */
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `organisateur` (
 
 CREATE TABLE IF NOT EXISTS `participe` (
   `sportif_id` int(11) NOT NULL,
-  `evenement_id` int(11) NOT NULL,
+  `epreuve_id` int(11) NOT NULL,
   `numero_participant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -210,7 +210,7 @@ ALTER TABLE `organisateur`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `participe`
-  ADD PRIMARY KEY (`sportif_id`,`evenement_id`);
+  ADD PRIMARY KEY (`sportif_id`,`epreuve_id`);
 
 ALTER TABLE `persistences`
   ADD PRIMARY KEY (`id`),
@@ -295,3 +295,19 @@ ALTER TABLE `throttle`
 INSERT INTO `roles` (`id`, `slug`, `name`, `permissions`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'Admin', '{"user.create":true,"user.update":true,"user.delete":true}', '2016-11-15 08:35:30', '2016-11-15 08:35:30'),
 (2, 'user', 'User', '{"user.update":true}', '2016-11-15 08:35:30', '2016-11-15 08:35:30');
+
+INSERT INTO `evenement` (`id`, `nom`, `adresse`, `date_debut`, `date_fin`, `telephone`, `discipline`, `description`, `etat`) VALUES
+(12, 'Le marathon blanc', 'adresse quelconque', '2016-11-15 16:59:31', '2016-11-15 16:59:31', 649128079, 'Marathon', 'dfbjksfjksdnjkvsdbjkjkbdfbjksbjkqgqvbjkvbjkqvbjkbjkbjqvbjqkqdfdfbjf', 0);
+
+INSERT INTO `epreuve` (`id`, `nom`, `capacite`, `date_debut`, `date_fin`, `etat`, `prix`, `evenement_id`) VALUES
+(1, 'enfant', 10, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, 12);
+
+INSERT INTO `organisateur` (`id`, `user_id`, `nom`, `prenom`, `paypal`) VALUES
+(1, 2, 'a', 'z', '');
+
+INSERT INTO `user` (`id`, `email`, `password`, `permissions`, `last_login`, `created_at`, `updated_at`) VALUES
+(2, 'lementai@hotmail.fr', '$2y$10$H3Qwy4tCMXOX0dG6.W8Ry..TaCs3FBIn55.rpQ.Q6FRWbydqArni6', '{"user.delete":0}', '2016-11-16 07:15:24', '2016-11-15 12:29:18', '2016-11-16 07:15:24');
+
+
+INSERT INTO `activations` (`id`, `user_id`, `code`, `completed`, `completed_at`, `created_at`, `updated_at`) VALUES
+(2, 2, 'zhrf6HMfzWddMpFBzQbPGzLDg9i4dac7', 1, '2016-11-15 12:29:18', '2016-11-15 12:29:18', '2016-11-15 12:29:18');
