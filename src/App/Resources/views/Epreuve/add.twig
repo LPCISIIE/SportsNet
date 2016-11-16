@@ -8,9 +8,7 @@
         <div class="jumbotron">
             <h3>Ajout d'épreuve</h3>
 
-            <form action="{{ path_for('epreuve.add', {'id_evenement': id}) }}" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="op" id="op" value="reg">
-
+            <form action="" method="POST" enctype="multipart/form-data">
                 {{ form.group('epreuve_name', null, 'epreuve_name', 'Nom de l\'épreuve') }}
                 {{ form.group('date_debut', null, 'date_debut', 'Début', null, 'text', 'JJ/MM/AAAA') }}
                 {{ form.group('heure_debut', null, 'heure_debut', 'Heure', null, 'text', '12:00') }}
