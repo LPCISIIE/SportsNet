@@ -55,6 +55,7 @@ class EvenementController extends Controller
         return $this->view->render($response, 'Evenement/create.twig');
     }
 
+
     public function show(Request $request, Response $response, array $args){
         $id_evenement = $args["id_evenement"];
         $evenement = Evenement::find($id_evenement);
