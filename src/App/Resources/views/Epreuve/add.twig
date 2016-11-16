@@ -9,7 +9,7 @@
             <h3>Ajout d'épreuve</h3>
 
             <form action="" method="POST" enctype="multipart/form-data">
-                {{ form.group('epreuve_name', null, 'epreuve_name', 'Nom de l\'épreuve') }}
+                {{ form.group('nom', null, 'nom', 'Nom de l\'épreuve') }}
                 {{ form.group('date_debut', null, 'date_debut', 'Début', null, 'text', 'JJ/MM/AAAA') }}
                 {{ form.group('heure_debut', null, 'heure_debut', 'Heure', null, 'text', '12:00') }}
 
@@ -21,10 +21,10 @@
                 {{ form.group('date_fin', null, 'date_fin', 'Fin', null, 'text', 'JJ/MM/AAAA') }}
                 {{ form.group('heure_fin', null, 'heure_fin', 'Heure', null, 'text', '12:00') }}
 
-                <div class="form-group{% if hasError('epreuve_description') %} has-error{% endif %}">
-                    <label for="epreuve_description">Description</label>
-                    <textarea name="epreuve_description" id="epreuve_description" placeholder="Donnez les détails concernant cette épreuve" class="form-control"></textarea>
-                    <span class="help-block">{{ error('epreuve_description') }}</span>
+                <div class="form-group{% if hasError('description') %} has-error{% endif %}">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" placeholder="Donnez les détails concernant cette épreuve" class="form-control"></textarea>
+                    <span class="help-block">{{ error('description') }}</span>
                 </div>
 
                 {{ form.group('capacite', null, 'capacite', 'Capacité maximum', null, 'number') }}

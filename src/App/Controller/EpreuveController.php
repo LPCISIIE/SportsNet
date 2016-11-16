@@ -28,17 +28,15 @@ class EpreuveController extends Controller
         }
 
         if ($request->isPost()) {
-            V::with('App\\Validation\\Rules\\');
-
             $this->validator->validate($request, [
-                'epreuve_name' => V::notEmpty(),
+                'nom' => V::notBlank(),
                 'date_debut' => V::date('d/m/Y'),
                 'heure_debut' => V::date('H:i'),
                 'date_fin' => V::date('d/m/Y'),
                 'heure_fin' => V::date('H:i'),
-                'epreuve_description' => V::notEmpty(),
-                'capacite' => V::notEmpty()->numeric(),
-                'prix' => V::notEmpty()->numeric()
+                'description' => V::notBlank(),
+                'capacite' => V::notBlank()->numeric(),
+                'prix' => V::notBlank()->numeric()
             ]);
 
             $storage = new FileSystem($this->getUploadDir($evenement->id));
@@ -55,15 +53,21 @@ class EpreuveController extends Controller
             }
 
             if ($this->validator->isValid()) {
-                $dated = \DateTime::createFromFormat('d/m/Y H:i', $request->getParam('date_debut') . ' ' . $request->getParam('heure_debut'));
-                $datef = \DateTime::createFromFormat('d/m/Y H:i', $request->getParam('date_fin') . ' ' . $request->getParam('heure_fin'));
+                $dated = $request->getParam('date_debut');
+                $datef = $request->getParam('date_fin');
+                $heured = $request->getParam('heure_debut');
+                $heuref = $request->getParam('heure_fin');
+
+                $dated = \DateTime::createFromFormat('d/m/Y H:i', $dated . ' ' . $heured);
+                $datef = \DateTime::createFromFormat('d/m/Y H:i', $datef . ' ' . $heuref);
+
                 $epreuve = new Epreuve([
-                    'nom' => $request->getParam('epreuve_name'),
+                    'nom' => $request->getParam('nom'),
                     'capacite' => $request->getParam('capacite'),
                     'date_debut' => $dated,
                     'date_fin' => $datef,
                     'etat' => Epreuve::CREE,
-                    'description' => $request->getParam('epreuve_description'),
+                    'description' => $request->getParam('description'),
                     'prix' => $request->getParam('prix')
                 ]);
 
@@ -100,32 +104,57 @@ class EpreuveController extends Controller
         }
 
         if ($request->isPost()) {
-            $epreuve = Epreuve::find($args['id_epreuve']);
-            $evenement = Evenement::find($args['id_evenement']);
-
-            if (!$epreuve) {
-                throw $this->notFoundException($request, $response);
-            }
-
-            v::with('App\\Validation\\Rules\\');
-
             $validation = $this->validator->validate($request, [
-                'epreuve_name' => v::notEmpty(),
-                'date_debut' => v::date('d/m/Y'),
-                'heure_debut' => v::date('H:i'),
-                'date_fin' => v::date('d/m/Y'),
-                'heure_fin' => v::date('H:i'),
-                'epreuve_pic_link' => v::ImageFormat()->ImageSize(),
-                'epreuve_description' => v::notEmpty(),
-                'capacite' => v::notEmpty()->numeric(),
-                'prix' => v::notEmpty()->numeric(),
-                'op' => v::equals('reg'),
+                'nom' => V::notBlank(),
+                'date_debut' => V::date('d/m/Y'),
+                'heure_debut' => V::date('H:i'),
+                'date_fin' => V::date('d/m/Y'),
+                'heure_fin' => V::date('H:i'),
+                'description' => V::notBlank(),
+                'capacite' => V::notBlank()->numeric(),
+                'prix' => V::notBlank()->numeric()
             ]);
 
+            $etat = $request->getParam('etat');
+
+            $etats = [
+                Evenement::CREE,
+                Evenement::VALIDE,
+                Evenement::OUVERT,
+                Evenement::EN_COURS,
+                Evenement::CLOS,
+                Evenement::EXPIRE,
+                Evenement::ANNULE
+            ];
+
+            if (!in_array($etat, $etats)) {
+                $this->validator->addError('etat', 'État non valide.');
+            }
+
+            $file = new File('epreuve_pic_link', new FileSystem($this->getUploadDir($evenement->id), true));
+            $file->setName('header');
+
+            $file->addValidations([
+                new Mimetype(['image/png', 'image/jpeg']),
+                new Size('2M')
+            ]);
+
+            $fileUploaded = isset($_FILES['epreuve_pic_link']) && $_FILES['epreuve_pic_link']['error'] != UPLOAD_ERR_NO_FILE;
+
+            if ($fileUploaded) {
+                if (!$file->validate()) {
+                    $this->validator->addErrors('epreuve_pic_link', $file->getErrors());
+                }
+            }
 
             if ($validation->isValid()) {
-                $dated = \DateTime::createFromFormat("d/m/Y H:i", $request->getParam('date_debut') . " " . $request->getParam('heure_debut'));
-                $datef = \DateTime::createFromFormat("d/m/Y H:i", $request->getParam('date_fin') . " " . $request->getParam('heure_fin'));
+                $dated = $request->getParam('date_debut');
+                $datef = $request->getParam('date_fin');
+                $heured = $request->getParam('heure_debut');
+                $heuref = $request->getParam('heure_fin');
+
+                $dated = \DateTime::createFromFormat('d/m/Y H:i', $dated . ' ' . $heured);
+                $datef = \DateTime::createFromFormat('d/m/Y H:i', $datef . ' ' . $heuref);
 
                 $epreuve->fill([
                     'nom' => $request->getParam('nom'),
@@ -139,12 +168,19 @@ class EpreuveController extends Controller
 
                 $epreuve->save();
 
-                $this->flash('success', 'L\'épreuve "' . $request->getParam('nom') . '" a bien été modifié !');
+                if ($fileUploaded) {
+                    unlink($this->getPicturePath($evenement->id));
+                    $file->upload();
+                }
+
+                $this->flash('success', 'L\'épreuve "' . $epreuve->nom . '" a bien été modifiée !');
                 return $this->redirect($response, 'home');
             }
         }
 
-        return $this->view->render($response, 'Epreuve/edit.twig', ['evenement' => $epreuve, 'evenement' => $epreuve]);
+        return $this->view->render($response, 'Epreuve/edit.twig', [
+            'epreuve' => $epreuve
+        ]);
     }
 
     public function getUploadDir($eventId)
@@ -152,12 +188,9 @@ class EpreuveController extends Controller
         return $this->settings['events_upload'] . $eventId . '/epreuves';
     }
 
-    public function getPicture(Epreuve $epreuve)
+    public function getPicturePath($eventId)
     {
-        if (file_exists($this->getFolderUpload($epreuve) . $epreuve->id . '.jpg')) {
-            return $this->getFolderUpload($epreuve) . $epreuve->id . '.jpg';
-        }
-
-        return $this->getFolderUpload($epreuve) . $epreuve->id . '.png';
+        $path = $this->getUploadDir($eventId) . '/header';
+        return file_exists($path . '.jpg') ? $path . '.jpg' : $path . '.png';
     }
 }
