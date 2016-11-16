@@ -1,5 +1,6 @@
 <?php
 
+
 $app->get('/user/{id:[0-9]+}', 'UserController:profil')->setName('user.profile');
 
 $app->group('', function () {
