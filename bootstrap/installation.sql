@@ -1,6 +1,6 @@
 
-SET FOREIGN_KEY_CHECKS = 0;
-SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
+/**SET FOREIGN_KEY_CHECKS = 0;
+--SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
   FROM information_schema.tables
   WHERE table_schema = 'nom de la table'; -- specify DB name here.
 
