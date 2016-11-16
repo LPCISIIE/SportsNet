@@ -1,0 +1,126 @@
+/**
+* Maestro Framework
+* Fichier des boutons
+* @author: Xavier CHOPIN
+*/
+
+@mixin bouton($couleurTexte,$couleurBackground,$couleurBackgroundHover,$couleurBackgroundAfter) {
+    @extend %resetUserSelect;
+    @include transition(0.3s);
+    margin: 0.5em;
+    color: $couleurTexte;
+    background-color: $couleurBackground;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: .5px;
+    font-weight: bolder;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+    border-radius: 2px;
+    line-height: 0px;
+    outline: 0;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    &:hover, &:active, &:focus {
+        background-color: $couleurBackgroundHover;
+        @extend %effetSurvol;
+    }
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 120%;
+        height: 120px;
+        margin-left: -60%;
+        margin-top: -60px;
+        background: $couleurBackgroundAfter;
+        border-radius: 100%;
+        opacity: 0.5;
+        transform: scale(0);
+    }
+
+    &:not(:active):after {
+        animation: ripple 1s ease-out;
+    }
+
+
+
+}
+
+@mixin boutonFancy($couleurTexte,$couleurBackground,$couleurBackgroundHover,$couleurBackgroundAfter){
+    height: 2em;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 0px -1px 0px rgba(0,0,0,0.4);
+    margin: 10px auto;
+    border-top-right-radius: 5px;
+    border-left: solid 1px #676767;
+    box-shadow: 0px 5px 0px 0px #676767;
+    @extend %resetUserSelect;
+    @include transition(0.3s);
+    color: $couleurTexte;
+    background-color: $couleurBackground;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    letter-spacing: .5px;
+    font-weight: bolder;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    line-height: 0px;
+    outline: 0;
+    text-transform: uppercase;
+    vertical-align: middle;
+
+    &:before {
+        top: -3px;
+    }
+
+    &:active {
+        top: 3px;
+    }
+
+    &:not(:active):after {
+        animation: none;
+    }
+
+    &:hover {
+        border-left: solid 1px #676767;
+        box-shadow: 0px 5px 0px 0px #676767;
+    }
+
+}
+
+@mixin tailleBouton($padding,$fontSize){
+    padding: $padding;
+    font-size: $fontSize;
+
+    @media #{$mq-telephone}{
+        font-size: 100%;
+    }
+}
+
+
+
+@keyframes ripple {
+    0%   { transform: scale(0); }
+    20%  { transform: scale(1); }
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}

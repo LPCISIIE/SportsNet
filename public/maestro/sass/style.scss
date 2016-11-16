@@ -1,0 +1,145 @@
+@import 'reset';
+@import 'variables';
+@import 'presets/fonctions';
+@import 'typographie';
+@import 'composant';
+@import 'bouton';
+@import 'tableau';
+@import 'grille';
+@import 'image';
+@import 'input';
+
+
+/* - - - - - - -  Maestro, à toi de jouer  - - - - - - - - - */
+
+
+body {
+    padding-top : $navbar-hauteur;
+    height:100%;
+}
+
+html {
+    font-family: $police1,$police2;
+    background: #FAFAFA;
+    min-height:100%;
+}
+
+hr {
+    margin-top: -0.5em;
+    border: 0;
+    height: 1px;
+    min-height:100%;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+
+pre {
+    font-family: 'Source Code Pro', monospace;
+    white-space: pre-wrap;       /* Depuis la préhistoire */
+    white-space: -moz-pre-wrap;  /* Mozifox, depuis 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7+ */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+
+code {
+    font-family: 'Source Code Pro';
+    display:block;
+    line-height:1.5em;
+    background-color: #282c33;
+    color: #d3d4d4;
+    margin: 1em 0;
+    font-weight:bold;
+    counter-reset: line;
+    padding-top:0;
+    overflow-x: auto;
+
+    span {
+        white-space:pre;
+        display:block;
+        position:relative;
+        padding-left:50px;
+
+
+        &:before {
+          margin-left:-50px;
+          position:absolute;
+          background-color: #404857;
+          counter-increment: line;
+          content: counter(line);
+          display: inline;
+          text-align:right;
+          padding: 0 .5em;
+          color: #757b85;
+          width: 1.5em;
+        }
+
+    }
+}
+
+
+
+kbd {
+    font-family: Verdana, Sans-Serif;
+    color: #252424;
+    font-size: 14px;
+    background-color: #EEEEEE;
+    text-align: center;
+    letter-spacing: .5px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+    display: inline-block;
+    line-height: 0px;
+    border-radius: 2px;
+    padding: 1rem 0.7rem;
+    margin-right: 1em;
+    -webkit-tap-highlight-color: transparent;
+    @include transition(0.3s);
+}
+
+kbd:hover {
+    background-color: #F5F5F5;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.22), 0 2px 10px 0 rgba(0, 0, 0, 0.18)
+}
+
+li {
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid $grisLeger;
+}
+
+
+
+ul {
+    margin-top: 1vh;
+    list-style-type: disc;
+    list-style-position: inside;
+
+    &.simple {
+      list-style-type: none;
+    }
+
+    &.carre {
+      list-style-type: square;
+    }
+}
+
+footer {
+    margin-top:2em;
+    padding-top: 4%;
+    padding-bottom: 3%;
+    padding-left:11%;
+    background-color: darken($grisFlat,20);
+    font-family: $police1;
+    color:white;
+    bottom:0;
+
+    @media #{$mq-iPhone} {
+        padding-left:5%;
+        padding-top: 100px !important;
+        padding-bottom: 100px !important;
+    }
+}

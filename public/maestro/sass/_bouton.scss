@@ -1,0 +1,58 @@
+@import 'presets/bouton';
+
+/** Styles */
+.btn {
+    @include bouton(#fff,$couleurTheme,$couleurThemeLeger,$blancEffet);
+    @include tailleBouton(1.1em 1em,1em);
+}
+
+.btn-simple {
+    @include bouton(#fff,$couleurTheme,$couleurThemeLeger,$blancEffet);
+    @include tailleBouton(1em 1em,0.8em);
+    &:not(:active):after { animation: none; }
+}
+
+.btn-vert {
+    @include bouton(#fff,$vert,$vertLeger,$blancEffet);
+    @include tailleBouton(1.1em 1em,1em);
+}
+
+.btn-rouge {
+    @include bouton(#fff,$rouge,$rougeLeger,$blancEffet);
+    @include tailleBouton(1.1em 1em,1em);
+}
+
+.btn-orange {
+    @include bouton(#fff,$orange,$orangeLeger,$blancEffet);
+    @include tailleBouton(1.1em 1em,1em);
+}
+
+.btn-theme {
+    @include bouton(#fff,#26a69a,lighten(#26a69a,5),$blancEffet);
+    @include tailleBouton(1.1em 1em,1em);
+}
+
+.btn-flat {
+    @include bouton(black,transparent,$grisFlat,$blancEffet);
+    @include tailleBouton(1.1em 1em,1em);
+    &, &:hover, &:active, &:focus { box-shadow: none; }
+}
+
+.btn-extra-large {
+    @include tailleBouton(1.3em 1em,1.7em);
+    width: 100%;
+}
+
+.btn-fancy {
+    @include boutonFancy(#fff,$couleurTheme,$couleurThemeLeger,$blancEffet);
+    @include tailleBouton(4px 20px 0,14px);
+}
+
+/** Tailles */
+.btn-large {
+    @include tailleBouton(1.5em 3em,1.2em);
+}
+
+.btn-petit {
+    @include tailleBouton(1em 1em,0.8em);
+}
