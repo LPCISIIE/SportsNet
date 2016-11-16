@@ -36,7 +36,7 @@
         {{ csrf() }}
         <input type="submit" class="btn btn-primary">
     </form>
-    <a href="{{ path_for('epreuve.add', {'id_evenement': evenement.id}) }}"><button>Ajouter une épreuve</button></a>
+    <a href="{{ path_for('epreuve.add', {'id_evenement': evenement.id}) }}" class="btn btn-default">Ajouter une épreuve</a>
 </div>
 
 {% endblock %}
