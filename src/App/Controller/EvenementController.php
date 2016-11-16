@@ -61,17 +61,6 @@ class EvenementController extends Controller
     }
 
 
-    public function show(Request $request, Response $response, array $args){
-        $id_evenement = $args["id_evenement"];
-        $evenement = Evenement::find($id_evenement);
-        $epreuves = $evenement->epreuves()->get()->toArray();
-        $evenement = $evenement->toArray();
-        return $this->view->render($response, 'Evenement/show.twig', [
-            'evenement' => $evenement,
-            'epreuves' => $epreuves
-        ]);
-    }
-
     public function edit(Request $request, Response $response, array $args)
     {
         $evenement = Evenement::find($args['id']);
