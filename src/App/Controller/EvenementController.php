@@ -73,6 +73,7 @@ class EvenementController extends Controller
         }
 
         if ($request->isPost()) {
+
             $this->validator->validate($request, [
                 'nom' => V::length(1, 100),
                 'adresse' => V::length(1, 100),
@@ -99,7 +100,7 @@ class EvenementController extends Controller
                 $this->validator->addError('etat', 'État non valide.');
             }
 
-            $file = new File('image', new FileSystem(__DIR__ . '/../../../public/uploads/evenements/' . $evenement->id, true));
+            $file = new File('image', new FileSystem($this->settings['events_upload'] . $evenement->id, true));
             $file->setName('header');
 
             $file->addValidations([

@@ -33,16 +33,15 @@ class EpreuveController extends Controller
             return $this->view->render($response, 'Epreuve/add.twig');
         }
 
-        //on créer l'image et sa destination de stockage
-        $storage = new \Upload\Storage\FileSystem(__DIR__.'/../../../public/uploads/evenements/'.$args['id_evenement'].'/epreuves');
+        $storage = new \Upload\Storage\FileSystem($this->settings['trials_upload'].$args['id_evenement'].'/epreuves');
         $file = new \Upload\File('epreuve_pic_link', $storage);
 
         $file->addValidations(array(
-            //You can also add multi mimetype validation
-            new \Upload\Validation\Mimetype(array('image/png', 'image/jpeg'))
+
+            new \Upload\Validation\Mimetype(array('image/png', 'image/jpeg')),
 
             // Ensure file is no larger than 5M (use "B", "K", M", or "G")
-            new \Upload\Validation\Size('2M')
+            new \Upload\Validation\Size('2M'),
         ));
 
         $dated = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
