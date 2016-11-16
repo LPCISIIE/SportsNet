@@ -5,10 +5,11 @@ use Respect\Validation\Validator as v;
 use App\Model\Epreuve;
 class EpreuveController extends Controller
 {
-    public function getAddEpreuve($request, $response) {
-        return $this->view->render($response, 'Epreuve/add.twig');
+    public function getAddEpreuve($request, $response, $args) {
+        $id = $args['id_evenement'];
+        return $this->view->render($response, 'Epreuve/add.twig', compact('id'));
     }
-    public function postAddEpreuve($request, $response) {
+    public function postAddEpreuve($request, $response, $args) {
         //validateur
        v::with('App\\Validation\\Rules\\');
         $validation = $this->validator->validate($request, [
@@ -47,10 +48,10 @@ class EpreuveController extends Controller
         $epreuve->prix=$request->getParam('prix');
         //TODO LATER AJOUTER ID D'EVENEMENT
         //temporaire
-        $epreuve->evenement_id=1;
+        $epreuve->evenement_id=$args['id_evenement'];
         //
         $epreuve->save();
-        
+
 
         return $this->view->render($response, 'Evenement/edit.twig');
     }

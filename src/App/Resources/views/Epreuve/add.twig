@@ -5,7 +5,7 @@
 <div class="container">
     <div class="jumbotron">
         <h3>Ajout d'épreuve</h3>
-        <form action="{{ path_for('epreuve.add') }}" method="post" autocomplete="off" enctype="multipart/form-data">
+        <form action="{{ path_for('epreuve.add', {'id_evenement': id}) }}" method="post" autocomplete="off" enctype="multipart/form-data">
             <input type="hidden" name="op" id="op" value="reg">
 
             <div class="form-group{% if hasError('epreuve_name') %}  has-error {% endif %} ">
