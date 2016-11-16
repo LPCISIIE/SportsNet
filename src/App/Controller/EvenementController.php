@@ -5,18 +5,22 @@ namespace App\Controller;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Model\Evenement as Evenement;
-use App\Model\Epreuve as Epreuve;
 use Respect\Validation\Validator as V;
+use Upload\File;
+use Upload\Storage\FileSystem;
+use Upload\Validation\Mimetype;
+use Upload\Validation\Size;
 
 class EvenementController extends Controller
 {
-    public function show(Request $request, Response $response, $args){
+    public function show(Request $request, Response $response, array $args){
         $id_evenement = $args["id_evenement"];
         $evenement = Evenement::find($id_evenement);
         $epreuves = $evenement->epreuves()->get()->toArray();
         $evenement = $evenement->toArray();
         return $this->view->render($response, 'Evenement/show.twig', compact('evenement', 'epreuves'));
     }
+
     public function edit(Request $request, Response $response, array $args)
     {
         $evenement = Evenement::find($args['id']);
@@ -36,6 +40,22 @@ class EvenementController extends Controller
                 'description' => V::notBlank()
             ]);
 
+            $file = new File('image', new FileSystem(__DIR__ . '/../../../public/uploads/evenements/' . $evenement->id, true));
+            $file->setName('header');
+
+            $file->addValidations([
+                new Mimetype(['image/png', 'image/jpeg']),
+                new Size('2M')
+            ]);
+
+            $fileUploaded = isset($_FILES['image']) && $_FILES['image']['error'] != UPLOAD_ERR_NO_FILE;
+
+            if ($fileUploaded) {
+                if (!$file->validate()) {
+                    $this->validator->addErrors('image', $file->getErrors());
+                }
+            }
+
             if ($this->validator->isValid()) {
                 $evenement->fill([
                     'nom' => $request->getParam('nom'),
@@ -48,6 +68,10 @@ class EvenementController extends Controller
                 ]);
 
                 $evenement->save();
+
+                if ($fileUploaded) {
+                    $file->upload();
+                }
 
                 $this->flash('success', 'L\'événement "' . $evenement->nom . '" a bien été modifié !');
                 return $this->redirect($response, 'home');
