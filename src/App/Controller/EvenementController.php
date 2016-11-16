@@ -141,7 +141,7 @@ class EvenementController extends Controller
         ]);
     }
 
-    public function annuler(Request $request, Response $response, array $args)
+    public function cancel(Request $request, Response $response, array $args)
     {
         $evenement = Evenement::find($args['id']);
 
@@ -158,6 +158,26 @@ class EvenementController extends Controller
         $evenement->save();
 
         $this->flash('success', 'L\'événement "' . $evenement->nom . '" a été annulé.');
+        return $this->redirect($response, 'user.events');
+    }
+
+    public function delete(Request $request, Response $response, array $args)
+    {
+        $evenement = Evenement::find($args['id']);
+
+        if (!$evenement) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        if ($evenement->user->id !== $this->user()->id) {
+            $this->flash('danger', 'Cet événement ne vous appartient pas !');
+            return $this->redirect($response, 'user.events');
+        }
+
+        $evenement->epreuves()->delete();
+        $evenement->delete();
+
+        $this->flash('success', 'L\'événement "' . $evenement->nom . '" a été supprimé.');
         return $this->redirect($response, 'user.events');
     }
 }
