@@ -132,7 +132,6 @@ class EpreuveController extends Controller
             }
 
             $file = new File('epreuve_pic_link', new FileSystem($this->getUploadDir($evenement->id), true));
-            $file->setName('header');
 
             $file->addValidations([
                 new Mimetype(['image/png', 'image/jpeg']),
@@ -169,7 +168,8 @@ class EpreuveController extends Controller
                 $epreuve->save();
 
                 if ($fileUploaded) {
-                    unlink($this->getPicturePath($evenement->id));
+                    unlink($this->getPicturePath($evenement->id, $epreuve->id));
+                    $file->setName($epreuve->id);
                     $file->upload();
                 }
 
@@ -183,14 +183,39 @@ class EpreuveController extends Controller
         ]);
     }
 
+    public function show(Request $request, Response $response, array $args)
+    {
+        $evenement = Evenement::find($args['event_id']);
+
+        if (!$evenement) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        if ($evenement->user_id !== $this->user()->id) {
+            $this->flash('danger', 'Cet événement ne vous appartient pas !');
+            return $this->redirect($response, 'home');
+        }
+
+        $epreuve = Epreuve::find($args['trial_id']);
+
+        if (!$epreuve) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        return $this->view->render($response, 'Epreuve/show.twig', [
+            'epreuve' => $epreuve,
+            'evenement' => $evenement
+        ]);
+    }
+
     public function getUploadDir($eventId)
     {
         return $this->settings['events_upload'] . $eventId . '/epreuves';
     }
 
-    public function getPicturePath($eventId)
+    public function getPicturePath($eventId, $trialId)
     {
-        $path = $this->getUploadDir($eventId) . '/header';
+        $path = $this->getUploadDir($eventId) . '/' . $trialId;
         return file_exists($path . '.jpg') ? $path . '.jpg' : $path . '.png';
     }
 }
