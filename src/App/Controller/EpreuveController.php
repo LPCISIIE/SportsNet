@@ -25,7 +25,6 @@ class EpreuveController extends Controller
             'heure_debut' => v::date('H:i'),
             'date_fin' => v::date('d-m-Y'),
             'heure_fin' => v::date('H:i'),
-            'epreuve_pic_link' => v::ImageFormat()->ImageSize(),
             'epreuve_description' => v::notEmpty(),
             'capacite' => v::notEmpty()->numeric(),
             'prix' => v::notEmpty()->numeric(),
@@ -41,6 +40,14 @@ class EpreuveController extends Controller
         //on créer l'image et sa destination de stockage
         $storage = new \Upload\Storage\FileSystem(__DIR__.'/../../../public/uploads/evenements/'.$args['id_evenement'].'/epreuves');
         $file = new \Upload\File('epreuve_pic_link', $storage);
+
+        $file->addValidations(array(
+            //You can also add multi mimetype validation
+            new \Upload\Validation\Mimetype(array('image/png', 'image/jpeg'))
+
+            // Ensure file is no larger than 5M (use "B", "K", M", or "G")
+            new \Upload\Validation\Size('2M')
+        ));
 
         $dated = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
         $datef = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
@@ -60,23 +67,13 @@ class EpreuveController extends Controller
         $new_filename = $epreuve->id;
         $file->setName($new_filename);
 
-        // on peut accéder aux données au cas ou
-        $data = array(
-            'name'       => $file->getNameWithExtension(),
-            'extension'  => $file->getExtension(),
-            'mime'       => $file->getMimetype(),
-            'size'       => $file->getSize(),
-            'md5'        => $file->getMd5(),
-            'dimensions' => $file->getDimensions()
-        );
-
         // on tente l'upload d'image
         try {
             // Success!
             $file->upload();
         } catch (\Exception $e) {
             // Fail!
-            $errors = $file->getErrors();
+            $this->validator->addErrors('epreuve_pic_link',$file->getErrors());
         }
 
 
