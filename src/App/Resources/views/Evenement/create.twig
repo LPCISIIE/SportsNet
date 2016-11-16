@@ -1,0 +1,24 @@
+{% extends 'layout.twig' %}
+
+{% import 'Macro/form.twig' as form %}
+
+{% block body %}
+
+    <div class="container">
+        <form action="{{ path_for('evenement.create')}}" method="POST" enctype="multipart/form-data">
+
+            {{ form.group('nom', null, 'nom', 'Nom') }}
+            {{ form.group('date_debut', null , 'date_debut', 'Début', null ) }}
+            {{ form.group('date_fin', null, 'date_fin', 'Fin', null) }}
+            {{ form.group('adresse', null, 'adresse', 'Lieu') }}
+            {{ form.group('discipline', null, 'discipline', 'Discipline') }}
+            {{ form.group('telephone', null, 'telephone', 'Téléphone', null, 'number') }}
+
+            <textarea name="description" id="description" class="form-control" placeholder="Description">{{ evenement.description }}</textarea>
+
+            {{ csrf() }}
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div>
+
+{% endblock %}
