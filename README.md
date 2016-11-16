@@ -7,7 +7,7 @@ SportsNet is a web application to create and manage sports events.
 
 ## Installation
 ```
-$ git@github.com:TPCISIIE/SportsNet.git
+$ git clone git@github.com:TPCISIIE/SportsNet.git
 ```
 
 ### 2. Download vendors

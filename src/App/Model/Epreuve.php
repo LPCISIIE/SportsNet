@@ -11,12 +11,12 @@ class Epreuve extends Model{
     public $timestamps = false;
     protected $fillable = [
         'nom',
-        'capacité',
+        'capacite',
         'date_debut',
         'date_fin',
         'etat',
+        'description',
         'prix'
     ];
 }
 
-?>
