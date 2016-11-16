@@ -9,6 +9,7 @@
                 <h2>{{ event.nom }} <small>{{ event.discipline }}</small></h2>
                 <p>{{ event.description }}</p>
                 <a href="{{ path_for('evenement.edit', {'id': event.id}) }}" class="btn btn-default">Modifier</a>
+                <a href="{{ path_for('evenement.participants', {'id': event.id}) }}" class="btn btn-default">Récupérer liste des participants</a>
                 <a href="{{ path_for('evenement.cancel', {'id': event.id}) }}" class="btn btn-warning">Annuler</a>
                 <a href="{{ path_for('evenement.delete', {'id': event.id}) }}" class="btn btn-danger">Supprimer</a>
             </div>

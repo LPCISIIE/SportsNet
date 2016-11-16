@@ -32,6 +32,10 @@ class Epreuve extends Model
         'prix'
     ];
 
+    public function sportifs(){
+        return $this->belongsToMany('App\Model\Sportif', "participe");
+    }
+
   public function evenement()
   {
     return $this->belongsTo('App\Model\Evenement');
@@ -40,4 +44,3 @@ class Epreuve extends Model
 
 
 }
-

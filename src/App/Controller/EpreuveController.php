@@ -59,7 +59,6 @@ class EpreuveController extends Controller
             new \Upload\Validation\Size('2M'),
         ));
 
-
         $dated = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
         $datef = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
         $epreuve = new Epreuve();
