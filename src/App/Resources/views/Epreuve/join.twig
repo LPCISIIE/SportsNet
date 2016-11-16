@@ -8,7 +8,7 @@
 <form action="{{ path_for('epreuve.join', {'id_evenement': evenement.id}) }}" method="POST" enctype="multipart/form-data">
     <div class="form-group{% if hasError(name) %} has-error{% endif %}">
     {% for epreuve in epreuves%}
-            <input type="checkbox" name="epreuve" value="{{epreuve.id}}"  class="epreuve">{{ epreuve.nom }}
+            <input type="checkbox" name="epreuves[]" value="{{epreuve.id}}"  class="epreuve">{{ epreuve.nom }}
     {% endfor%}
     </div>
 
