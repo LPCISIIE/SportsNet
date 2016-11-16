@@ -1,17 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Xavier
- * Date: 15/11/2016
- * Time: 10:24
- */
 
 namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
-use App\Model\Epreuve as Epreuve;
 
 class Evenement extends Model
 {
+    const CREE = 0;
+    const VALIDE = 1;
+    const OUVERT = 2;
+    const EN_COURS = 3;
+    const CLOS = 4;
+    const EXPIRE = 5;
+    const ANNULE = 6;
+
     protected $table = 'evenement';
 
     protected $primaryKey = 'id';
@@ -26,37 +27,16 @@ class Evenement extends Model
         'telephone',
         'discipline',
         'description',
-        'etat',
+        'etat'
     ];
-
-
-    public function annuler()
-    {
-        $this->etat = -1;
-    }
-
-    public function cloturer()
-    {
-        $this->etat = 0;
-    }
-
-    public function ouvrir()
-    {
-        $this->etat = 1;
-    }
-
-    public function enCours()
-    {
-        $this->etat = 3;
-    }
-
-    public function expirer()
-    {
-        $this->etat = 4;
-    }
 
     public function epreuves()
     {
         return $this->hasMany('App\Model\Epreuve');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Model\User');
     }
 }
