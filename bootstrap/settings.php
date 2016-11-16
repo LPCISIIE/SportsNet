@@ -5,7 +5,6 @@ return [
         'determineRouteBeforeAppMiddleware' => false,
         'displayErrorDetails' => true,
         'events_upload' => __DIR__.'/../public/uploads/evenements/',
-        'trials_upload' => __DIR__.'/../public/uploads/epreuves/',
 
         'view' => [
             'template_path' => __DIR__ . '/../src/App/Resources/views',

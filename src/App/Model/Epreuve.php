@@ -4,7 +4,8 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Epreuve extends Model{
+class Epreuve extends Model
+{
 
   const CREE = 0;
   const VALIDE = 1;
@@ -35,6 +36,8 @@ class Epreuve extends Model{
   {
     return $this->belongsTo('App\Model\Evenement');
   }
+
+
 
 }
 
