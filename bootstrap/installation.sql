@@ -1,13 +1,13 @@
 
-SET FOREIGN_KEY_CHECKS = 0;
-SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
+/**SET FOREIGN_KEY_CHECKS = 0;
+--SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
   FROM information_schema.tables
   WHERE table_schema = 'nom de la table'; -- specify DB name here.
 
 SET @tables = CONCAT('DROP TABLE IF EXISTS ', @tables);
 -- PREPARE stmt FROM @tables;
 -- EXECUTE stmt;
-SET FOREIGN_KEY_CHECKS = 1;
+SET FOREIGN_KEY_CHECKS = 1; */
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
