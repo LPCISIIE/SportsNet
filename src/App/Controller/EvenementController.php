@@ -37,8 +37,24 @@ class EvenementController extends Controller
                 'date_fin' => V::date('d/m/Y'),
                 'telephone' => V::phone(),
                 'discipline' => V::length(1, 50),
-                'description' => V::notBlank()
+                'description' => V::notBlank(),
+                'etat' => V::intVal()
             ]);
+
+            $etat = $request->getParam('etat');
+            $etats = [
+                Evenement::CREE,
+                Evenement::VALIDE,
+                Evenement::OUVERT,
+                Evenement::EN_COURS,
+                Evenement::CLOS,
+                Evenement::EXPIRE,
+                Evenement::ANNULE
+            ];
+
+            if (!in_array($etat, $etats)) {
+                $this->validator->addError('etat', 'État non valide.');
+            }
 
             $file = new File('image', new FileSystem(__DIR__ . '/../../../public/uploads/evenements/' . $evenement->id, true));
             $file->setName('header');
@@ -64,7 +80,8 @@ class EvenementController extends Controller
                     'date_fin' => \DateTime::createFromFormat('d/m/Y', $request->getParam('date_fin')),
                     'telephone' => $request->getParam('telephone'),
                     'discipline' => $request->getParam('discipline'),
-                    'description' => $request->getParam('description')
+                    'description' => $request->getParam('description'),
+                    'etat' => $etat
                 ]);
 
                 $evenement->save();
