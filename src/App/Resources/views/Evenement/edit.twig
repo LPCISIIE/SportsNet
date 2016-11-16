@@ -9,11 +9,17 @@
 
     <h2 class="text-center">Modification d'un évenement</h2>
     <form action="{{ path_for('evenement.edit', {'id': evenement.id}) }}" method="POST" enctype="multipart/form-data">
+        {{ form.group('nom', evenement.nom, 'nom', 'Nom') }}
+        {{ form.group('date_debut', evenement.date_debut|date('d/m/Y'), 'date_debut', 'Début') }}
+        {{ form.group('date_fin', evenement.date_fin|date('d/m/Y'), 'date_fin', 'Fin') }}
+        {{ form.group('adresse', evenement.adresse, 'adresse', 'Lieu') }}
+        {{ form.group('discipline', evenement.discipline, 'discipline', 'Discipline') }}
+        {{ form.group('telephone', evenement.telephone, 'telephone', 'Téléphone', null, 'tel') }}
 
-        <div class="form-group">
-            <label for="etat">État </label>
-            <select required name="etat" id="etat">
-                <option value="0" disabled {% if evenement.etat == 0 %} selected{% endif %}>Choisir un état</option>
+        <div class="form-group{% if hasError('etat') %} has-error{% endif %}">
+            <label for="etat">État</label>
+            <select name="etat" id="etat" class="form-control">
+                <option value="0"{% if evenement.etat == 0 %} selected{% else %} disabled{% endif %}>Choisir un état</option>
                 <option value="1"{% if evenement.etat == 1 %} selected{% endif %}>Validé</option>
                 <option value="2"{% if evenement.etat == 2 %} selected{% endif %}>Ouvert à l'inscription</option>
                 <option value="4"{% if evenement.etat == 4 %} selected{% endif %}>Clos à l'inscription</option>
@@ -21,6 +27,7 @@
                 <option value="5"{% if evenement.etat == 5 %} selected{% endif %}>Expiré</option>
                 <option value="6"{% if evenement.etat == 6 %} selected{% endif %}>Annulé</option>
             </select>
+            <span class="help-block">{{ error('etat') }}</span>
         </div>
 
         <div class="form-group">
@@ -35,14 +42,11 @@
         {{ form.group('discipline', evenement.discipline, 'discipline', 'Discipline') }}
         {{ form.group('telephone', evenement.telephone, 'telephone', 'Téléphone de contact', null, 'tel') }}
 
-
-
         <textarea name="description" id="description" class="form-control" placeholder="Description">{{ evenement.description }}</textarea>
 
         {{ csrf() }} <br>
         <input type="submit" class="btn btn-primary">
     </form>
-
-    </div>
+</div>
 
 {% endblock %}
