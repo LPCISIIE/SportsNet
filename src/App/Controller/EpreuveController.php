@@ -152,7 +152,7 @@ class EpreuveController extends Controller
                 'nom' => V::length(1,50),
                 'prenom' => V::length(1,50),
                 'email' => V::noWhitespace()->email(),
-                'birthday' => v::date('d-m-Y'),
+                'birthday' => v::date('d/m/Y'),
             ]);
 
             /*Test si pas deja inscrit*/
