@@ -1,0 +1,47 @@
+/**
+* Maestro Framework
+* Fichier des composants
+* @author: Xavier CHOPIN
+*/
+
+%jumbotron {
+	padding: 15px;
+	margin-bottom: 2vh;
+	border: 1px solid transparent;
+	border-radius: 2px;
+	background-color: $grisLeger;
+	overflow: hidden;
+
+	p.intro {
+		margin-top: 1em;
+		padding-bottom: 1em;
+		border-bottom: 1px solid #cdcdcd;
+		font-size: 1.2em;
+		font-weight: 300;
+	}
+
+	p { margin-top: 1em; }
+
+	.btn{
+		background: #2196F3;
+		margin-top: 2em;
+		float:right;
+		padding: 1.2em 2.5em;
+		font-size: 1.2em;
+	}
+
+	.btn:hover{
+		background: #64B5F6;
+	}
+}
+
+
+%page-header {
+	padding-top: 10px;
+	padding-bottom: 2vh;
+	vertical-align: middle;
+	margin-bottom: 25px;
+	border: 1px solid transparent;
+	border-radius: 2px;
+	background-color: $grisLeger;
+}

@@ -1,0 +1,24 @@
+@import 'presets/input';
+
+input.simple {
+    @include inputSimple($grisFlat);
+}
+
+input.simple-rouge {
+    @include inputSimple($rouge);
+}
+
+input.simple-vert {
+    @include inputSimple($vert);
+}
+
+.formulaire {
+    @include formulaire($couleurTheme);
+}
+
+.formulaire-rouge {
+    @include formulaire($rouge);
+}
+.formulaire-vert {
+    @include formulaire($vert);
+}
