@@ -15,11 +15,9 @@ class EpreuveController extends Controller
 
     public function postAddEpreuve($request, $response, $args)
     {
-
-        //validateur
        v::with('App\\Validation\\Rules\\');
+
         $validation = $this->validator->validate($request, [
-            // à valider avec les paramètres de $request
             'epreuve_name' => v::notEmpty(),
             'date_debut' => v::date('d-m-Y'),
             'heure_debut' => v::date('H:i'),
@@ -31,11 +29,9 @@ class EpreuveController extends Controller
             'prix' => v::notEmpty()->numeric(),
             'op' => v::equals('reg'),
         ]);
-        /**
-        * If the fields fail, then redirect back to signup
-        */
+
         if (!($validation->isValid())) {
-            return $this->getAddEpreuve($request,$response);
+            return $this->view->render($response, 'Epreuve/add.twig');
         }
         $dated = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
         $datef = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
@@ -54,4 +50,64 @@ class EpreuveController extends Controller
 
         return $this->view->render($response, 'Evenement/edit.twig');
     }
+
+
+    public function editTrial($request, $response)
+    {
+
+        if ($request->isPost()) {
+
+            $epreuve = Epreuve::find($arg['id_epreuve']);
+            if (!$epreuve) {
+                throw $this->notFoundException($request, $response);
+            }
+
+            v::with('App\\Validation\\Rules\\');
+
+            $validation = $this->validator->validate($request, [
+                'epreuve_name' => v::notEmpty(),
+                'date_debut' => v::date('d-m-Y'),
+                'heure_debut' => v::date('H:i'),
+                'date_fin' => v::date('d-m-Y'),
+                'heure_fin' => v::date('H:i'),
+                'epreuve_pic_link' => v::ImageFormat()->ImageSize(),
+                'epreuve_description' => v::notEmpty(),
+                'capacite' => v::notEmpty()->numeric(),
+                'prix' => v::notEmpty()->numeric(),
+                'op' => v::equals('reg'),
+            ]);
+
+
+            if ($validation->isValid()) {
+                    $dated = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
+                    $datef = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
+
+                    $epreuve->fill([
+                        'nom' => $request->getParam('nom'),
+                        'capacite' => $request->getParam('capacite'),
+                        'date_debut' => $dated,
+                        'date_fin' => $datef,
+                        'etat' => $request->getParam('etat'),
+                        'description' => $request->getParam('description'),
+                        'prix' => $request->getParam('prix'),
+                    ]);
+
+                    $epreuve->save();
+
+                    $this->flash('success', 'L\'épreuve "' . $request->getParam('nom') . '" a bien été modifié !');
+                    return $this->redirect($response, 'home');
+            }
+        }
+
+        return $this->view->render($response, 'Epreuve/edit.twig');
+
+    }
+
+
+
+
+
+
+
+
 }

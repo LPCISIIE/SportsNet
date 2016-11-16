@@ -1,2 +1,5 @@
 .sass-cache/*
 css/*.css.map
+*.idea
+*.DS_STORE
+*~
