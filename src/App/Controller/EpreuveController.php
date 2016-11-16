@@ -21,9 +21,9 @@ class EpreuveController extends Controller
         $validation = $this->validator->validate($request, [
             // à valider avec les paramètres de $request
             'epreuve_name' => v::notEmpty(),
-            'date_debut' => v::date('d-m-Y'),
+            'date_debut' => v::date('d/m/Y'),
             'heure_debut' => v::date('H:i'),
-            'date_fin' => v::date('d-m-Y'),
+            'date_fin' => v::date('d/m/Y'),
             'heure_fin' => v::date('H:i'),
             'epreuve_description' => v::notEmpty(),
             'capacite' => v::notEmpty()->numeric(),
@@ -49,8 +49,8 @@ class EpreuveController extends Controller
             new \Upload\Validation\Size('2M'),
         ));
 
-        $dated = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
-        $datef = \DateTime::createFromFormat("d-m-Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
+        $dated = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
+        $datef = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
         $epreuve = new Epreuve();
         $epreuve->nom=$request->getParam('epreuve_name');
         $epreuve->capacite=$request->getParam('capacite');
