@@ -1,68 +1,39 @@
 {% extends 'layout.twig' %}
 
+{% import 'Macro/form.twig' as form %}
+
 {% block body %}
 
     <div class="container">
         <div class="jumbotron">
             <h3>Ajout d'épreuve</h3>
 
-            <form action="{{ path_for('epreuve.add', {'id_evenement': id}) }}" method="post" autocomplete="off" enctype="multipart/form-data">
+            <form action="{{ path_for('epreuve.add', {'id_evenement': id}) }}" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="op" id="op" value="reg">
 
-                <div class="form-group{% if hasError('epreuve_name') %}  has-error {% endif %} ">
-                    <input type="text" name="epreuve_name" id="epreuve_name" class="form-control" placeholder="Nom de l'épreuve">
-                    <span class="help-block">{{ error('epreuve_name') }}</span>
-                </div>
+                {{ form.group('epreuve_name', null, 'epreuve_name', 'Nom de l\'épreuve') }}
+                {{ form.group('date_debut', null, 'date_debut', 'Début', null, 'text', 'JJ/MM/AAAA') }}
+                {{ form.group('heure_debut', null, 'heure_debut', 'Heure', null, 'text', '12:00') }}
 
-                <div class="form-group{% if hasError('date_debut') %}  has-error {% endif %} ">
-                    <label for="date_debut">Début (jour mois année)</label>
-                    <input type="text" name="date_debut" id="date_debut" class="form-control">
-                    <span class="help-block">{{ error('date_debut') }}</span>
-                </div>
-
-                <div class="form-group{% if hasError('heure_debut') %}  has-error {% endif %} ">
-                    <label for="heure_debut">heure : </label>
-                    <input type="text" name="heure_debut" id="heure_debut" class="form-control">
-                    <span class="help-block">{{ error('heure_debut') }}</span>
-                </div>
-
-                <div class="form-group{% if hasError('epreuve_pic_link') %}  has-error {% endif %} ">
+                <div class="form-group{% if hasError('epreuve_pic_link') %} has-error{% endif %}">
                     <input type="file" name="epreuve_pic_link" id="epreuve_pic_link">
                     <span class="help-block">{{ error('epreuve_pic_link') }}</span>
                 </div>
 
-                <div class="form-group{% if hasError('date_fin') %}  has-error {% endif %} ">
-                    <label for="date_fin">Fin (jour mois année)</label>
-                    <input type="text" name="date_fin" id="date_fin" class="form-control">
-                    <span class="help-block">{{ error('date_fin') }}</span>
-                </div>
+                {{ form.group('date_fin', null, 'date_fin', 'Fin', null, 'text', 'JJ/MM/AAAA') }}
+                {{ form.group('heure_fin', null, 'heure_fin', 'Heure', null, 'text', '12:00') }}
 
-                <div class="form-group{% if hasError('heure_fin') %}  has-error {% endif %} ">
-                    <label for="heure_fin">heure : </label>
-                    <input type="text" name="heure_fin" id="heure_fin" class="form-control">
-                    <span class="help-block">{{ error('heure_fin') }}</span>
-                </div>
-
-                <div class="form-group{% if hasError('epreuve_description') %}  has-error {% endif %} ">
-                    <label for="epreuve_description">Description : </label>
-                    <textarea rows="6" cols="50" name="epreuve_description" id="epreuve_description" placeholder="Donnez les détails concernant cette épreuve." class="form-control"></textarea>
+                <div class="form-group{% if hasError('epreuve_description') %} has-error{% endif %}">
+                    <label for="epreuve_description">Description</label>
+                    <textarea name="epreuve_description" id="epreuve_description" placeholder="Donnez les détails concernant cette épreuve" class="form-control"></textarea>
                     <span class="help-block">{{ error('epreuve_description') }}</span>
                 </div>
 
-                <div class="form-group{% if hasError('capacite') %}  has-error {% endif %} ">
-                    <label for="capacite">Capacité maximum : </label>
-                    <input type="text" name="capacite" id="capacite" class="form-control">
-                    <span class="help-block">{{ error('capacite') }}</span>
-                </div>
+                {{ form.group('capacite', null, 'capacite', 'Capacité maximum', null, 'number') }}
+                {{ form.group('prix', null, 'prix', 'Prix de participation (€)', null, 'number') }}
 
-                <div class="form-group{% if hasError('prix') %}  has-error {% endif %} ">
-                    <label for="prix">Prix de participation (€)</label>
-                    <input type="text" name="prix" id="prix" class="form-control">
-                    <span class="help-block">{{ error('prix') }}</span>
-                </div>
-
-                <button type="submit">Créer l'épreuve</button>
                 {{ csrf() }}
+                <input type="submit" class="btn btn-primary" value="Créer l'épreuve">
             </form>
         </div>
     </div>

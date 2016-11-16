@@ -8,5 +8,4 @@ $app->group('', function () {
 
     $this->map(['GET','POST'],'/evenement/{id_evenement:[0-9]+}/{id_epreuve:[0-9]+}', 'EpreuveController:edit')
     ->setName('trial.edit');
-
 })->add(new App\Middleware\AuthMiddleware($container));
