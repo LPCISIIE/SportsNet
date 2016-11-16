@@ -102,6 +102,7 @@ class EvenementController extends Controller
 
             $etat = $request->getParam('etat');
 
+
             $etats = [
                 Evenement::CREE,
                 Evenement::VALIDE,
@@ -112,7 +113,7 @@ class EvenementController extends Controller
                 Evenement::ANNULE
             ];
 
-            if (!in_array($etat, $etats)) {
+            if (!in_array($etat, $etats) || !$etat) {
                 $this->validator->addError('etat', 'État non valide.');
             }
 
