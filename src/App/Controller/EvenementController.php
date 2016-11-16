@@ -13,6 +13,48 @@ use Upload\Validation\Size;
 
 class EvenementController extends Controller
 {
+
+    public function create(Request $request, Response $response)
+    {
+
+        if ($request->isPost()) {
+            $this->validator->validate($request, [
+                'nom' => V::length(1, 100),
+                'adresse' => V::length(1, 100),
+                'date_debut' => V::date('d/m/Y'),
+                'date_fin' => V::date('d/m/Y'),
+                'telephone' => V::phone(),
+                'discipline' => V::length(1, 50),
+                'description' => V::notBlank()
+            ]);
+
+            if ($this->validator->isValid()) {
+                $evenement = new Evenement ([
+                    'nom' => $request->getParam('nom'),
+                    'adresse' => $request->getParam('adresse'),
+                    'date_debut' => \DateTime::createFromFormat('d/m/Y', $request->getParam('date_debut')),
+                    'date_fin' => \DateTime::createFromFormat('d/m/Y', $request->getParam('date_fin')),
+                    'telephone' => $request->getParam('telephone'),
+                    'discipline' => $request->getParam('discipline'),
+                    'description' => $request->getParam('description'),
+                    'etat' => 1,
+                ]);
+                $evenement->user()->associate($this->user());
+                $evenement->save();
+
+                mkdir(__DIR__ . '/../../../public/uploads/evenements/'.$evenement->id);
+
+                $this->flash('success', 'L\'événement "' . $request->getParam('nom') . '" a bien été crée !');
+
+                return $this->redirect($response, 'home');
+            }
+
+
+        }
+
+        return $this->view->render($response, 'Evenement/create.twig');
+    }
+
     public function show(Request $request, Response $response, array $args){
         $id_evenement = $args["id_evenement"];
         $evenement = Evenement::find($id_evenement);
@@ -100,44 +142,5 @@ class EvenementController extends Controller
         ]);
     }
 
-    public function create(Request $request, Response $response)
-    {
 
-        if ($request->isPost()) {
-            $this->validator->validate($request, [
-                'nom' => V::length(1, 100),
-                'adresse' => V::length(1, 100),
-                'date_debut' => V::date('d/m/Y'),
-                'date_fin' => V::date('d/m/Y'),
-                'telephone' => V::phone(),
-                'discipline' => V::length(1, 50),
-                'description' => V::notBlank()
-            ]);
-
-            if ($this->validator->isValid()) {
-                $evenement = new Evenement ([
-                    'nom' => $request->getParam('nom'),
-                    'adresse' => $request->getParam('adresse'),
-                    'date_debut' => \DateTime::createFromFormat('d/m/Y', $request->getParam('date_debut')),
-                    'date_fin' => \DateTime::createFromFormat('d/m/Y', $request->getParam('date_fin')),
-                    'telephone' => $request->getParam('telephone'),
-                    'discipline' => $request->getParam('discipline'),
-                    'description' => $request->getParam('description'),
-                    'etat' => 1,
-                ]);
-                $evenement->user()->associate($this->user());
-                $evenement->save();
-
-
-                $this->flash('success', 'L\'événement "' . $request->getParam('nom') . '" a bien été crée !');
-
-                return $this->redirect($response, 'home');
-            }
-
-
-        }
-
-        return $this->view->render($response, 'Evenement/create.twig');
-
-    }
 }
