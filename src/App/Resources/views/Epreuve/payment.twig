@@ -1,0 +1,12 @@
+{% extends 'layout.twig' %}
+
+{% import 'Macro/form.twig' as form %}
+
+{% block body %}
+<div class="jumbotron">{{evenement.nom}} </div>
+<div class="container">
+  C'est ici que l'utilisateur paye {{prixTotal}}€ avec son moyen de paiement favori
+  <a href="{{path_for()}}"></a>
+</div>
+
+{% endblock %}
