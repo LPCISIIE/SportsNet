@@ -11,6 +11,10 @@
   <div class="evenement_discipline">Discipline: {{evenement['discipline']}} </div>
   <div class="evenement_telephone">Telephone: {{evenement['telephone']}} </div>
   <div class="evenement_description">Description: {{evenement['description']}} </div>
+
+  <a href="{{path_for("epreuve.join", {id_evenement:evenement['id']})}}">
+    <button class="btn_rejoindre_epreuve">Rejoindre une épreuve</button>
+  </a>
   <hr>
 
   {% for epreuve in epreuves%}
