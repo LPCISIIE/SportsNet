@@ -13,8 +13,24 @@ use Upload\Validation\Size;
 
 class EvenementController extends Controller
 {
+
+    public function getFolderUpload($evenement)
+    {
+        return $this->settings['events_upload'] . $evenement->id . '/';
+    }
+
+    public function getPicture($evenement)
+    {
+        if (file_exists($this->getFolderUpload($evenement) . 'header.jpg') ) {
+            return $this->getFolderUpload($evenement) . 'header.jpg';
+        }
+
+        return $this->getFolderUpload($evenement) . 'header.png';
+    }
+
     public function create(Request $request, Response $response)
     {
+
         if ($request->isPost()) {
             $this->validator->validate($request, [
                 'nom' => V::length(1, 100),
@@ -40,7 +56,7 @@ class EvenementController extends Controller
                 $evenement->user()->associate($this->user());
                 $evenement->save();
 
-                mkdir(__DIR__ . '/../../../public/uploads/evenements/'.$evenement->id);
+                mkdir($this->getFolderUpload($evenement).'epreuves',0777,true);
 
                 $this->flash('success', 'L\'événement "' . $request->getParam('nom') . '" a bien été crée !');
                 return $this->redirect($response, 'home');
@@ -51,8 +67,9 @@ class EvenementController extends Controller
     }
 
 
-    public function show(Request $request, Response $response, array $args){
-        $id_evenement = $args["id_evenement"];
+    public function show(Request $request, Response $response, array $args)
+    {
+        $id_evenement = $args['id_evenement'];
         $evenement = Evenement::find($id_evenement);
         $epreuves = $evenement->epreuves()->get()->toArray();
         $evenement = $evenement->toArray();
@@ -71,6 +88,7 @@ class EvenementController extends Controller
         }
 
         if ($request->isPost()) {
+
             $this->validator->validate($request, [
                 'nom' => V::length(1, 100),
                 'adresse' => V::length(1, 100),
@@ -83,6 +101,7 @@ class EvenementController extends Controller
             ]);
 
             $etat = $request->getParam('etat');
+
             $etats = [
                 Evenement::CREE,
                 Evenement::VALIDE,
@@ -97,7 +116,7 @@ class EvenementController extends Controller
                 $this->validator->addError('etat', 'État non valide.');
             }
 
-            $file = new File('image', new FileSystem(__DIR__ . '/../../../public/uploads/evenements/' . $evenement->id, true));
+            $file = new File('image', new FileSystem($this->getFolderUpload($evenement), true));
             $file->setName('header');
 
             $file->addValidations([
