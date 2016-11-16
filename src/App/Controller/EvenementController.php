@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use App\Model\Evenement as Evenement;
+use App\Model\Evenement;
 use Respect\Validation\Validator as V;
 use Upload\File;
 use Upload\Storage\FileSystem;
@@ -13,7 +13,7 @@ use Upload\Validation\Size;
 
 class EvenementController extends Controller
 {
-    
+
     public function getFolderUpload($evenement)
     {
         return $this->settings['events_upload'] . $evenement->id . '/';
