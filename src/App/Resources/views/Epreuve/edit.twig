@@ -11,7 +11,7 @@
             <form action="" method="POST" enctype="multipart/form-data">
                 {{ form.group('nom', epreuve.nom, 'nom', 'Nom de l\'épreuve') }}
                 {{ form.group('date_debut', epreuve.date_debut|date('d/m/Y'), 'date_debut', 'Début', null, 'text', 'JJ/MM/AAAA') }}
-                {{ form.group('heure_debut', epreuve.heure_debut|date('H:i'), 'heure_debut', 'Heure', null, 'text', '12:00') }}
+                {{ form.group('heure_debut', epreuve.date_debut|date('H:i'), 'heure_debut', 'Heure', null, 'text', '12:00') }}
 
                 <div class="form-group{% if hasError('epreuve_pic_link') %} has-error{% endif %}">
                     <input type="file" name="epreuve_pic_link" id="epreuve_pic_link">
@@ -19,7 +19,7 @@
                 </div>
 
                 {{ form.group('date_fin', epreuve.date_fin|date('d/m/Y'), 'date_fin', 'Fin', null, 'text', 'JJ/MM/AAAA') }}
-                {{ form.group('heure_fin', epreuve.heure_fin|date('H:i'), 'heure_fin', 'Heure', null, 'text', '12:00') }}
+                {{ form.group('heure_fin', epreuve.date_fin|date('H:i'), 'heure_fin', 'Heure', null, 'text', '12:00') }}
 
                 <div class="form-group{% if hasError('description') %} has-error{% endif %}">
                     <label for="description">Description</label>
