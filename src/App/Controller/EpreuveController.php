@@ -3,6 +3,7 @@ namespace App\Controller;
 use App\Controller\Controller;
 use Respect\Validation\Validator as v;
 use App\Model\Epreuve;
+use App\Model\Evenement;
 class EpreuveController extends Controller
 {
     public function getAddEpreuve($request, $response) {
@@ -37,7 +38,7 @@ class EpreuveController extends Controller
         $epreuve->capacite=$request->getParam('capacite');
         $epreuve->date_debut=$dated;
         $epreuve->date_fin=$datef;
-        /*  
+        /*
         0 - fermé
         1 - ouvert
         2 - annulé
@@ -50,8 +51,15 @@ class EpreuveController extends Controller
         $epreuve->evenement_id=1;
         //
         $epreuve->save();
-        
+
 
         return $this->view->render($response, 'Evenement/edit.twig');
+    }
+
+    public function join($request, $response,$args){
+        $evenement=Evenement::find($args["id_evenement"]);
+        $epreuves = $evenement->epreuves()->get()->toArray();
+        $evenement= $evenement->toArray();
+        return $this->view->render($response, 'Epreuve/join.twig', compact('evenement','epreuves'));
     }
 }
