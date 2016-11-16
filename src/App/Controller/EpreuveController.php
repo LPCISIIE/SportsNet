@@ -135,14 +135,19 @@ class EpreuveController extends Controller
         return $this->view->render($response, 'Epreuve/edit.twig');
 
     }
-    public function join($request, $response,$args){
+
+    public function join($request, $response,$args)
+    {
         $evenement_id=$args['id_evenement'];
+        $evenement=Evenement::find($args["id_evenement"]);
+        $epreuves = $evenement->epreuves()->get()->toArray();
+        $evenement= $evenement->toArray();
         if ($request->isPost()) {
             $nom = $request->getParam('nom');
             $prenom = $request->getParam('prenom');
             $email = $request->getParam('email');
             $birthday = $request->getParam('birthday');
-            $epreuves = $request->getParam('epreuves');
+            $epreuvesSelection = $request->getParam('epreuves');
             $this->validator->validate($request, [
                 'nom' => V::length(1,50),
                 'prenom' => V::length(1,50),
@@ -163,27 +168,30 @@ class EpreuveController extends Controller
                 $sportif->save();
             }
             $prixTotal=0;
-            foreach ($epreuves as $epreuve) {
-                try{
-                    $sportif->epreuves()->attach($epreuve);
-                    $prixTotal+=Epreuve::find($epreuve)->prix;
-                }
-                catch (QueryException $e){
-                    $errorCode = $e->errorInfo[1];
-                    if($errorCode == 1062){
-                        $this->flash('error', 'Vous vous êtes déjà inscrit à l\'épreuve '.Epreuve::find($epreuve)->first()->nom);
-                        header("Refresh:0");
+            if (isset($epreuvesSelection)) {
+                foreach ($epreuvesSelection as $epreuve) {
+                    try{
+                        $sportif->epreuves()->attach($epreuve);
+                        $prixTotal+=Epreuve::find($epreuve)->prix;
+                    }
+                    catch (QueryException $e){
+                        $errorCode = $e->errorInfo[1];
+                        if($errorCode == 1062){
+                            $this->flash('error', 'Vous vous êtes déjà inscrit à l\'épreuve '.Epreuve::find($epreuve)->nom);
+                            return $this->redirect($response, 'epreuve.join', ['id_evenement'=>$evenement_id]);
+                        }
                     }
                 }
+            }
+            else {
+                $this->flash('error', 'Selectionnez au moins une épreuve');
+                return $this->redirect($response, 'epreuve.join', ['id_evenement'=>$evenement_id]);
             }
 
             return $this->view->render($response, 'Epreuve/payment.twig',compact('prixTotal','evenement_id'));
 
 
         }
-        $evenement=Evenement::find($args["id_evenement"]);
-        $epreuves = $evenement->epreuves()->get()->toArray();
-        $evenement= $evenement->toArray();
         return $this->view->render($response, 'Epreuve/join.twig', compact('evenement','epreuves'));
     }
 }
