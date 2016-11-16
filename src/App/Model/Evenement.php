@@ -34,4 +34,9 @@ class Evenement extends Model
     {
         return $this->hasMany('App\Model\Epreuve');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Model\User');
+    }
 }

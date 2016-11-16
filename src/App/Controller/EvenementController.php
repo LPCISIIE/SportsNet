@@ -115,7 +115,7 @@ class EvenementController extends Controller
             ]);
 
             if ($this->validator->isValid()) {
-                Evenement::create([
+                $evenement = new Evenement ([
                     'nom' => $request->getParam('nom'),
                     'adresse' => $request->getParam('adresse'),
                     'date_debut' => \DateTime::createFromFormat('d/m/Y', $request->getParam('date_debut')),
@@ -125,6 +125,9 @@ class EvenementController extends Controller
                     'description' => $request->getParam('description'),
                     'etat' => 1,
                 ]);
+                $evenement->user()->associate($this->user());
+                $evenement->save();
+
 
                 $this->flash('success', 'L\'événement "' . $request->getParam('nom') . '" a bien été crée !');
 
