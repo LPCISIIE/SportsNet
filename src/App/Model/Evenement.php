@@ -30,11 +30,6 @@ class Evenement extends Model
     ];
 
 
-    public function changerDescription($description)
-    {
-
-    }
-
     public function annuler()
     {
         $this->etat = -1;
@@ -49,9 +44,6 @@ class Evenement extends Model
     {
         $this->etat = 1;
     }
-    public function epreuves(){
-      return $this->hasMany('App\Model\Epreuve');
-    }
 
     public function enCours()
     {
@@ -61,5 +53,10 @@ class Evenement extends Model
     public function expirer()
     {
         $this->etat = 4;
+    }
+
+    public function epreuves()
+    {
+        return $this->hasMany('App\Model\Epreuve');
     }
 }
