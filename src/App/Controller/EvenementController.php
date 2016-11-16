@@ -5,6 +5,7 @@ namespace App\Controller;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Model\Evenement as Evenement;
+use App\Model\Epreuve as Epreuve;
 use Respect\Validation\Validator as V;
 use Upload\File;
 use Upload\Storage\FileSystem;
@@ -199,5 +200,38 @@ class EvenementController extends Controller
 
         $this->flash('success', 'L\'événement "' . $evenement->nom . '" a été supprimé.');
         return $this->redirect($response, 'user.events');
+    }
+
+     public function getParticipants($request, $response, $args) {
+
+        //on récupère la liste des personne participants à l'évènement
+        $epreuve_by_id = Epreuve::where('evenement_id','like',$args['id'])->get();
+        $tab_csv = array();
+        foreach($epreuve_by_id as $epreuve) {
+            array_push($tab_csv,array($epreuve['nom']));
+            array_push($tab_csv,array('---'));
+            $participants = $epreuve->sportifs()->get();
+            foreach ($participants as $participant) {
+                array_push($tab_csv,array($participant['nom']." ".$participant['prenom']));
+            }
+            array_push($tab_csv,array('   '));
+        }
+        //echo "<pre>";
+        //print_r($tab_csv);
+        //exit();
+
+        $filename = "liste_participant.csv";
+        $delimiter = ",";
+
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachment; filename="'.$filename.'";');
+
+        // open the "output" stream
+        // see http://www.php.net/manual/en/wrappers.php.php#refsect2-wrappers.php-unknown-unknown-unknown-descriptioq
+        $f = fopen('php://output', 'w');
+
+        foreach ($tab_csv as $line) {
+            fputcsv($f, $line, $delimiter);
+        }
     }
 }
