@@ -20,7 +20,8 @@ return [
                 'app',
                 'auth',
                 'evenement',
-                'user'
+                'user',
+                'epreuve'
             ]
         ],
 
