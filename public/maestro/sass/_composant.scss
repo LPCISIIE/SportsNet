@@ -13,13 +13,13 @@ header { @include navbar($couleurThemeFonce,$navbar-hauteur,true,#26A69A); }
 
 .boite-center { @extend %boite-center; }
 
-.alerte-theme { @include alerte($couleurThemeLeger); }
+.alerte-info { @include alerte($couleurThemeLeger); }
 
-.alerte-orange { @include alerte($orangeLeger); }
+.alerte-warning { @include alerte($orangeLeger); }
 
-.alerte-rouge { @include alerte($rougeLeger); }
+.alerte-danger { @include alerte($rougeLeger); }
 
-.alerte-vert { @include alerte($vertLeger);   }
+.alerte-success { @include alerte($vertLeger);   }
 
 .page-header { @extend %page-header; }
 
