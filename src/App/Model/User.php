@@ -21,6 +21,11 @@ class User extends EloquentUser
       return $this->hasOne('App\Model\Organisateur');
     }
 
+    public function sportif()
+    {
+      return $this->hasOne('App\Model\Sportif');
+    }
+
     public function evenements()
     {
         return $this->hasMany('App\Model\Evenement');
