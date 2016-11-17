@@ -74,4 +74,10 @@ class Evenement extends Model
         $rootPath =  __DIR__ . '/../../../public/' . $webPath;
         return file_exists($rootPath . '.jpg') ? $webPath . '.jpg' : $webPath . '.png';
     }
+
+    public function getImageWebPath($id) {
+        $webPath = 'uploads/evenements/' . $this->id . '/' . $id;
+        $rootPath =  __DIR__ . '/../../../public/' . $webPath;
+        return file_exists($rootPath . '.jpg') ? $webPath . '.jpg' : $webPath . '.png';
+    }
 }

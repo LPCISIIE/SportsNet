@@ -32,7 +32,7 @@
     <hr>
     {% for picture in pic_links %}
         <div class="img_galerie col-md-3">
-            <img src="{{ base_url() }}/uploads/evenements/{{ evenement.id }}/{{ picture }}"/>
+            <img src="{{ base_url() }}/{{ picture }}"/>
         </div>
     {% endfor %}
 

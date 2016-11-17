@@ -72,17 +72,17 @@ class EvenementController extends Controller
             throw $this->notFoundException($request, $response);
         }
 
-        $files = glob($this->settings['events_upload'].$args['id'].'/*.{jpg,png,gif}', GLOB_BRACE);
+        $files = glob($this->settings['events_upload'].$args['id_evenement'].'/*.{jpg,png,gif}', GLOB_BRACE);
         $size = sizeof($files)-1;
         $files_link = array();
         for ($i=1; $i <= $size; $i++) { 
-            array_push($files_link,$i.'.png');
+            array_push($files_link,$evenement->getImageWebPath($i));
         }
 
         return $this->view->render($response, 'Evenement/show.twig', [
             'evenement' => $evenement,
             'epreuves' => $evenement->epreuves,
-            'pic_linls' => $files_link
+            'pic_links' => $files_link
         ]);
     }
 
