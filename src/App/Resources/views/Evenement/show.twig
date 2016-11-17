@@ -22,8 +22,7 @@
                 <img src="{{ base_url() }}/{{ epreuve.webPath }}" style="width: 100%;" />
             </div>
             <div class="col-md-10">
-                <h3>{{ epreuve.nom }}</h3>
-                <p>{{ epreuve.description }}</p>
+        <div class="row"><a href="{{ path_for('epreuve.show', {'trial_id' : epreuve['id'], 'event_id' : evenement['id']}) }}">{{epreuve['nom']}}</a></div>
             </div>
         </div>
     {% endfor %}
