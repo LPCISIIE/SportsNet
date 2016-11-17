@@ -1,11 +1,13 @@
 @import 'reset';
 @import 'variables';
+@import 'presets/clearfix';
 @import 'presets/fonctions';
 @import 'typographie';
 @import 'composant';
 @import 'bouton';
 @import 'tableau';
-@import 'grille';
+@import 'grid_float';
+@import 'grid_flex';
 @import 'image';
 @import 'input';
 
