@@ -1,19 +1,36 @@
-body {
-  padding-top: 100px; }
+label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 0.9em; }
 
 .form-control {
+  display: block;
+  width: 100%;
   border: 1px #CCC solid;
   border-radius: 2px;
   padding: 8px 15px; }
   .form-control:focus {
-    border-color: #4c626d; }
+    border-color: #617d8b; }
+
+.form-group {
+  margin-bottom: 10px; }
+
+body {
+  padding-top: 100px; }
 
 header > form {
   float: right;
-  padding: 25px; }
+  padding: 20px; }
   header > form > input[type="text"] {
     background-color: #4c626d;
     border-color: #2d3940;
     color: #FFF; }
+    header > form > input[type="text"]:focus {
+      border-color: #617d8b; }
+
+.page-header {
+  padding-left: 50px;
+  padding-right: 50px; }
 
 /*# sourceMappingURL=app.css.map */
