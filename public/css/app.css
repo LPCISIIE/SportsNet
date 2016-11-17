@@ -1,0 +1,19 @@
+body {
+  padding-top: 100px; }
+
+.form-control {
+  border: 1px #CCC solid;
+  border-radius: 2px;
+  padding: 8px 15px; }
+  .form-control:focus {
+    border-color: #4c626d; }
+
+header > form {
+  float: right;
+  padding: 25px; }
+  header > form > input[type="text"] {
+    background-color: #4c626d;
+    border-color: #2d3940;
+    color: #FFF; }
+
+/*# sourceMappingURL=app.css.map */
