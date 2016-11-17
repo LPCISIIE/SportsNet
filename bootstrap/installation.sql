@@ -153,6 +153,7 @@ CREATE TABLE IF NOT EXISTS `role_users` (
 
 CREATE TABLE IF NOT EXISTS `sportif` (
   `id` int(11) NOT NULL,
+  `user_id` int(10) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
