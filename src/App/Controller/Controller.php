@@ -19,6 +19,7 @@ use Slim\Views\Twig;
  * @property Messages flash
  * @property Validator validator
  * @property Sentinel auth
+ * @property array settings
  */
 class Controller
 {

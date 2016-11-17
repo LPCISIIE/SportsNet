@@ -28,6 +28,7 @@ class Validation extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('error', array($this, 'getError')),
             new \Twig_SimpleFunction('errors', array($this, 'getErrors')),
+            new \Twig_SimpleFunction('allErrors', array($this, 'getAllErrors')),
             new \Twig_SimpleFunction('hasError', array($this, 'hasError')),
             new \Twig_SimpleFunction('hasErrors', array($this, 'hasErrors'))
         ];
@@ -53,6 +54,11 @@ class Validation extends \Twig_Extension
     public function getErrors($param)
     {
         return $this->validator->getErrorsOf($param);
+    }
+
+    public function getAllErrors()
+    {
+        return $this->validator->getErrors();
     }
 
     /**

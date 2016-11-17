@@ -1,68 +1,51 @@
 {% extends 'layout.twig' %}
 
+{% import 'Macro/form.twig' as form %}
+
 {% block body %}
 
     <div class="container">
         <div class="jumbotron">
-            <h3>Ajout d'épreuve</h3>
+            <h3>Modification d'épreuve</h3>
 
-            <form action="{{ path_for('epreuve.add', {'id_evenement': id}) }}" method="post" autocomplete="off" enctype="multipart/form-data">
-                <input type="hidden" name="op" id="op" value="reg">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {{ form.group('nom', epreuve.nom, 'nom', 'Nom de l\'épreuve') }}
+                {{ form.group('date_debut', epreuve.date_debut|date('d/m/Y'), 'date_debut', 'Début', null, 'text', 'JJ/MM/AAAA') }}
+                {{ form.group('heure_debut', epreuve.date_debut|date('H:i'), 'heure_debut', 'Heure', null, 'text', '12:00') }}
 
-                <div class="form-group{% if hasError('epreuve_name') %}  has-error {% endif %} ">
-                    <input type="text" name="epreuve_name" id="epreuve_name" class="form-control" placeholder="Nom de l'épreuve">
-                    <span class="help-block">{{ error('epreuve_name') }}</span>
-                </div>
-
-                <div class="form-group{% if hasError('date_debut') %}  has-error {% endif %} ">
-                    <label for="date_debut">Début (jour mois année)</label>
-                    <input type="text" name="date_debut" id="date_debut" class="form-control">
-                    <span class="help-block">{{ error('date_debut') }}</span>
-                </div>
-
-                <div class="form-group{% if hasError('heure_debut') %}  has-error {% endif %} ">
-                    <label for="heure_debut">heure : </label>
-                    <input type="text" name="heure_debut" id="heure_debut" class="form-control">
-                    <span class="help-block">{{ error('heure_debut') }}</span>
-                </div>
-
-                <div class="form-group{% if hasError('epreuve_pic_link') %}  has-error {% endif %} ">
+                <div class="form-group{% if hasError('epreuve_pic_link') %} has-error{% endif %}">
                     <input type="file" name="epreuve_pic_link" id="epreuve_pic_link">
                     <span class="help-block">{{ error('epreuve_pic_link') }}</span>
                 </div>
 
-                <div class="form-group{% if hasError('date_fin') %}  has-error {% endif %} ">
-                    <label for="date_fin">Fin (jour mois année)</label>
-                    <input type="text" name="date_fin" id="date_fin" class="form-control">
-                    <span class="help-block">{{ error('date_fin') }}</span>
+                {{ form.group('date_fin', epreuve.date_fin|date('d/m/Y'), 'date_fin', 'Fin', null, 'text', 'JJ/MM/AAAA') }}
+                {{ form.group('heure_fin', epreuve.date_fin|date('H:i'), 'heure_fin', 'Heure', null, 'text', '12:00') }}
+
+                <div class="form-group{% if hasError('description') %} has-error{% endif %}">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" placeholder="Donnez les détails concernant cette épreuve" class="form-control">{{ epreuve.description }}</textarea>
+                    <span class="help-block">{{ error('description') }}</span>
                 </div>
 
-                <div class="form-group{% if hasError('heure_fin') %}  has-error {% endif %} ">
-                    <label for="heure_fin">heure : </label>
-                    <input type="text" name="heure_fin" id="heure_fin" class="form-control">
-                    <span class="help-block">{{ error('heure_fin') }}</span>
+                {{ form.group('capacite', epreuve.capacite, 'capacite', 'Capacité maximum', null, 'number') }}
+                {{ form.group('prix', epreuve.prix, 'prix', 'Prix de participation (€)', null, 'number') }}
+
+                <div class="form-group{% if hasError('etat') %} has-error{% endif %}">
+                    <label for="etat">État</label>
+                    <select name="etat" id="etat" class="form-control">
+                        <option value="0"{% if epreuve.etat == 0 %} selected{% else %} disabled{% endif %}>Choisir un état</option>
+                        <option value="1"{% if epreuve.etat == 1 %} selected{% endif %}>Validé</option>
+                        <option value="2"{% if epreuve.etat == 2 %} selected{% endif %}>Ouvert à l'inscription</option>
+                        <option value="4"{% if epreuve.etat == 4 %} selected{% endif %}>Clos à l'inscription</option>
+                        <option value="3"{% if epreuve.etat == 3 %} selected{% endif %}>En cours</option>
+                        <option value="5"{% if epreuve.etat == 5 %} selected{% endif %}>Expiré</option>
+                        <option value="6"{% if epreuve.etat == 6 %} selected{% endif %}>Annulé</option>
+                    </select>
+                    <span class="help-block">{{ error('etat') }}</span>
                 </div>
 
-                <div class="form-group{% if hasError('epreuve_description') %}  has-error {% endif %} ">
-                    <label for="epreuve_description">Description : </label>
-                    <textarea rows="6" cols="50" name="epreuve_description" id="epreuve_description" placeholder="Donnez les détails concernant cette épreuve." class="form-control"></textarea>
-                    <span class="help-block">{{ error('epreuve_description') }}</span>
-                </div>
-
-                <div class="form-group{% if hasError('capacite') %}  has-error {% endif %} ">
-                    <label for="capacite">Capacité maximum : </label>
-                    <input type="text" name="capacite" id="capacite" class="form-control">
-                    <span class="help-block">{{ error('capacite') }}</span>
-                </div>
-
-                <div class="form-group{% if hasError('prix') %}  has-error {% endif %} ">
-                    <label for="prix">Prix de participation (€)</label>
-                    <input type="text" name="prix" id="prix" class="form-control">
-                    <span class="help-block">{{ error('prix') }}</span>
-                </div>
-
-                <button type="submit">Créer l'épreuve</button>
                 {{ csrf() }}
+                <input type="submit" class="btn btn-primary" value="Modifier l'épreuve">
             </form>
         </div>
     </div>
