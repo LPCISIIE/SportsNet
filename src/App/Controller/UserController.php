@@ -14,6 +14,7 @@ class UserController extends Controller
         $user = $this->user();
         $organisateur = $user->organisateur;
 
+        $is_organisateur = $this->isOrganisateur();
         if ($request->isPost()) {
             $this->validator->validate($request, [
                 'nom' => V::length(1, 50),
@@ -39,7 +40,7 @@ class UserController extends Controller
         }
 
         return $this->view->render($response, 'User/mon-compte.twig', [
-            'organisateur' => $organisateur
+            'is_organisateur' => $is_organisateur
         ]);
     }
 
