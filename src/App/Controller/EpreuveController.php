@@ -218,4 +218,49 @@ class EpreuveController extends Controller
         $path = $this->getUploadDir($eventId) . '/' . $trialId;
         return file_exists($path . '.jpg') ? $path . '.jpg' : $path . '.png';
     }
+
+    public function resultatPerso(Request $request, Response $response, array $args)
+    {
+        if ($request->isPost()) {
+
+            $idEpreuve   = $args['trial_id'];
+            $idEvenement = $args['event_id'];
+            $file        = $this->getUploadDir($idEvenement) . '/' . $idEpreuve . '.csv';
+
+            if (file_exists($file)) {
+
+                $target = $request->getParam('numeroSportif'); // not the supermarket lol
+                $file   = fopen($file, 'r');
+                $head   = fgetcsv($file, 4096, ';', '"');
+
+                $participant = NULL;
+
+                while($column = fgetcsv($file, 4096, ';', '"')) {
+
+                    $column = array_combine($head, $column);
+                    if ($column['Numéro participant'] == $target) {
+                        $participant = $column;
+                    }
+                }
+
+                if ($participant == NULL) {
+                    $this->flash('danger','Participant introuvable');
+                    return $this->redirect($response, 'recherchePerso',['event_id' => $idEvenement, 'trial_id' => $idEpreuve]);
+                };
+
+                return $this->redirect($response, 'resultatPerso', ['participant' => $participant]);
+            }
+
+            $tel = Evenement::find($idEvenement)->telephone;
+
+            $message = ($tel) ? 'Aucun fichier de résultat pour cet épreuve veuillez contacter le '.$tel : 'Evenement innexistant';
+
+            $this->flash('danger', $message);
+
+            return $this->redirect($response, 'recherchePerso',['event_id' => $idEvenement, 'trial_id' => $idEpreuve]);
+
+        }
+
+        return $this->view->render($response, 'Epreuve/recherchePerso.twig');
+    }
 }
