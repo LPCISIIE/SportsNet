@@ -56,3 +56,17 @@ header > form {
     font-size: 1.5em;
   }
 }
+
+.help-block {
+  color: #B0413E;
+}
+
+.has-error, .has-error {
+  input, textarea {
+    border-color: #B0413E;
+  }
+
+  .barre:before, .barre:after {
+    background-color: #B0413E;
+  }
+}

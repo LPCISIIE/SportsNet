@@ -1,10 +1,10 @@
 
 {% macro group(name, value, id, label, class, type) %}
     <div class="formulaire{% if hasError(name) %} has-error{% endif %}">
-        <input type="{{ type|default('text') }}" name="{{ name }}" value="{{ value }}" id="{{ id }}" class="{{ class }}" aria-describedby="{{ id }}-help-block">
+        <input type="{{ type|default('text') }}" name="{{ name }}" value="{{ value }}" id="{{ id }}" class="{{ class }}">
         <span class="barre"></span>
         <label for="{{ id }}">{{ label }}</label>
-        <span id="{{ id }}-help-block" class="help-block">{{ error(name) }}</span>
+        <span class="help-block">{{ error(name) }}</span>
     </div>
 {% endmacro %}
 

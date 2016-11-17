@@ -2214,7 +2214,7 @@ input.simple-vert {
     margin-bottom: 2em
 }
 
-.formulaire input {
+.formulaire input, .formulaire textarea {
     font-size: 1em;
     display: block;
     padding: 10px 10px 10px 5px;
@@ -2223,7 +2223,7 @@ input.simple-vert {
     border-bottom: 1px solid #6e6e6e
 }
 
-.formulaire input:focus {
+.formulaire input:focus, .formulaire textarea:focus {
     outline: none
 }
 
@@ -2240,7 +2240,7 @@ input.simple-vert {
     top: 10px
 }
 
-.formulaire input:focus ~ label {
+.formulaire input:focus ~ label, .formulaire textarea:focus ~ label {
     top: -20px;
     color: #607D8B
 }
@@ -2285,7 +2285,7 @@ input.simple-vert {
     left: 0
 }
 
-.formulaire input:focus ~ .selection {
+.formulaire input:focus ~ .selection, .formulaire textarea:focus ~ .selection {
     -webkit-animation: materialAnimation 0.3s ease;
     -moz-animation: materialAnimation 0.3s ease;
     animation: materialAnimation 0.3s ease
@@ -2306,7 +2306,7 @@ input.simple-vert {
     margin-bottom: 2em
 }
 
-.formulaire-rouge input {
+.formulaire-rouge input, .formulaire-rouge textarea {
     font-size: 1em;
     display: block;
     padding: 10px 10px 10px 5px;
@@ -2315,7 +2315,7 @@ input.simple-vert {
     border-bottom: 1px solid #6e6e6e
 }
 
-.formulaire-rouge input:focus {
+.formulaire-rouge input:focus, .formulaire-rouge textarea:focus {
     outline: none
 }
 
@@ -2332,7 +2332,7 @@ input.simple-vert {
     top: 10px
 }
 
-.formulaire-rouge input:focus ~ label {
+.formulaire-rouge input:focus ~ label, .formulaire-rouge textarea:focus ~ label {
     top: -20px;
     color: #F44336
 }
@@ -2377,7 +2377,7 @@ input.simple-vert {
     left: 0
 }
 
-.formulaire-rouge input:focus ~ .selection {
+.formulaire-rouge input:focus ~ .selection, .formulaire-rouge textarea:focus ~ .selection {
     -webkit-animation: materialAnimation 0.3s ease;
     -moz-animation: materialAnimation 0.3s ease;
     animation: materialAnimation 0.3s ease
@@ -2398,7 +2398,7 @@ input.simple-vert {
     margin-bottom: 2em
 }
 
-.formulaire-vert input {
+.formulaire-vert input, .formulaire-vert textarea {
     font-size: 1em;
     display: block;
     padding: 10px 10px 10px 5px;
@@ -2407,7 +2407,7 @@ input.simple-vert {
     border-bottom: 1px solid #6e6e6e
 }
 
-.formulaire-vert input:focus {
+.formulaire-vert input:focus, .formulaire-vert textarea:focus {
     outline: none
 }
 
@@ -2424,7 +2424,7 @@ input.simple-vert {
     top: 10px
 }
 
-.formulaire-vert input:focus ~ label {
+.formulaire-vert input:focus ~ label, .formulaire-vert textarea:focus ~ label {
     top: -20px;
     color: #4CAF50
 }
@@ -2469,7 +2469,7 @@ input.simple-vert {
     left: 0
 }
 
-.formulaire-vert input:focus ~ .selection {
+.formulaire-vert input:focus ~ .selection, .formulaire-vert textarea:focus ~ .selection {
     -webkit-animation: materialAnimation 0.3s ease;
     -moz-animation: materialAnimation 0.3s ease;
     animation: materialAnimation 0.3s ease

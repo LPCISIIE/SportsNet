@@ -41,4 +41,12 @@ header > form {
     margin-bottom: 10px;
     font-size: 1.5em; }
 
+.help-block {
+  color: #B0413E; }
+
+.has-error input, .has-error textarea, .has-error input, .has-error textarea {
+  border-color: #B0413E; }
+.has-error .barre:before, .has-error .barre:after, .has-error .barre:before, .has-error .barre:after {
+  background-color: #B0413E; }
+
 /*# sourceMappingURL=app.css.map */
