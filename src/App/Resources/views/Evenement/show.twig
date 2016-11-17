@@ -4,8 +4,10 @@
 
 {% block body %}
 
-<div class="jumbotron">{{ evenement.nom }}</div>
 <div class="container">
+    <img src="{{ base_url() }}/{{ evenement.webPath }}" style="max-height: 200px;" />
+    <div class="jumbotron">{{ evenement.nom }}</div>
+
     <div class="evenement_debut">Date début : {{ evenement.date_debut }} </div>
     <div class="evenement_fin">Date fin : {{ evenement.date_fin }} </div>
     <div class="evenement_adresse">Adresse : {{ evenement.adresse }} </div>

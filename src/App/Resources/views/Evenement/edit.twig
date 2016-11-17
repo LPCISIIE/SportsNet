@@ -5,10 +5,13 @@
 {% block body %}
 
 <div class="container">
+    <div class="page-header">
+        <h1>Modifier un événement</h1>
+    </div>
+
     <a href="{{ path_for('epreuve.add', {'event_id': evenement.id}) }}" class="btn btn-default">Ajouter une épreuve</a>
 
-    <h2 class="text-center">Modification d'un évenement</h2>
-    <form action="{{ path_for('evenement.edit', {'id': evenement.id}) }}" method="POST" enctype="multipart/form-data">
+    <form action="" method="POST" enctype="multipart/form-data">
         <div class="form-group{% if hasError('etat') %} has-error{% endif %}">
             <label for="etat">État</label>
             <select name="etat" id="etat" class="form-control">
@@ -23,9 +26,10 @@
             <span class="help-block">{{ error('etat') }}</span>
         </div>
 
-        <div class="form-group">
+        <div class="form-group{% if hasError('image') %} has-error{% endif %}">
             <label for="image">Image</label>
             <input type="file" name="image" id="image">
+            <span class="help-block">{{ error('image') }}</span>
         </div>
 
         {{ form.group('nom', evenement.nom, 'nom', 'Nom') }}
@@ -33,9 +37,13 @@
         {{ form.group('date_fin', evenement.date_fin|date('d/m/Y'), 'date_fin', 'Se termine le') }}
         {{ form.group('adresse', evenement.adresse, 'adresse', 'Lieu') }}
         {{ form.group('discipline', evenement.discipline, 'discipline', 'Discipline') }}
-        {{ form.group('telephone', evenement.telephone, 'telephone', 'Téléphone de contact', null, 'tel') }}
+        {{ form.group('telephone', evenement.telephone, 'telephone', 'Téléphone de contact', null, 'number') }}
 
-        <textarea name="description" id="description" class="form-control" placeholder="Description">{{ evenement.description }}</textarea>
+        <div class="form-group{% if hasError('description') %} has-error{% endif %}">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" class="form-control" placeholder="Description">{{ evenement.description }}</textarea>
+            <span class="help-block">{{ error('description') }}</span>
+        </div>
 
         {{ csrf() }} <br>
         <input type="submit" class="btn btn-primary">
