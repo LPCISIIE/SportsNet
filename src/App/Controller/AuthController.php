@@ -23,7 +23,7 @@ class AuthController extends Controller
             try {
                 if ($this->auth->authenticate($credentials, $remember)) {
                     $this->flash('success', 'You have been logged in.');
-                    return $this->redirect($response, 'home');
+                    return $this->redirect($response, 'user.compte');
                 } else {
                     $this->flash('danger', 'Bad username or password.');
                 }
@@ -102,6 +102,6 @@ class AuthController extends Controller
         $this->auth->logout();
 
         $this->flash('success', 'You have been logged out.');
-        return $this->redirect($response, 'home');
+        return $this->redirect($response, 'login');
     }
 }
