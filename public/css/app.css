@@ -1,32 +1,17 @@
-label {
-  display: inline-block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  font-size: 0.9em; }
-
-.form-control {
-  display: block;
-  width: 100%;
-  border: 1px #CCC solid;
-  border-radius: 2px;
-  padding: 8px 15px; }
-  .form-control:focus {
-    border-color: #617d8b; }
-
-.form-group {
-  margin-bottom: 10px; }
-
 body {
   padding-top: 100px; }
+
+a {
+  color: #607D8B; }
 
 header > form {
   float: right;
   padding: 20px; }
-  header > form > input[type="text"] {
+  header > form input[type="text"] {
     background-color: #4c626d;
     border-color: #2d3940;
     color: #FFF; }
-    header > form > input[type="text"]:focus {
+    header > form input[type="text"]:focus {
       border-color: #617d8b; }
 
 .close-alert {
@@ -43,5 +28,16 @@ header > form {
 .page-header {
   padding-left: 50px;
   padding-right: 50px; }
+
+.card {
+  padding: 20px;
+  background-color: #FFF;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
+  .card img {
+    max-width: 100%; }
+  .card .card-title {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 1.5em; }
 
 /*# sourceMappingURL=app.css.map */

@@ -1,16 +1,19 @@
 
 $navbarColor: #37474F;
-
-@import 'form';
+$linkColor: #607D8B;
 
 body {
   padding-top: 100px;
 }
 
+a {
+  color: $linkColor;
+}
+
 header > form {
   float: right;
   padding: 20px;
-  & > input[type="text"] {
+  input[type="text"] {
     background-color: lighten($navbarColor, 10);
     border-color: darken($navbarColor, 5);
     color: #FFF;
@@ -35,4 +38,20 @@ header > form {
 .page-header {
   padding-left: 50px;
   padding-right: 50px;
+}
+
+.card {
+  padding: 20px;
+  background-color: #FFF;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+  img {
+    max-width: 100%;
+  }
+
+  .card-title {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+  }
 }
