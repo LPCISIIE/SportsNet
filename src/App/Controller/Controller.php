@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\User;
+use App\Model\Organisateur;
 use App\Service\Validator;
 use Cartalyst\Sentinel\Sentinel;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -92,6 +93,16 @@ class Controller
     public function user()
     {
         return $this->auth->getUser();
+    }
+
+    /**
+     * Check if the current user is an organisateur
+     *
+     * @return boolean
+     */
+    public function isOrganisateur()
+    {
+        return (empty(Organisateur::where('user_id', $this->user()->id)->first())) ? false : true;
     }
 
     public function __get($property)
