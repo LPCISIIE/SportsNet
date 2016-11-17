@@ -3,33 +3,30 @@
 {% import 'Macro/form.twig' as form %}
 
 {% block body %}
-<div class="jumbotron">{{evenement['nom']}} </div>
+
+<div class="jumbotron">{{ evenement.nom }}</div>
 <div class="container">
-  <div class="evenement_debut">Date début: {{evenement['date_debut']}} </div>
-  <div class="evenement_fin">Date fin: {{evenement['date_fin']}} </div>
-  <div class="evenement_adresse">Adresse: {{evenement['adresse']}} </div>
-  <div class="evenement_discipline">Discipline: {{evenement['discipline']}} </div>
-  <div class="evenement_telephone">Telephone: {{evenement['telephone']}} </div>
-  <div class="evenement_description">Description: {{evenement['description']}} </div>
+    <div class="evenement_debut">Date début : {{ evenement.date_debut }} </div>
+    <div class="evenement_fin">Date fin : {{ evenement.date_fin }} </div>
+    <div class="evenement_adresse">Adresse : {{ evenement.adresse }} </div>
+    <div class="evenement_discipline">Discipline : {{ evenement.discipline }} </div>
+    <div class="evenement_telephone">Telephone : {{ evenement.telephone }} </div>
+    <div class="evenement_description">Description : {{ evenement.description }} </div>
 
-  <a href="{{path_for("epreuve.join", {id_evenement:evenement['id']})}}">
-    <button class="btn_rejoindre_epreuve">Rejoindre une épreuve</button>
-  </a>
-  <hr>
+    <a href="{{ path_for('epreuve.join', {id_evenement: evenement.id}) }}" class="btn btn-default">Rejoindre une épreuve</a>
+    <hr>
 
-  {% for epreuve in epreuves%}
-
-  <div class="evenement_description row">
-    <div class="img_epreuve col-md-2">
-      <img src="{{epreuve['id']}}"/>
-    </div>
-    <div class="col-md-4 ">
-        <div class="row">{{epreuve['nom']}}</div>
-    </div>
-
-  </div>
-
-  {% endfor%}
+    {% for epreuve in epreuves %}
+        <div class="evenement_description row well">
+            <div class="img_epreuve col-md-2">
+                <img src="{{ base_url() }}/{{ epreuve.webPath }}" style="width: 100%;" />
+            </div>
+            <div class="col-md-10">
+                <h3>{{ epreuve.nom }}</h3>
+                <p>{{ epreuve.description }}</p>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
