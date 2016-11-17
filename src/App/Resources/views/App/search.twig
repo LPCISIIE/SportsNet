@@ -1,0 +1,26 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Résultats pour "{{ query }}" :</h1>
+    </div>
+    {% if not evenements.empty %}
+        {% for event in evenements %}
+            <div class="row well">
+                <div class="col-md-2">
+                    <img src="{{ base_url() }}/{{ event.webPath }}" alt="Evenement" style="width: 100%;">
+                </div>
+                <div class="col-md-10">
+                    <h3><a href="{{ path_for('evenement.show', {'id_evenement': event.id}) }}">{{ event.nom }}</a></h3>
+                    <p>{{ event.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="well">Aucun résultat pour "{{ query }}"</p>
+    {% endif %}
+</div>
+
+{% endblock %}
