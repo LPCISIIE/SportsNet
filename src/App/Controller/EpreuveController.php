@@ -1,157 +1,226 @@
 <?php
+
 namespace App\Controller;
-use Respect\Validation\Validator as v;
+
+use Psr\Http\Message\RequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+use Respect\Validation\Validator as V;
 use Illuminate\Database\QueryException;
+use Upload\File;
+use Upload\Storage\FileSystem;
+use Upload\Validation\Mimetype;
+use Upload\Validation\Size;
 use App\Model\Epreuve;
-use App\Model\Evenement;
 use App\Model\Sportif;
 use App\Model\Participe;
+use App\Model\Evenement;
+
 class EpreuveController extends Controller
 {
-
-    public function getFolderUpload(Epreuve $epreuve)
+    public function add(Request $request, Response $response, array $args)
     {
-        $id = $epreuve->evenement->id;
-        return $this->settings['events_upload'] . $id . '/epreuves/';
-    }
+        $evenement = Evenement::find($args['event_id']);
 
-    public function getPicture(Epreuve $epreuve)
-    {
-        if ( file_exists($this->getFolderUpload($epreuve) . $epreuve->id . '.jpg') ) {
-            return $this->getFolderUpload($epreuve) . $epreuve->id . '.jpg';
+        if (!$evenement) {
+            throw $this->notFoundException($request, $response);
         }
 
-        return $this->getFolderUpload($epreuve) . $epreuve->id . '.png';
-    }
-
-
-    public function getAddEpreuve($request, $response, $args)
-    {
-        $id = $args['id_evenement'];
-        return $this->view->render($response, 'Epreuve/add.twig', compact('id'));
-    }
-
-    public function postAddEpreuve($request, $response, $args)
-    {
-       v::with('App\\Validation\\Rules\\');
-
-        $validation = $this->validator->validate($request, [
-            'epreuve_name' => v::notEmpty(),
-            'date_debut' => v::date('d/m/Y'),
-            'heure_debut' => v::date('H:i'),
-            'date_fin' => v::date('d/m/Y'),
-            'heure_fin' => v::date('H:i'),
-            'epreuve_description' => v::notEmpty(),
-            'capacite' => v::notEmpty()->numeric(),
-            'prix' => v::notEmpty()->numeric(),
-            'op' => v::equals('reg'),
-        ]);
-
-        if (!($validation->isValid())) {
-            return $this->view->render($response, 'Epreuve/add.twig');
+        if ($evenement->user_id !== $this->user()->id) {
+            $this->flash('danger', 'Cet événement ne vous appartient pas !');
+            return $this->redirect($response, 'home');
         }
-
-
-
-        $file->addValidations(array(
-            //You can also add multi mimetype validation
-            new \Upload\Validation\Mimetype(array('image/png', 'image/jpeg')),
-
-            // Ensure file is no larger than 5M (use "B", "K", M", or "G")
-            new \Upload\Validation\Size('2M'),
-        ));
-
-
-        $dated = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
-        $datef = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
-        $epreuve = new Epreuve();
-        $epreuve->nom=$request->getParam('epreuve_name');
-        $epreuve->capacite=$request->getParam('capacite');
-        $epreuve->date_debut=$dated;
-        $epreuve->date_fin=$datef;
-        $epreuve->etat=Epreuve::CREE;
-        $epreuve->description=$request->getParam('epreuve_description');
-        $epreuve->prix=$request->getParam('prix');
-        $epreuve->evenement_id=$args['id_evenement'];
-        $epreuve->save();
-
-        $storage = new \Upload\Storage\FileSystem($this->getFolderUpload($epreuve));
-        $file = new \Upload\File('epreuve_pic_link', $storage);
-
-
-        $file->addValidations(array(
-            new \Upload\Validation\Mimetype(array('image/png', 'image/jpeg')),
-            new \Upload\Validation\Size('2M'),
-        ));
-
-
-
-        $new_filename = $epreuve->id;
-        $file->setName($new_filename);
-
-        try {
-            $file->upload();
-        } catch (\Exception $e) {
-            $this->validator->addErrors('epreuve_pic_link',$file->getErrors());
-        }
-
-        return $this->view->render($response, 'Evenement/edit.twig');
-    }
-
-
-    public function edit($request, $response)
-    {
 
         if ($request->isPost()) {
-
-            $epreuve = Epreuve::find($args['id_epreuve']);
-            $evenement = Evenement::find($args['id_evenement']);
-
-            if (!$epreuve) {
-                throw $this->notFoundException($request, $response);
-            }
-
-            v::with('App\\Validation\\Rules\\');
-
-            $validation = $this->validator->validate($request, [
-                'epreuve_name' => v::notEmpty(),
-                'date_debut' => v::date('d/m/Y'),
-                'heure_debut' => v::date('H:i'),
-                'date_fin' => v::date('d/m/Y'),
-                'heure_fin' => v::date('H:i'),
-                'epreuve_pic_link' => v::ImageFormat()->ImageSize(),
-                'epreuve_description' => v::notEmpty(),
-                'capacite' => v::notEmpty()->numeric(),
-                'prix' => v::notEmpty()->numeric(),
-                'op' => v::equals('reg'),
+            $this->validator->validate($request, [
+                'nom' => V::notBlank(),
+                'date_debut' => V::date('d/m/Y'),
+                'heure_debut' => V::date('H:i'),
+                'date_fin' => V::date('d/m/Y'),
+                'heure_fin' => V::date('H:i'),
+                'description' => V::notBlank(),
+                'capacite' => V::notBlank()->numeric(),
+                'prix' => V::notBlank()->numeric()
             ]);
 
+            $storage = new FileSystem($this->getUploadDir($evenement->id));
+            $file = new File('epreuve_pic_link', $storage);
+            $file->setName('header');
 
-            if ($validation->isValid()) {
-                    $dated = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_debut')." ".$request->getParam('heure_debut'));
-                    $datef = \DateTime::createFromFormat("d/m/Y H:i",$request->getParam('date_fin')." ".$request->getParam('heure_fin'));
+            $file->addValidations(array(
+                new Mimetype(['image/png', 'image/jpeg']),
+                new Size('2M'),
+            ));
 
-                    $epreuve->fill([
-                        'nom' => $request->getParam('nom'),
-                        'capacite' => $request->getParam('capacite'),
-                        'date_debut' => $dated,
-                        'date_fin' => $datef,
-                        'etat' => $request->getParam('etat'),
-                        'description' => $request->getParam('description'),
-                        'prix' => $request->getParam('prix'),
-                    ]);
+            if (!$file->validate()) {
+                $this->validator->addErrors('epreuve_pic_link', $file->getErrors());
+            }
 
-                    $epreuve->save();
+            if ($this->validator->isValid()) {
+                $dated = $request->getParam('date_debut');
+                $datef = $request->getParam('date_fin');
+                $heured = $request->getParam('heure_debut');
+                $heuref = $request->getParam('heure_fin');
 
-                    $this->flash('success', 'L\'épreuve "' . $request->getParam('nom') . '" a bien été modifié !');
-                    return $this->redirect($response, 'home');
+                $dated = \DateTime::createFromFormat('d/m/Y H:i', $dated . ' ' . $heured);
+                $datef = \DateTime::createFromFormat('d/m/Y H:i', $datef . ' ' . $heuref);
+
+                $epreuve = new Epreuve([
+                    'nom' => $request->getParam('nom'),
+                    'capacite' => $request->getParam('capacite'),
+                    'date_debut' => $dated,
+                    'date_fin' => $datef,
+                    'etat' => Epreuve::CREE,
+                    'description' => $request->getParam('description'),
+                    'prix' => $request->getParam('prix')
+                ]);
+
+                $epreuve->evenement()->associate($evenement);
+                $epreuve->save();
+
+                $file->upload();
+
+                $this->flash('success', 'L\'épreuve a bien été créée !');
+                return $this->redirect($response, 'home');
             }
         }
 
-        return $this->view->render($response, 'Epreuve/edit.twig',['evenement' => $epreuve, 'evenement' => $epreuve ]);
-
+        return $this->view->render($response, 'Epreuve/add.twig');
     }
 
+    public function edit(Request $request, Response $response, array $args)
+    {
+        $evenement = Evenement::find($args['event_id']);
+
+        if (!$evenement) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        if ($evenement->user_id !== $this->user()->id) {
+            $this->flash('danger', 'Cet événement ne vous appartient pas !');
+            return $this->redirect($response, 'home');
+        }
+
+        $epreuve = Epreuve::find($args['trial_id']);
+
+        if (!$epreuve) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        if ($request->isPost()) {
+            $validation = $this->validator->validate($request, [
+                'nom' => V::notBlank(),
+                'date_debut' => V::date('d/m/Y'),
+                'heure_debut' => V::date('H:i'),
+                'date_fin' => V::date('d/m/Y'),
+                'heure_fin' => V::date('H:i'),
+                'description' => V::notBlank(),
+                'capacite' => V::notBlank()->numeric(),
+                'prix' => V::notBlank()->numeric()
+            ]);
+
+            $etat = $request->getParam('etat');
+
+            $etats = [
+                Evenement::CREE,
+                Evenement::VALIDE,
+                Evenement::OUVERT,
+                Evenement::EN_COURS,
+                Evenement::CLOS,
+                Evenement::EXPIRE,
+                Evenement::ANNULE
+            ];
+
+            if (!in_array($etat, $etats)) {
+                $this->validator->addError('etat', 'État non valide.');
+            }
+
+            $file = new File('epreuve_pic_link', new FileSystem($this->getUploadDir($evenement->id), true));
+
+            $file->addValidations([
+                new Mimetype(['image/png', 'image/jpeg']),
+                new Size('2M')
+            ]);
+
+            $fileUploaded = isset($_FILES['epreuve_pic_link']) && $_FILES['epreuve_pic_link']['error'] != UPLOAD_ERR_NO_FILE;
+
+            if ($fileUploaded) {
+                if (!$file->validate()) {
+                    $this->validator->addErrors('epreuve_pic_link', $file->getErrors());
+                }
+            }
+
+            if ($validation->isValid()) {
+                $dated = $request->getParam('date_debut');
+                $datef = $request->getParam('date_fin');
+                $heured = $request->getParam('heure_debut');
+                $heuref = $request->getParam('heure_fin');
+
+                $dated = \DateTime::createFromFormat('d/m/Y H:i', $dated . ' ' . $heured);
+                $datef = \DateTime::createFromFormat('d/m/Y H:i', $datef . ' ' . $heuref);
+
+                $epreuve->fill([
+                    'nom' => $request->getParam('nom'),
+                    'capacite' => $request->getParam('capacite'),
+                    'date_debut' => $dated,
+                    'date_fin' => $datef,
+                    'etat' => $request->getParam('etat'),
+                    'description' => $request->getParam('description'),
+                    'prix' => $request->getParam('prix'),
+                ]);
+
+                $epreuve->save();
+
+                if ($fileUploaded) {
+                    unlink($this->getPicturePath($evenement->id, $epreuve->id));
+                    $file->setName($epreuve->id);
+                    $file->upload();
+                }
+
+                $this->flash('success', 'L\'épreuve "' . $epreuve->nom . '" a bien été modifiée !');
+                return $this->redirect($response, 'home');
+            }
+        }
+
+        return $this->view->render($response, 'Epreuve/edit.twig', [
+            'epreuve' => $epreuve
+        ]);
+    }
+
+    public function show(Request $request, Response $response, array $args)
+    {
+        $evenement = Evenement::find($args['event_id']);
+
+        if (!$evenement) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        if ($evenement->user_id !== $this->user()->id) {
+            $this->flash('danger', 'Cet événement ne vous appartient pas !');
+            return $this->redirect($response, 'home');
+        }
+
+        $epreuve = Epreuve::find($args['trial_id']);
+
+        if (!$epreuve) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        return $this->view->render($response, 'Epreuve/show.twig', [
+            'epreuve' => $epreuve,
+            'evenement' => $evenement
+        ]);
+    }
+
+    public function getUploadDir($eventId)
+    {
+        return $this->settings['events_upload'] . $eventId . '/epreuves';
+    }
+
+    public function getPicturePath($eventId, $trialId)
+    {
+        $path = $this->getUploadDir($eventId) . '/' . $trialId;
+        return file_exists($path . '.jpg') ? $path . '.jpg' : $path . '.png';
+    }
     public function join($request, $response,$args)
     {
         $evenement_id=$args['id_evenement'];
