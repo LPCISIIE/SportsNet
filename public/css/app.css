@@ -29,6 +29,17 @@ header > form {
     header > form > input[type="text"]:focus {
       border-color: #617d8b; }
 
+.close-alert {
+  position: relative;
+  top: -2px;
+  background: transparent;
+  border: none;
+  float: right;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #FFF;
+  cursor: pointer; }
+
 .page-header {
   padding-left: 50px;
   padding-right: 50px; }
