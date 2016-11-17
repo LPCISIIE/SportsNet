@@ -5,33 +5,33 @@
 {% block body %}
 
 <div class="container">
-    <div class="page-header">
-        <h1>Ajouter un événement</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="form-group{% if hasError('image') %} has-error{% endif %}">
+                    <label for="image">Image</label>
+                    <input type="file" name="image" id="image">
+                    <span class="help-block">{{ error('image') }}</span>
+                </div>
+
+                {{ form.group('nom', null, 'nom', 'Nom') }}
+                {{ form.group('date_debut', null , 'date_debut', 'Début', null ) }}
+                {{ form.group('date_fin', null, 'date_fin', 'Fin', null) }}
+                {{ form.group('adresse', null, 'adresse', 'Lieu') }}
+                {{ form.group('discipline', null, 'discipline', 'Discipline') }}
+                {{ form.group('telephone', null, 'telephone', 'Téléphone', null, 'number') }}
+
+                <div class="form-group{% if hasError('description') %} has-error{% endif %}">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" class="form-control" placeholder="Description"></textarea>
+                    <span class="help-block">{{ error('description') }}</span>
+                </div>
+
+                {{ csrf() }}
+                <input type="submit" class="btn" value="Créer">
+            </form>
+        </div>
     </div>
-
-    <form action="" method="POST" enctype="multipart/form-data">
-        <div class="form-group{% if hasError('image') %} has-error{% endif %}">
-            <label for="image">Image</label>
-            <input type="file" name="image" id="image">
-            <span class="help-block">{{ error('image') }}</span>
-        </div>
-
-        {{ form.group('nom', null, 'nom', 'Nom') }}
-        {{ form.group('date_debut', null , 'date_debut', 'Début', null ) }}
-        {{ form.group('date_fin', null, 'date_fin', 'Fin', null) }}
-        {{ form.group('adresse', null, 'adresse', 'Lieu') }}
-        {{ form.group('discipline', null, 'discipline', 'Discipline') }}
-        {{ form.group('telephone', null, 'telephone', 'Téléphone', null, 'number') }}
-
-        <div class="form-group{% if hasError('description') %} has-error{% endif %}">
-            <label for="description">Description</label>
-            <textarea name="description" id="description" class="form-control" placeholder="Description"></textarea>
-            <span class="help-block">{{ error('description') }}</span>
-        </div>
-
-        {{ csrf() }}
-        <input type="submit" class="btn btn-primary">
-    </form>
 </div>
 
 {% endblock %}
