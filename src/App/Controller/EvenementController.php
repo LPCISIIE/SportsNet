@@ -14,24 +14,8 @@ use Upload\Validation\Size;
 
 class EvenementController extends Controller
 {
-
-    public function getFolderUpload($evenement)
+    public function add(Request $request, Response $response)
     {
-        return $this->settings['events_upload'] . $evenement->id . '/';
-    }
-
-    public function getPicture($evenement)
-    {
-        if (file_exists($this->getFolderUpload($evenement) . 'header.jpg') ) {
-            return $this->getFolderUpload($evenement) . 'header.jpg';
-        }
-
-        return $this->getFolderUpload($evenement) . 'header.png';
-    }
-
-    public function create(Request $request, Response $response)
-    {
-
         if ($request->isPost()) {
             $this->validator->validate($request, [
                 'nom' => V::length(1, 100),
@@ -42,6 +26,17 @@ class EvenementController extends Controller
                 'discipline' => V::length(1, 50),
                 'description' => V::notBlank()
             ]);
+
+            $file = new File('image', new FileSystem($this->settings['events_upload'], true));
+
+            $file->addValidations([
+                new Mimetype(['image/png', 'image/jpeg']),
+                new Size('2M')
+            ]);
+
+            if (!$file->validate()) {
+                $this->validator->addErrors('image', $file->getErrors());
+            }
 
             if ($this->validator->isValid()) {
                 $evenement = new Evenement([
@@ -57,16 +52,17 @@ class EvenementController extends Controller
                 $evenement->user()->associate($this->user());
                 $evenement->save();
 
-                mkdir($this->getFolderUpload($evenement).'epreuves',0777,true);
+                mkdir($this->getUploadDir($evenement->id) . 'epreuves', 0777, true);
+                $file = new File('image', new FileSystem($this->getUploadDir($evenement->id), true));
+                $file->upload('header');
 
                 $this->flash('success', 'L\'événement "' . $request->getParam('nom') . '" a bien été crée !');
                 return $this->redirect($response, 'home');
             }
         }
 
-        return $this->view->render($response, 'Evenement/create.twig');
+        return $this->view->render($response, 'Evenement/add.twig');
     }
-
 
     public function show(Request $request, Response $response, array $args)
     {
@@ -91,7 +87,6 @@ class EvenementController extends Controller
         }
 
         if ($request->isPost()) {
-
             $this->validator->validate($request, [
                 'nom' => V::length(1, 100),
                 'adresse' => V::length(1, 100),
@@ -104,7 +99,6 @@ class EvenementController extends Controller
             ]);
 
             $etat = $request->getParam('etat');
-
 
             $etats = [
                 Evenement::CREE,
@@ -120,7 +114,7 @@ class EvenementController extends Controller
                 $this->validator->addError('etat', 'État non valide.');
             }
 
-            $file = new File('image', new FileSystem($this->getFolderUpload($evenement), true));
+            $file = new File('image', new FileSystem($this->getUploadDir($evenement->id), true));
             $file->setName('header');
 
             $file->addValidations([
@@ -205,23 +199,23 @@ class EvenementController extends Controller
         return $this->redirect($response, 'user.events');
     }
 
-     public function getParticipants($request, $response, $args)
-     {
-        $epreuve_by_id = Epreuve::where('evenement_id','like',$args['id'])->get();
+
+    public function getParticipants(Request $request, Response $response, array $args)
+    {
+        //on récupère la liste des personne participants à l'évènement
+        $epreuve_by_id = Epreuve::where('evenement_id', 'like', $args['id'])->get();
         $tab_csv = array();
         $tab_csv[0] = array();
         $tab_csv[1] = array();
-
-        foreach($epreuve_by_id as $epreuve) {
-
-            array_push($tab_csv[0],$epreuve['nom']);
-
-            array_push($tab_csv[1],'---');
+        foreach ($epreuve_by_id as $epreuve) {
+            array_push($tab_csv[0], $epreuve['nom']);
+            array_push($tab_csv[1], '---');
 
             $participants = $epreuve->sportifs()->get();
             $nb = 2;
 
             foreach ($participants as $participant) {
+
 
                 if(sizeof($tab_csv) < ($nb+1)) {
                     $tab_csv[$nb] = array();
@@ -229,6 +223,13 @@ class EvenementController extends Controller
 
                 array_push($tab_csv[$nb],$participant['nom']." ".$participant['prenom']);
                 $nb+=1;
+
+                if (sizeof($tab_csv) < ($nb + 1)) {
+                    $tab_csv[$nb] = array();
+                }
+                array_push($tab_csv[$nb], $participant['nom'] . ' ' . $participant['prenom']);
+                $nb += 1;
+
             }
         }
 
@@ -236,12 +237,23 @@ class EvenementController extends Controller
         $delimiter = ",";
 
         header('Content-Type: application/csv');
-        header('Content-Disposition: attachment; filename="'.$filename.'";');
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
 
         $f = fopen('php://output', 'w');
 
         foreach ($tab_csv as $line) {
             fputcsv($f, $line, $delimiter);
         }
+    }
+
+    public function getUploadDir($eventId)
+    {
+        return $this->settings['events_upload'] . $eventId . '/';
+    }
+
+    public function getPicturePath($eventId)
+    {
+        $path = $this->getUploadDir($eventId) . '/header';
+        return file_exists($path . '.jpg') ? $path . '.jpg' : $path . '.png';
     }
 }

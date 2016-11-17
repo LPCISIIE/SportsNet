@@ -27,7 +27,7 @@
     <p class="well">{{ epreuve.description }}</p>
     <p class="text-center">Capacité maximum : {{ epreuve.capacite }}</p>
     <p class="text-center">Prix de participation : {{ epreuve.prix }} €</p>
-    <a href="{{ path_for('resultatPerso', {'event_id': evenement.id, 'trial_id': epreuve.id})  }}" class="btn btn-success">Voir mon résultat</a>
+    <a href="{{ path_for('recherchePerso', {'event_id': evenement.id, 'trial_id': epreuve.id})  }}" class="btn btn-success">Voir mon résultat</a>
 </div>
 
 {% endblock %}

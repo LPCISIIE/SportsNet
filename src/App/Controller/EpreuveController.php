@@ -147,10 +147,6 @@ class EpreuveController extends Controller
                 new Extension('csv'),
             ]);
 
-            /*echo "<pre>";
-            print_r($_FILES['result_csv']);
-            exit();*/
-
             $fileUploaded = isset($_FILES['epreuve_pic_link']) && $_FILES['epreuve_pic_link']['error'] != UPLOAD_ERR_NO_FILE;
             $fileUploaded2 = isset($_FILES['result_csv']) && $_FILES['result_csv']['error'] != UPLOAD_ERR_NO_FILE;
 
@@ -160,7 +156,7 @@ class EpreuveController extends Controller
                 }
             }
 
-            if($fileUploaded2) {
+            if ($fileUploaded2) {
                 if (!$filecsv->validate()) {
                     $this->validator->addErrors('result_csv', $filecsv->getErrors());
                 }
@@ -233,16 +229,7 @@ class EpreuveController extends Controller
         ]);
     }
 
-    public function getUploadDir($eventId)
-    {
-        return $this->settings['events_upload'] . $eventId . '/epreuves';
-    }
 
-    public function getPicturePath($eventId, $trialId)
-    {
-        $path = $this->getUploadDir($eventId) . '/' . $trialId;
-        return file_exists($path . '.jpg') ? $path . '.jpg' : $path . '.png';
-    }
 
     public function resultatPerso(Request $request, Response $response, array $args)
     {
@@ -302,7 +289,7 @@ class EpreuveController extends Controller
         $evenement_id=$args['id_evenement'];
         $evenement=Evenement::find($args["id_evenement"]);
         $epreuves = $evenement->epreuves()->get()->toArray();
-        $evenement= $evenement->toArray();
+        $evenement = $evenement->toArray();
         if ($request->isPost()) {
             $nom = $request->getParam('nom');
             $prenom = $request->getParam('prenom');
@@ -310,8 +297,8 @@ class EpreuveController extends Controller
             $birthday = $request->getParam('birthday');
             $epreuvesSelection = $request->getParam('epreuves');
             $validation = $this->validator->validate($request, [
-                'nom' => V::notEmpty()->length(1,50),
-                'prenom' => V::notEmpty()->length(1,50),
+                'nom' => V::notEmpty()->length(1, 50),
+                'prenom' => V::notEmpty()->length(1, 50),
                 'email' => V::notEmpty()->noWhitespace()->email(),
                 'birthday' => v::notEmpty()->date('d/m/Y'),
             ]);
@@ -319,42 +306,51 @@ class EpreuveController extends Controller
 
             if ($validation->isValid()) {
                 /*Test si pas deja inscrit*/
-                $sportif = Sportif::where('email',$email)->first();
-                if ($sportif==null) {
-                    $birthday = \DateTime::createFromFormat("d-m-Y",$birthday);
-                    $sportif=new Sportif();
-                    $sportif->nom=$nom;
-                    $sportif->prenom=$prenom;
-                    $sportif->email=$email;
-                    $sportif->birthday=$birthday;
+                $sportif = Sportif::where('email', $email)->first();
+                if ($sportif == null) {
+                    $birthday = \DateTime::createFromFormat('d-m-Y', $birthday);
+                    $sportif = new Sportif();
+                    $sportif->nom = $nom;
+                    $sportif->prenom = $prenom;
+                    $sportif->email = $email;
+                    $sportif->birthday = $birthday;
                     $sportif->save();
                 }
-                $prixTotal=0;
+                $prixTotal = 0;
                 if (isset($epreuvesSelection)) {
                     foreach ($epreuvesSelection as $epreuve) {
-                        try{
+                        try {
                             $sportif->epreuves()->attach($epreuve);
-                            $prixTotal+=Epreuve::find($epreuve)->prix;
-                        }
-                        catch (QueryException $e){
+                            $prixTotal += Epreuve::find($epreuve)->prix;
+                        } catch (QueryException $e) {
                             $errorCode = $e->errorInfo[1];
-                            if($errorCode == 1062){
-                                $this->flash('error', 'Vous vous êtes déjà inscrit à l\'épreuve '.Epreuve::find($epreuve)->nom);
-                                return $this->redirect($response, 'epreuve.join', ['id_evenement'=>$evenement_id]);
+                            if ($errorCode == 1062) {
+                                $this->flash('error', 'Vous vous êtes déjà inscrit à l\'épreuve ' . Epreuve::find($epreuve)->nom);
+                                return $this->redirect($response, 'epreuve.join', ['id_evenement' => $evenement_id]);
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     $this->flash('error', 'Selectionnez au moins une épreuve');
-                    return $this->redirect($response, 'epreuve.join', ['id_evenement'=>$evenement_id]);
+                    return $this->redirect($response, 'epreuve.join', ['id_evenement' => $evenement_id]);
                 }
 
-                return $this->view->render($response, 'Epreuve/payment.twig',compact('prixTotal','evenement_id'));
+                return $this->view->render($response, 'Epreuve/payment.twig', compact('prixTotal', 'evenement_id'));
             }
-
         }
-        return $this->view->render($response, 'Epreuve/join.twig', compact('evenement','epreuves'));
+
+        return $this->view->render($response, 'Epreuve/join.twig', compact('evenement', 'epreuves'));
+    }
+
+    public function getUploadDir($eventId)
+    {
+        return $this->settings['events_upload'] . $eventId . '/epreuves';
+    }
+
+    public function getPicturePath($eventId, $trialId)
+    {
+        $path = $this->getUploadDir($eventId) . '/' . $trialId;
+        return file_exists($path . '.jpg') ? $path . '.jpg' : $path . '.png';
     }
 }
 
