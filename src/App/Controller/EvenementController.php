@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use App\Model\Evenement as Evenement;
 use App\Model\Epreuve as Epreuve;
+use App\Model\Evenement as Evenement;
 use Respect\Validation\Validator as V;
 use Upload\File;
 use Upload\Storage\FileSystem;

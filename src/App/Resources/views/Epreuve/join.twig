@@ -1,0 +1,25 @@
+{% extends 'layout.twig' %}
+
+{% import 'Macro/form.twig' as form %}
+
+{% block body %}
+<div class="jumbotron">{{evenement.nom}} </div>
+<div class="container">
+<form action="{{ path_for('epreuve.join', {'id_evenement': evenement.id}) }}" method="POST" enctype="multipart/form-data">
+    <div class="form-group{% if hasError(name) %} has-error{% endif %}">
+    {% for epreuve in epreuves%}
+            <input type="checkbox" name="epreuves[]" value="{{epreuve.id}}"  class="epreuve">{{ epreuve.nom }}
+    {% endfor%}
+    </div>
+
+    <hr>
+    {{ form.group('nom', null, 'nom', 'Nom', null, 'nom') }}
+    {{ form.group('prenom', null, 'prenom', 'Prenom', null, 'prenom') }}
+    {{ form.group('email', null, 'email', 'Email', null, 'email') }}
+    {{ form.group('birthday', null, 'birthday', 'Birthday', null, 'date') }}
+    {{ csrf() }}
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+</div>
+
+{% endblock %}

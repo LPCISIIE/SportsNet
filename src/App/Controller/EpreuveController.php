@@ -5,12 +5,15 @@ namespace App\Controller;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Respect\Validation\Validator as V;
-use App\Model\Evenement;
-use App\Model\Epreuve;
+use Illuminate\Database\QueryException;
 use Upload\File;
 use Upload\Storage\FileSystem;
 use Upload\Validation\Mimetype;
 use Upload\Validation\Size;
+use App\Model\Epreuve;
+use App\Model\Sportif;
+use App\Model\Participe;
+use App\Model\Evenement;
 
 class EpreuveController extends Controller
 {
@@ -217,5 +220,64 @@ class EpreuveController extends Controller
     {
         $path = $this->getUploadDir($eventId) . '/' . $trialId;
         return file_exists($path . '.jpg') ? $path . '.jpg' : $path . '.png';
+    }
+    public function join($request, $response,$args)
+    {
+        $evenement_id=$args['id_evenement'];
+        $evenement=Evenement::find($args["id_evenement"]);
+        $epreuves = $evenement->epreuves()->get()->toArray();
+        $evenement= $evenement->toArray();
+        if ($request->isPost()) {
+            $nom = $request->getParam('nom');
+            $prenom = $request->getParam('prenom');
+            $email = $request->getParam('email');
+            $birthday = $request->getParam('birthday');
+            $epreuvesSelection = $request->getParam('epreuves');
+            $validation = $this->validator->validate($request, [
+                'nom' => V::notEmpty()->length(1,50),
+                'prenom' => V::notEmpty()->length(1,50),
+                'email' => V::notEmpty()->noWhitespace()->email(),
+                'birthday' => v::notEmpty()->date('d/m/Y'),
+            ]);
+
+
+            if ($validation->isValid()) {
+                /*Test si pas deja inscrit*/
+                $sportif = Sportif::where('email',$email)->first();
+                if ($sportif==null) {
+                    $birthday = \DateTime::createFromFormat("d-m-Y",$birthday);
+                    $sportif=new Sportif();
+                    $sportif->nom=$nom;
+                    $sportif->prenom=$prenom;
+                    $sportif->email=$email;
+                    $sportif->birthday=$birthday;
+                    $sportif->save();
+                }
+                $prixTotal=0;
+                if (isset($epreuvesSelection)) {
+                    foreach ($epreuvesSelection as $epreuve) {
+                        try{
+                            $sportif->epreuves()->attach($epreuve);
+                            $prixTotal+=Epreuve::find($epreuve)->prix;
+                        }
+                        catch (QueryException $e){
+                            $errorCode = $e->errorInfo[1];
+                            if($errorCode == 1062){
+                                $this->flash('error', 'Vous vous êtes déjà inscrit à l\'épreuve '.Epreuve::find($epreuve)->nom);
+                                return $this->redirect($response, 'epreuve.join', ['id_evenement'=>$evenement_id]);
+                            }
+                        }
+                    }
+                }
+                else {
+                    $this->flash('error', 'Selectionnez au moins une épreuve');
+                    return $this->redirect($response, 'epreuve.join', ['id_evenement'=>$evenement_id]);
+                }
+
+                return $this->view->render($response, 'Epreuve/payment.twig',compact('prixTotal','evenement_id'));
+            }
+
+        }
+        return $this->view->render($response, 'Epreuve/join.twig', compact('evenement','epreuves'));
     }
 }
