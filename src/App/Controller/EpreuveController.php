@@ -248,7 +248,13 @@ class EpreuveController extends Controller
                     return $this->redirect($response, 'recherchePerso',['event_id' => $idEvenement, 'trial_id' => $idEpreuve]);
                 };
 
-                return $this->redirect($response, 'resultatPerso', ['participant' => $participant]);
+
+                return $this->view->render($response, 'Epreuve/afficherResultat.twig',
+                    [ 'participant' => $participant,
+                      'epreuve' => Epreuve::find($idEpreuve),
+                      'evenement' => Evenement::find($idEvenement),
+                    ]);
+
             }
 
             $tel = Evenement::find($idEvenement)->telephone;
@@ -263,4 +269,5 @@ class EpreuveController extends Controller
 
         return $this->view->render($response, 'Epreuve/recherchePerso.twig');
     }
+
 }
