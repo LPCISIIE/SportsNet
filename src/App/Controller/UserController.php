@@ -13,9 +13,9 @@ class UserController extends Controller
     {
         $user = $this->user();
         $is_organisateur = $this->isOrganisateur();
-        if ($is_organisateur){
+        if ($is_organisateur)
             $profil = $user->organisateur;
-        else{
+        else
             $profil = $user->sportif;
         if ($request->isPost()) {
             $this->validator->validate($request, [
