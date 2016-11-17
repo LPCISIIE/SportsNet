@@ -12,9 +12,11 @@ class UserController extends Controller
     public function monCompte(Request $request, Response $response)
     {
         $user = $this->user();
-        $organisateur = $user->organisateur;
-
         $is_organisateur = $this->isOrganisateur();
+        if ($is_organisateur){
+            $profil = $user->organisateur;
+        else{
+            $profil = $user->sportif;
         if ($request->isPost()) {
             $this->validator->validate($request, [
                 'nom' => V::length(1, 50),
@@ -27,12 +29,12 @@ class UserController extends Controller
                 $user->email = $request->getParam('email');
                 $user->save();
 
-                $organisateur->fill([
+                $profil->fill([
                     'nom' => $request->getParam('nom'),
                     'prenom' => $request->getParam('prenom'),
                     'paypal' => $request->getParam('paypal')
                 ]);
-                $organisateur->save();
+                $profil->save();
 
                 $this->flash('success', 'Votre compte a bien été modifié !');
                 return $this->redirect($response, 'user.compte');
@@ -40,6 +42,7 @@ class UserController extends Controller
         }
 
         return $this->view->render($response, 'User/mon-compte.twig', [
+            'organisateur' => $profil,
             'is_organisateur' => $is_organisateur
         ]);
     }
