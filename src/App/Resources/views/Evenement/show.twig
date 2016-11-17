@@ -5,15 +5,15 @@
 {% block body %}
 <div class="jumbotron">{{evenement['nom']}} </div>
 <div class="container">
-  <div class="evenement_debut">Date début: {{evenement['date_debut']}} </div>
-  <div class="evenement_fin">Date fin: {{evenement['date_fin']}} </div>
+  <div class="evenement_debut">Du {{evenement['date_debut']}} au {{evenement['date_fin']}} </div>
   <div class="evenement_adresse">Adresse: {{evenement['adresse']}} </div>
   <div class="evenement_discipline">Discipline: {{evenement['discipline']}} </div>
-  <div class="evenement_telephone">Telephone: {{evenement['telephone']}} </div>
+  <div class="evenement_telephone">Nous contacter : {{evenement['telephone']}} </div>
   <div class="evenement_description">Description: {{evenement['description']}} </div>
   <hr>
 
-  {% for epreuve in epreuves%}
+
+  {% for epreuve in epreuves %}
 
   <div class="evenement_description row">
     <div class="img_epreuve col-md-2">
@@ -22,7 +22,6 @@
     <div class="col-md-4 ">
         <div class="row">{{epreuve['nom']}}</div>
     </div>
-
   </div>
 
   {% endfor%}
