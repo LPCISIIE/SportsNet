@@ -72,7 +72,7 @@ class EvenementController extends Controller
             throw $this->notFoundException($request, $response);
         }
 
-        $files = glob('../../../public/uploads/evenements/'.$args['id_evenement'].'/*.{jpg,png,gif}', GLOB_BRACE);
+        $files = glob($this->settings['events_upload'].$args['id'].'/*.{jpg,png,gif}', GLOB_BRACE);
         $size = sizeof($files)-1;
         $files_link = array();
         for ($i=1; $i <= $size; $i++) { 
@@ -95,6 +95,7 @@ class EvenementController extends Controller
         }
 
         if ($request->isPost()) {
+            v::with('App\\Validation\\Rules\\');
             $this->validator->validate($request, [
                 'nom' => V::length(1, 100),
                 'adresse' => V::length(1, 100),
@@ -103,7 +104,8 @@ class EvenementController extends Controller
                 'telephone' => V::phone(),
                 'discipline' => V::length(1, 50),
                 'description' => V::notBlank(),
-                'etat' => V::intVal()
+                'etat' => V::intVal(),
+                'galerie' => V::ImageSize()->ImageFormat()
             ]);
 
             $etat = $request->getParam('etat');
@@ -124,6 +126,23 @@ class EvenementController extends Controller
 
             $file = new File('image', new FileSystem($this->getUploadDir($evenement->id), true));
             $file->setName('header');
+
+            //on gère l'upload multiple d'images
+            //on modifie l'array pour que la strusture soit plus facile à manier
+            $file_ary = array();
+            $file_count = count($_FILES['galerie']['name']);
+            $files_galerie = $_FILES['galerie'];
+
+            for($i=0; $i < $file_count; $i++) { 
+                $img = array();
+                $img["name"] = $files_galerie["name"][$i];
+                $img["tmp_name"] = $files_galerie["tmp_name"][$i];
+                $img["type"] = $files_galerie["type"][$i];
+                $img["size"] = $files_galerie["size"][$i];
+                $img["error"] = $files_galerie["error"][$i];
+                array_push($file_ary,$img);
+            }
+            //
 
             $file->addValidations([
                 new Mimetype(['image/png', 'image/jpeg']),
@@ -155,6 +174,21 @@ class EvenementController extends Controller
                 if ($fileUploaded) {
                     $file->upload();
                 }
+
+
+                $galerie = array();
+                $files = glob($this->settings['events_upload'].$args['id'].'/*.{jpg,png,gif}', GLOB_BRACE);
+                $name_to_upload = sizeof($files);
+                $a = 0;
+                foreach ($file_ary as $file_ary_img) {
+                    $tmp_name = $file_ary_img["tmp_name"];
+                    $extension = explode(".",$file_ary_img["name"]);
+                    //echo "<pre>";
+                    //print_r($this->settings['events_upload'].$args['id'].'/'.$name_to_upload.".".$extension[1]);
+                    move_uploaded_file($tmp_name, $this->settings['events_upload'].$args['id'].'/'.$name_to_upload.".".$extension[1]);
+                    $name_to_upload += 1;
+                }
+                //
 
                 $this->flash('success', 'L\'événement "' . $evenement->nom . '" a bien été modifié !');
                 return $this->redirect($response, 'home');
