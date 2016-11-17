@@ -4,6 +4,8 @@
 
 {% block body %}
 
+<div class="jumbotron">{{ evenement.nom }}</div>
+
 <div class="container">
     <img src="{{ base_url() }}/{{ evenement.webPath }}" style="max-height: 200px;" />
     <div class="jumbotron">{{ evenement.nom }}</div>
@@ -17,6 +19,7 @@
 
     <a href="{{ path_for('epreuve.join', {id_evenement: evenement.id}) }}" class="btn btn-default">Rejoindre une épreuve</a>
     <hr>
+
 
     {% for epreuve in epreuves %}
         <div class="evenement_description row well">
