@@ -44,6 +44,11 @@
                     <span class="help-block">{{ error('etat') }}</span>
                 </div>
 
+                <div class="form-group{% if hasError('result_csv') %} has-error{% endif %}">
+                    <input type="file" name="result_csv" id="result_csv">
+                    <span class="help-block">{{ error('result_csv') }}</span>
+                </div>
+
                 {{ csrf() }}
                 <input type="submit" class="btn btn-primary" value="Modifier l'épreuve">
             </form>
