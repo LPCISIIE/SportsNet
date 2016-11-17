@@ -1,0 +1,53 @@
+
+@import 'presets/grid_float';
+
+$columns: 12 !default;
+$gutter: 2% !default;
+
+$sm-min: 768px;
+$md-min: 992px;
+$lg-min: 1200px;
+
+$container-sm: 750px;
+$container-md: 970px;
+$container-lg: 1170px;
+
+.row {
+    @include row();
+}
+
+.container {
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@include float-columns($columns, $gutter, 'col-xs-');
+@include offsets($columns, $gutter, 'offset-xs-');
+
+@media screen and (min-width: $sm-min) {
+    @include float-columns($columns, $gutter, 'col-sm-');
+    @include offsets($columns, $gutter, 'offset-sm-');
+
+    .container {
+        width: $container-sm;
+    }
+}
+
+@media screen and (min-width: $md-min) {
+    @include float-columns($columns, $gutter, 'col-md-');
+    @include offsets($columns, $gutter, 'offset-md-');
+
+    .container {
+        width: $container-md;
+    }
+}
+
+@media screen and (min-width: $lg-min) {
+    @include float-columns($columns, $gutter, 'col-lg-');
+    @include offsets($columns, $gutter, 'offset-lg-');
+
+    .container {
+        width: $container-lg;
+    }
+}

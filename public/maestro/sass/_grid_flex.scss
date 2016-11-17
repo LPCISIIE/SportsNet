@@ -1,0 +1,12 @@
+
+@import 'presets/grid_flex';
+
+$gutter: 2% !default;
+
+.flex-row {
+    @include flex-row();
+}
+
+.col {
+    @include flex-grid($gutter);
+}

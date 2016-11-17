@@ -48,6 +48,12 @@ $container['view'] = function ($container) {
     return $view;
 };
 
+$container['notFoundHandler'] = function ($container) {
+    return function ($request, $response) use ($container) {
+        return $container['view']->render($response, 'Error/404.twig')->withStatus(404);
+    };
+};
+
 foreach ($container['settings']['routes']['files'] as $file) {
     require $container['settings']['routes']['dir'] . '/' . $file . '.php';
 }

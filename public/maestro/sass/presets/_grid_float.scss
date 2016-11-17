@@ -1,0 +1,41 @@
+
+/*
+ * Get the width of a column in a grid (use percents)
+ */
+@function columnWidth($columnCount, $gutter, $currentColumn, $scale: 100%) {
+  @return (($scale - ($columnCount * $gutter)) / $columnCount) * $currentColumn + (($currentColumn - 1) * $gutter);
+}
+
+/*
+ * Get the width of the left margin for a column in a grid (use percents)
+ */
+@function offsetWidth($columnCount, $gutter, $currentColumn, $scale: 100%) {
+  @return (($scale - ($columnCount * $gutter)) / $columnCount) * $currentColumn + ($currentColumn * $gutter) + ($gutter / 2);
+}
+
+@mixin row() {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  @include clearfix();
+}
+
+@mixin float-columns($columns, $gutter, $classPrefix: 'span-') {
+  @for $i from 1 through $columns {
+    .#{$classPrefix}#{$i} {
+      box-sizing: border-box;
+      float: left;
+      margin-left: $gutter / 2;
+      margin-right: $gutter / 2;
+      width: columnWidth($columns, $gutter, $i);
+    }
+  }
+}
+
+@mixin offsets($columns, $gutter, $classPrefix: 'offset-') {
+  @for $i from 1 through ($columns - 1) {
+    .#{$classPrefix}#{$i} {
+      margin-left: offsetWidth($columns, $gutter, $i);
+    }
+  }
+}
