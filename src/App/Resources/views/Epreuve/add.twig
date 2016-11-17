@@ -9,7 +9,9 @@
             <h3>Ajout d'épreuve</h3>
 
             <form action="" method="POST" enctype="multipart/form-data">
+                <div class="page-header">
                 {{ form.group('nom', null, 'nom', 'Nom de l\'épreuve') }}
+                </div>
                 {{ form.group('date_debut', null, 'date_debut', 'Début', null, 'text', 'JJ/MM/AAAA') }}
                 {{ form.group('heure_debut', null, 'heure_debut', 'Heure', null, 'text', '12:00') }}
 
