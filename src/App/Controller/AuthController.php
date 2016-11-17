@@ -6,6 +6,7 @@ use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Model\Organisateur as Organisateur;
+use App\Model\Sportif;
 use Respect\Validation\Validator as V;
 
 class AuthController extends Controller
@@ -43,6 +44,8 @@ class AuthController extends Controller
             $password = $request->getParam('password');
             $nom = $request->getParam('nom');
             $prenom = $request->getParam('prenom');
+            $type=$request->getParam('type');
+
 
             $this->validator->validate($request, [
                 'nom' => V::length(1,50),
@@ -58,7 +61,6 @@ class AuthController extends Controller
 
             if ($this->validator->isValid()) {
                 $role = $this->auth->findRoleByName('User');
-
                 $user = $this->auth->registerAndActivate([
                     'email' => $email,
                     'password' => $password,
@@ -66,11 +68,25 @@ class AuthController extends Controller
                         'user.delete' => 0
                     ]
                 ]);
-                $organisateur = new Organisateur([
-                    'nom' => $nom,
-                    'prenom' => $prenom
-                ]);
-                $user->organisateur()->save($organisateur);
+                if ($type=='organisateur') {
+                    $organisateur = new Organisateur([
+                        'nom' => $nom,
+                        'prenom' => $prenom
+                    ]);
+                    $user->organisateur()->save($organisateur);
+
+                }
+                elseif ($type=='sportif') {
+                    $sportif = new Sportif([
+                        'nom' => $nom,
+                        'prenom' => $prenom,
+                        'email'=>$email
+                    ]);
+
+                    $user->sportif()->save($sportif);
+                }
+
+
                 $role->users()->attach($user);
 
                 $this->flash('success', 'Your account has been created.');
