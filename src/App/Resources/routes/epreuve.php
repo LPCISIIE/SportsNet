@@ -9,4 +9,4 @@ $app->group('', function () {
 
 $app->map(['GET', 'POST'], '/{event_id:[0-9]+}/{trial_id:[0-9]+}/searchMe', 'EpreuveController:resultatPerso')->setName('recherchePerso');
 
-$app->get[]
+$app->get('/resultat/individuel','EpreuveController:afficherResultatPerso')->setName('recherchePerso');
