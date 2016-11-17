@@ -162,6 +162,7 @@ class EvenementController extends Controller
         ]);
     }
 
+
     public function cancel(Request $request, Response $response, array $args)
     {
         $evenement = Evenement::find($args['id']);
@@ -202,22 +203,28 @@ class EvenementController extends Controller
         return $this->redirect($response, 'user.events');
     }
 
-     public function getParticipants($request, $response, $args) {
-
-        //on récupère la liste des personne participants à l'évènement
+     public function getParticipants($request, $response, $args)
+     {
         $epreuve_by_id = Epreuve::where('evenement_id','like',$args['id'])->get();
         $tab_csv = array();
         $tab_csv[0] = array();
         $tab_csv[1] = array();
+
         foreach($epreuve_by_id as $epreuve) {
+
             array_push($tab_csv[0],$epreuve['nom']);
+
             array_push($tab_csv[1],'---');
+
             $participants = $epreuve->sportifs()->get();
             $nb = 2;
+
             foreach ($participants as $participant) {
+
                 if(sizeof($tab_csv) < ($nb+1)) {
                     $tab_csv[$nb] = array();
                 }
+
                 array_push($tab_csv[$nb],$participant['nom']." ".$participant['prenom']);
                 $nb+=1;
             }
