@@ -1,3 +1,22 @@
+label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 0.9em; }
+
+.form-control {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border: 1px #CCC solid;
+  border-radius: 2px;
+  padding: 8px 15px; }
+  .form-control:focus {
+    border-color: #617d8b; }
+
+.form-group {
+  margin-bottom: 10px; }
+
 body {
   padding-top: 100px; }
 

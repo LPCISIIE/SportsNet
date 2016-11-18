@@ -78,6 +78,9 @@ class EpreuveController extends Controller
                 $epreuve->evenement()->associate($evenement);
                 $epreuve->save();
 
+                $storage = new FileSystem($this->getUploadDir($evenement->id));
+                $file = new File('epreuve_pic_link', $storage);
+                $file->setName($epreuve->id);
                 $file->upload();
 
                 $this->flash('success', 'L\'épreuve a bien été créée !');

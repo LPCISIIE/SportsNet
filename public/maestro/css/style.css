@@ -409,7 +409,7 @@ header ul {
     display: inline-flex;
     flex-direction: row;
     float: right;
-    font-size: 14px
+    font-size: 14px;
 }
 
 header ul > li {
@@ -766,7 +766,7 @@ header .menu-icon a:before {
     }
 }
 
-.alerte-info {
+.alerte-theme {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
@@ -775,7 +775,7 @@ header .menu-icon a:before {
     background-color: #78909C
 }
 
-.alerte-warning {
+.alerte-orange {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
@@ -784,7 +784,7 @@ header .menu-icon a:before {
     background-color: #FFB74D
 }
 
-.alerte-danger {
+.alerte-rouge {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
@@ -793,7 +793,7 @@ header .menu-icon a:before {
     background-color: #E57373
 }
 
-.alerte-success {
+.alerte-vert {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;

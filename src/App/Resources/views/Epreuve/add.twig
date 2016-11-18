@@ -5,23 +5,37 @@
 {% block body %}
 
     <div class="container">
-        <div class="jumbotron">
-            <h3>Ajout d'épreuve</h3>
+        <h3 class="centre">Ajout d'épreuve</h3>
 
             <form action="" method="POST" enctype="multipart/form-data">
-                <div class="page-header">
-                {{ form.group('nom', null, 'nom', 'Nom de l\'épreuve') }}
+                <div class="page-header flex-row">
+                    <div class="centre col-md-4 offset-md-4">{{ form.group('nom', null, 'nom', 'Nom de l\'épreuve') }}</div>
                 </div>
-                {{ form.group('date_debut', null, 'date_debut', 'Début', null, 'text', 'JJ/MM/AAAA') }}
-                {{ form.group('heure_debut', null, 'heure_debut', 'Heure', null, 'text', '12:00') }}
+                
+                <div class="flex-row">
+                    <div class="flex-row">
+                        <div class="col-md-3 centre">
+                            {{ form.group('date_debut', null, 'date_debut', 'Début', null, 'text', 'JJ/MM/AAAA') }}
+                        </div>
+                        <div class="col-md-3 offset-md-1 centre">
+                            {{ form.group('heure_debut', null, 'heure_debut', 'Heure', null, 'text', '12:00') }}
+                        </div>
+                    </div>
 
-                <div class="form-group{% if hasError('epreuve_pic_link') %} has-error{% endif %}">
-                    <input type="file" name="epreuve_pic_link" id="epreuve_pic_link">
-                    <span class="help-block">{{ error('epreuve_pic_link') }}</span>
+                    <div class="form-group{% if hasError('epreuve_pic_link') %} has-error{% endif %} col-md-3 offset-md-1 centre">
+                        <input type="file" name="epreuve_pic_link" id="epreuve_pic_link">
+                        <span class="help-block">{{ error('epreuve_pic_link') }}</span>
+                    </div>
+
+                    <div class="flex-row">
+                        <div class="col-md-3 offset-md-1 centre">
+                            {{ form.group('date_fin', null, 'date_fin', 'Fin', null, 'text', 'JJ/MM/AAAA') }}
+                        </div>
+                        <div class="col-md-3 centre">
+                            {{ form.group('heure_fin', null, 'heure_fin', 'Heure', null, 'text', '12:00') }}
+                        </div>
+                    </div>
                 </div>
-
-                {{ form.group('date_fin', null, 'date_fin', 'Fin', null, 'text', 'JJ/MM/AAAA') }}
-                {{ form.group('heure_fin', null, 'heure_fin', 'Heure', null, 'text', '12:00') }}
 
                 <div class="form-group{% if hasError('description') %} has-error{% endif %}">
                     <label for="description">Description</label>
@@ -29,13 +43,21 @@
                     <span class="help-block">{{ error('description') }}</span>
                 </div>
 
-                {{ form.group('capacite', null, 'capacite', 'Capacité maximum', null, 'number') }}
-                {{ form.group('prix', null, 'prix', 'Prix de participation (€)', null, 'number') }}
+                <div class="flex-row">
+                    <div class="col-md-12">
+                        {{ form.group('capacite', null, 'capacite', 'Capacité maximum', null, 'number') }}
+                    </div>
+                </div>
+
+                <div class="flex-row">
+                    <div class="col-md-12">
+                        {{ form.group('prix', null, 'prix', 'Prix de participation (€)', null, 'number') }}
+                    </div>
+                </div>
 
                 {{ csrf() }}
                 <input type="submit" class="btn btn-primary" value="Créer l'épreuve">
-            </form>
-        </div>
+        </form>
     </div>
 
 {% endblock %}
