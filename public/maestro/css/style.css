@@ -409,7 +409,7 @@ header ul {
     display: inline-flex;
     flex-direction: row;
     float: right;
-    font-size: 14px
+    font-size: 14px;
 }
 
 header ul > li {

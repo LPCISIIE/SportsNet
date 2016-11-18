@@ -14,7 +14,11 @@ class AppController extends Controller
             return $this->redirect($response, 'login');
         }
 
-        return $this->view->render($response, 'App/home.twig');
+        $evenements = Evenement::query()->orderBy('id', 'desc')->take(10)->get();
+
+        return $this->view->render($response, 'App/home.twig', [
+            'evenements' => $evenements
+        ]);
     }
 
     public function search(Request $request, Response $response)

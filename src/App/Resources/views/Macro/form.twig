@@ -6,3 +6,12 @@
       <span class="help-block">{{ error(name) }}</span>
   </div>
 {% endmacro %}
+
+
+{% macro group_noerror(name, value, id, label, class, type) %}
+    <div class="formulaire">
+      <label for="{{ id }}">{{ label }}</label>
+      <input type="{{ type|default('text') }}" name="{{ name }}" value="{{ value }}" id="{{ id }}" class="{{ class }}">
+      <span class="barre"></span>
+  </div>
+{% endmacro %}

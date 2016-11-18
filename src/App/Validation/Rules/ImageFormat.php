@@ -10,11 +10,11 @@ class ImageFormat extends AbstractRule
 	public function validate($input)
 	{
 		$image = $_FILES['galerie']['name'];
-		$b = false;
+		$b = true;
 		foreach ($image as $name) {
 			$pieces = explode(".",$name);
-			if(end($pieces) === "jpg" || end($pieces) === "png") {
-				$b = true;
+			if(end($pieces) != "jpg" && end($pieces) != "png") {
+				$b = false;
 			}
 		}
 		return $b;
