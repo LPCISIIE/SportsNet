@@ -212,11 +212,6 @@ class EpreuveController extends Controller
             throw $this->notFoundException($request, $response);
         }
 
-        if ($evenement->user_id !== $this->user()->id) {
-            $this->flash('danger', 'Cet événement ne vous appartient pas !');
-            return $this->redirect($response, 'home');
-        }
-
         $epreuve = Epreuve::find($args['trial_id']);
 
         if (!$epreuve) {
@@ -344,37 +339,53 @@ class EpreuveController extends Controller
         $evenement=Evenement::find($args["id_evenement"]);
         $epreuves = $evenement->epreuves()->get()->toArray();
         $evenement = $evenement->toArray();
+
+
         if ($request->isPost()) {
             $nom = $request->getParam('nom');
             $prenom = $request->getParam('prenom');
             $email = $request->getParam('email');
-            $birthday = $request->getParam('birthday');
             $epreuvesSelection = $request->getParam('epreuves');
-            $validation = $this->validator->validate($request, [
-                'nom' => V::notEmpty()->length(1, 50),
-                'prenom' => V::notEmpty()->length(1, 50),
-                'email' => V::notEmpty()->noWhitespace()->email(),
-                'birthday' => v::notEmpty()->date('d/m/Y'),
-            ]);
 
+            if(!$this->user()){
+                $validation = $this->validator->validate($request, [
+                    'nom' => V::notEmpty()->length(1, 50),
+                    'prenom' => V::notEmpty()->length(1, 50),
+                    'email' => V::notEmpty()->noWhitespace()->email(),
+                ]);
+            }
+            else {
+                $validation = $this->validator->validate($request, [
+                    'nom' => V::notEmpty()->length(1, 50),
+                    'prenom' => V::notEmpty()->length(1, 50),
+                ]);
+            }
 
-            if ($validation->isValid()) {
-
-                $sportif = Sportif::where('email', $email)->first();
-                if ($sportif == null) {
-                    $birthday = \DateTime::createFromFormat('d/m/Y', $birthday);
+            if ($validation->isValid() ) {
+                $sportif=null;
+                if (!$this->user()) {
+                    $sportif = Sportif::where('email', $email)->first();
+                }
+                else if($this->user()){
+                    $email = $this->user()->email;
+                    $sportif = Sportif::where('email', $email)->first();
+                }
+                if (!$sportif) {
                     $sportif = new Sportif();
                     $sportif->nom = $nom;
                     $sportif->prenom = $prenom;
                     $sportif->email = $email;
-                    $sportif->birthday = $birthday;
                     $sportif->save();
                 }
+
                 $prixTotal = 0;
                 if (isset($epreuvesSelection)) {
                     foreach ($epreuvesSelection as $epreuve) {
                         try {
                             $sportif->epreuves()->attach($epreuve);
+                            if ($this->user()) {
+                                $this->user()->sportif()->save($sportif);
+                            }
                             $prixTotal += Epreuve::find($epreuve)->prix;
                         } catch (QueryException $e) {
                             $errorCode = $e->errorInfo[1];
@@ -390,9 +401,9 @@ class EpreuveController extends Controller
                 }
 
                 return $this->view->render($response, 'Epreuve/payment.twig', compact('prixTotal', 'evenement_id'));
+
             }
         }
-
         return $this->view->render($response, 'Epreuve/join.twig', compact('evenement', 'epreuves'));
     }
 

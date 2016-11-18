@@ -8,7 +8,10 @@
     <form action="{{ path_for('user.compte') }}" method="POST">
         {{ form.group('nom', organisateur.nom, 'nom', 'Nom') }}
         {{ form.group('prenom', organisateur.prenom, 'prenom', 'Prénom') }}
-        {{ form.group('paypal', organisateur.paypal, 'paypal', 'Adresse Paypal', null, 'email') }}
+        {% if is_organisateur %}
+            {{ form.group('paypal', organisateur.paypal, 'paypal', 'Adresse Paypal', null, 'email') }}
+        {% endif %}
+
         {{ form.group('email', auth.user.email, 'email', 'Email', null, 'email') }}
 
         {{ csrf() }}
