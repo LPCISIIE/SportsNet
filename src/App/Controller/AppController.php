@@ -18,9 +18,9 @@ class AppController extends Controller
         $query = $request->getParam('q');
 
         if (!$query) {
-            return $this->view->render($response, 'error.twig', [
-                'titreErreur' => 'Recherche vide',
-                'descriptionErreur' => 'Veuillez renseigner des mots clés pour lancer la recherche'
+            return $this->view->render($response, 'Error/error.twig', [
+                'title' => 'Recherche vide',
+                'description' => 'Veuillez renseigner des mots clés pour lancer la recherche'
             ]);
         }
 
