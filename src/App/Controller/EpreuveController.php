@@ -226,6 +226,60 @@ class EpreuveController extends Controller
 
 
 
+    public function resultat(Request $request, Response $response, array $args )
+    {
+
+        $idEpreuve   = $args['trial_id'];
+        $idEvenement = $args['event_id'];
+        $file        = $this->getUploadDir($idEvenement) . '/' . $idEpreuve . '.csv';
+
+        if (file_exists($file)) {
+
+            $file   = fopen($file, 'r');
+            $head   = fgetcsv($file, 4096, ';', '"');
+
+            $participants = [];
+            $i = 0;
+
+            while($column = fgetcsv($file, 4096, ';', '"')) {
+                $column = array_combine($head, $column);
+
+                if (!empty($column['Classement'])) {
+                    $participants[$i++] = $column;
+                }
+            }
+
+            function sort($tab)
+            {
+                $temp = [];
+                // shame on me
+               foreach ($tab as $p) {
+                    if ( empty($temp[(int) $p['Classement'] - 1])) {
+                        $temp[(int) $p['Classement'] - 1] = $p;
+                    }else{
+                        $temp[(int) $p['Classement']] = $p;
+                    }
+               }
+            }
+
+            return $this->view->render($response, 'Epreuve/classement.twig',
+                [ 'participants' => $participants,
+                    'epreuve'    => Epreuve::find($idEpreuve),
+                    'evenement'  => Evenement::find($idEvenement),
+                ]);
+
+        }
+
+        $tel = Evenement::find($idEvenement)->telephone;
+
+        $message = ($tel) ? 'Aucun fichier de résultat pour cet épreuve veuillez contacter le '.$tel : 'Evenement innexistant';
+
+        $this->flash('danger', $message);
+
+        return $this->redirect($response, 'recherchePerso',['event_id' => $idEvenement, 'trial_id' => $idEpreuve]);
+
+    }
+
     public function resultatPerso(Request $request, Response $response, array $args)
     {
         if ($request->isPost()) {
@@ -307,14 +361,12 @@ class EpreuveController extends Controller
                 ]);
             }
 
-
             if ($validation->isValid() ) {
-                /*Test si pas deja inscrit*/
                 $sportif=null;
                 if (!$this->user()) {
                     $sportif = Sportif::where('email', $email)->first();
                 }
-                elseif($this->user()){
+                else if($this->user()){
                     $email = $this->user()->email;
                     $sportif = Sportif::where('email', $email)->first();
                 }
