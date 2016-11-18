@@ -10,6 +10,10 @@ class AppController extends Controller
 {
     public function home(Request $request, Response $response)
     {
+        if (!$this->auth->check()) {
+            return $this->redirect($response, 'login');
+        }
+
         return $this->view->render($response, 'App/home.twig');
     }
 
