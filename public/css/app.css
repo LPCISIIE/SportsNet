@@ -1,3 +1,6 @@
+body, html {
+  min-height: 100%; }
+
 body {
   padding-top: 100px; }
 
@@ -48,5 +51,8 @@ header > form {
   border-color: #B0413E; }
 .has-error .barre:before, .has-error .barre:after, .has-error .barre:before, .has-error .barre:after {
   background-color: #B0413E; }
+
+.bg-404 > img {
+  width: 35%; }
 
 /*# sourceMappingURL=app.css.map */
