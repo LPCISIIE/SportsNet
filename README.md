@@ -6,31 +6,31 @@
 SportsNet is a web application to create and manage sports events.
 
 ## Installation
-```
+```bash
 $ git clone git@github.com:TPCISIIE/SportsNet.git
 ```
 
 ### 2. Download vendors
-```
+```bash
 $ cd SportsNet
 $ composer install
 ```
 
 ### 3. Setup permissions
-```
+```bash
 chmod -R 777 cache
 ```
 
 ### 4. Link your database
-```
+```bash
 $ cd bootstrap
 $ cp db.php.dist db.php
-Fill the array
 ```
+Fill the array
 
 ### 5. Create tables and insert important queries
 Execute the following command in a terminal:
-```
+```bash
 $ php bootstrap/database.php
 ```
 or import `bootstrap/installation.sql` in your database manager
@@ -60,7 +60,7 @@ or import `bootstrap/installation.sql` in your database manager
 SportsNet is open-sourced software licensed under the MIT license.
 
 ## Credits 
- Xavier CHOPIN  <br>
- Corentin LABROCHE <br>
- David LEBRUN <br>
- Alexis WURTH
+- Xavier CHOPIN
+- Corentin LABROCHE
+- David LEBRUN
+- Alexis WURTH
