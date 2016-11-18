@@ -1,5 +1,5 @@
 <header>
-    <a href="{{ path_for('home') }}" class="logo-header blanc">Sportsnet</a>
+    <a href="{{ path_for('home') }}" class="logo-header">Sportsnet</a>
     <nav>
         <a href="#" class="menu-icon"></a>
         <ul>
@@ -14,8 +14,8 @@
                 <li><a href="{{ path_for('user.compte') }}">Mon compte</a></li>
                 <li><a href="{{ path_for('logout') }}">Déconnexion</a></li>
             {% else %}
-                <li><a class="blanc" href="{{ path_for('register') }}">Register</a></li>
-                <li><a class="blanc" href="{{ path_for('login') }}">Login</a></li>
+                <li><a href="{{ path_for('register') }}">Register</a></li>
+                <li><a href="{{ path_for('login') }}">Login</a></li>
             {% endif %}
         </ul>
     </nav>
