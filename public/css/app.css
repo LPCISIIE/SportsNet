@@ -2247,7 +2247,7 @@ input {
       margin: 0;
       color: white; }
 
-.evenement-header {
+.pull-up {
   margin-top: -23px; }
 
 body, html {
@@ -2435,7 +2435,6 @@ header > form {
 .absolute-flash {
   position: absolute;
   left: 0;
-  right: 0;
   right: 0; }
 
 /*# sourceMappingURL=app.css.map */
