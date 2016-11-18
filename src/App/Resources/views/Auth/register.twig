@@ -2,6 +2,12 @@
 
 {% import 'Macro/form.twig' as form %}
 
+{% block flash %}
+    <div class="absolute-flash">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
 {% block body %}
 
 <div class="page-header pull-up" style="background-image: url('{{ base_url() }}/img/intro.jpg')">
