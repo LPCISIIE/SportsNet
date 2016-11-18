@@ -7,7 +7,7 @@
         <div style='background-image: url("{{ base_url() }}/{{ event.webPath }}");' class="card card-bg">
             <div class='card-filtre'>
                     <a href="{{ path_for('evenement.show', {'id_evenement': event.id}) }}" class="titre-card">{{ event.nom }}</a>
-                    <p>{{ event.description }}</p>
+                    <p class="blanc">{{ event.description }}</p>
                     <a href="{{ path_for('evenement.participants', {'id': event.id}) }}" class="btn-blanc">Récupérer liste des participants</a>
                     <a href="{{ path_for('evenement.edit', {'id': event.id}) }}" class="btn btn-default">Modifier</a>
                     <a href="{{ path_for('evenement.cancel', {'id': event.id}) }}" class="btn-orange">Annuler</a>
