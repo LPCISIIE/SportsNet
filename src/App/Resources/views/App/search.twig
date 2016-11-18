@@ -8,15 +8,29 @@
     </div>
     {% if not evenements.empty %}
         {% for event in evenements %}
-            <div class="row card">
-                <div class="col-md-2">
-                    <img src="{{ base_url() }}/{{ event.webPath }}" alt="Evenement">
-                </div>
-                <div class="col-md-10">
-                    <a href="{{ path_for('evenement.show', {'id_evenement': event.id}) }}" class="card-title">{{ event.nom }}</a>
+
+
+
+            <div style='background-image: url("{{ base_url() }}/{{ event.webPath }}");' class="card card-bg">
+                <div class='card-filtre'>
+                    <a href="{{ path_for('evenement.show', {'id_evenement': event.id}) }}" class="titre-card">{{ event.nom }}</a>
                     <p>{{ event.description }}</p>
+                    <p>
+                        {% if
+                              event.getState() == "Ouvert"
+                           or event.getState() == "Créé"
+                           or event.getState() == "Validé"
+                           or event.getState() == "Ouvert à l'inscription"
+                        %}
+                            <button class="forcer-droite btn-vert">{{ event.getState()}}</button>
+                        {% else  %}
+                            <button class="forcer-droite btn-rouge">{{ event.getState()}}</button>
+                        {% endif %}
+                    </p> <br> <br> <br>
                 </div>
             </div>
+
+
         {% endfor %}
     {% else %}
         <p class="card">Aucun résultat pour "{{ query }}"</p>

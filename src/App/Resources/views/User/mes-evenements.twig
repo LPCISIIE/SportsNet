@@ -4,17 +4,14 @@
 
 <div class="container">
     {% for event in evenements %}
-        <div class="row card">
-            <div class="col-md-2">
-                <img src="{{ base_url() }}/{{ event.webPath }}" alt="Evenement">
-            </div>
-            <div class="col-md-10">
-                <a href="{{ path_for('evenement.show', {'id_evenement': event.id}) }}" class="card-title">{{ event.nom }}</a>
-                <p>{{ event.description }}</p>
-                <a href="{{ path_for('evenement.participants', {'id': event.id}) }}" class="btn">Récupérer liste des participants</a>
-                <a href="{{ path_for('evenement.edit', {'id': event.id}) }}" class="btn btn-default">Modifier</a>
-                <a href="{{ path_for('evenement.cancel', {'id': event.id}) }}" class="btn-orange">Annuler</a>
-                <a href="{{ path_for('evenement.delete', {'id': event.id}) }}" class="btn-rouge">Supprimer</a>
+        <div style='background-image: url("{{ base_url() }}/{{ event.webPath }}");' class="card card-bg">
+            <div class='card-filtre'>
+                    <a href="{{ path_for('evenement.show', {'id_evenement': event.id}) }}" class="titre-card">{{ event.nom }}</a>
+                    <p>{{ event.description }}</p>
+                    <a href="{{ path_for('evenement.participants', {'id': event.id}) }}" class="btn-blanc">Récupérer liste des participants</a>
+                    <a href="{{ path_for('evenement.edit', {'id': event.id}) }}" class="btn btn-default">Modifier</a>
+                    <a href="{{ path_for('evenement.cancel', {'id': event.id}) }}" class="btn-orange">Annuler</a>
+                    <a href="{{ path_for('evenement.delete', {'id': event.id}) }}" class="btn-rouge">Supprimer</a>
             </div>
         </div>
     {% endfor %}

@@ -16,6 +16,7 @@ body,html {
 
 body {
   padding-top: 100px;
+  text-align:left !important;
 }
 
 a {
@@ -51,7 +52,7 @@ header {
 
 .card {
   margin-bottom: 20px;
-  padding: 20px;
+
   background-color: #FFF;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
@@ -112,6 +113,34 @@ $epreuveHeight:75px;
 
 }
 
+
+.card-bg {
+  background-size:cover;
+  background-repeat : no-repeat;
+}
+
+.card-filtre {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+
+.btn-blanc {
+  @include bouton(#fff,white,#e2e2e2,$blancEffet);
+  color:black;
+  @include tailleBouton(1.1em 1em,1em);
+}
+
+.titre-card {
+  color: white;
+  font-size: 50px;
+  @include transition(0.3s);
+
+  &:hover {
+    @include transition(0.3s);
+    color: white;
+  }
+}
+
 .show-epreuve-debut, .show-epreuve-fin {
   padding-top: 50px;
   text-align: center;
@@ -133,3 +162,4 @@ $epreuveHeight:75px;
 #disqus_thread {
   margin-top: 100px;
 }
+
