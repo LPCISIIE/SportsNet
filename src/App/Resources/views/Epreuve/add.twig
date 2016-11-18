@@ -9,11 +9,11 @@
 
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="page-header flex-row">
-                    <div class="centre col-md-4 offset-md-4">{{ form.group_noerror('nom', null, 'nom', 'Nom de l\'épreuve') }}</div>
+                    <div class="centre col-md-4 offset-md-4 centre centrer">{{ form.group_noerror('nom', null, 'nom', 'Nom de l\'épreuve') }}</div>
                 </div>
                 
-                <div class="flex-row">
-                    <div class="col-md-4">
+                <div class="flex-row" id="form-triple-row-flex">
+                    <div class="col-md-4 centrer">
                         <div class="row-flex">
                             <div class="col-md-8 offset-md-2 centre">
                                 {{ form.group_noerror('date_debut', null, 'date_debut', 'Début (jj/mm/yyyy)', null, 'text', 'JJ/MM/AAAA') }}
@@ -27,11 +27,11 @@
                         </div>
                     </div>
 
-                    <div class="form-group form-input col-md-4 centre">
+                    <div class="form-group form-input col-md-4 centre centrer">
                         <input type="file" name="epreuve_pic_link" id="epreuve_pic_link">
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4 centrer">
                         <div class="row-flex">
                             <div class="col-md-8 offset-md-2 centre">
                                 {{ form.group_noerror('date_fin', null, 'date_fin', 'Fin (jj/mm/yyyy)', null, 'text', 'JJ/MM/AAAA') }}
@@ -47,29 +47,29 @@
                 </div>
 
                 <div class="flex-row">
-                    <div class="form-group{% if hasError('description') %} has-error{% endif %} col-md-10 offset-md-1">
+                    <div class="form-group{% if hasError('description') %} has-error{% endif %} col-md-10 offset-md-1 centre centrer">
                         <label for="description">Description</label>
-                        <textarea name="description" id="description" rows="7" placeholder="Donnez les détails concernant cette épreuve" class="form-control"></textarea>
+                        <textarea name="description" id="description" rows="7" class="form-resized" placeholder="Donnez les détails concernant cette épreuve" class="form-control"></textarea>
                         <span class="help-block">{{ error('description') }}</span>
                     </div>
                 </div>
 
                 <div class="flex-row">
-                    <div class="col-md-6 offset-md-3">
+                    <div class="col-md-6 offset-md-3 centre centrer">
                         {{ form.group_noerror('capacite', null, 'capacite', 'Capacité maximum', null, 'number') }}
                     </div>
                 </div>
 
                 <div class="flex-row">
-                    <div class="col-md-6 offset-md-3">
+                    <div class="col-md-6 offset-md-3 centre centrer">
                         {{ form.group_noerror('prix', null, 'prix', 'Prix de participation (€)', null, 'number') }}
                     </div>
                 </div>
 
                 {{ csrf() }}
                 <div class="flex-row">
-                    <div class="col-md-6 offset-md-3">
-                        <input type="submit" class="btn btn-primary form-btn" value="Créer l'épreuve">
+                    <div class="col-md-6 offset-md-3 centre centrer">
+                        <input type="submit" class="btn btn-primary form-resized" value="Créer l'épreuve">
                     </div>
                 </div>
         </form>

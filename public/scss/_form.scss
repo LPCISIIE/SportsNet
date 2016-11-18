@@ -27,11 +27,20 @@ $form-border-color-focus: lighten(#37474F, 20);
   }
 }
 
-.form-btn {
+.form-resized {
+  //weed = 100%
   width: 100%;
   margin-left: 0;
   margin-right: 0;
 }
+
+@media screen and (min-width: 200px) and (max-width: 1000px) and (orientation: portrait) {
+  #form-triple-row-flex {
+    flex-direction: column;
+  }
+}
+
+
 
 .formulaire{
   .checkbox{

@@ -2143,11 +2143,14 @@ footer {
     margin-left: auto;
     margin-right: auto; }
 
-.form-btn {
+.form-resized {
   width: 100%;
   margin-left: 0;
   margin-right: 0; }
 
+@media screen and (min-width: 200px) and (max-width: 1000px) and (orientation: portrait) {
+  #form-triple-row-flex {
+    flex-direction: column; } }
 .formulaire .checkbox {
   width: auto;
   display: inline-block;
