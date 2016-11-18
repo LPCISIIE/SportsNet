@@ -58,12 +58,12 @@ table {
 /**  2. Couleurs : */
 /** 3. Media Queries */
 /** 4. Variables autres */
-.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy {
+.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy, .btn-blanc {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none; }
 
-ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus {
+ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus, .btn-blanc:hover, .btn-blanc:active, .btn-blanc:focus {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.22), 0 2px 10px 0 rgba(0, 0, 0, 0.18); }
 
 .centrer {
@@ -2176,8 +2176,12 @@ input {
     background-color: rgba(0, 0, 0, 0.7);
     font-size: 2em; }
 
+body, html {
+  min-height: 100%; }
+
 body {
-  padding-top: 100px; }
+  padding-top: 100px;
+  text-align: left !important; }
 
 a {
   color: #607D8B; }
@@ -2201,7 +2205,6 @@ header > form {
 
 .card {
   margin-bottom: 20px;
-  padding: 20px;
   background-color: #FFF;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
   .card img {
@@ -2221,5 +2224,82 @@ header > form {
   font-weight: bold;
   color: #FFF;
   cursor: pointer; }
+
+.bg-404 > img {
+  width: 35%; }
+
+.card-bg {
+  background-size: cover;
+  background-repeat: no-repeat; }
+
+.card-filtre {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px; }
+
+.btn-blanc {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  margin: 0.5em;
+  color: #fff;
+  background-color: white;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: .5px;
+  font-weight: bolder;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  border: none;
+  border-radius: 2px;
+  line-height: 0px;
+  outline: 0;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: black;
+  padding: 1.1em 1em;
+  font-size: 1em; }
+  .btn-blanc:hover, .btn-blanc:active, .btn-blanc:focus {
+    background-color: #e2e2e2; }
+  .btn-blanc:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120%;
+    height: 120px;
+    margin-left: -60%;
+    margin-top: -60px;
+    background: #f0f0f0;
+    border-radius: 100%;
+    opacity: 0.5;
+    transform: scale(0); }
+  .btn-blanc:not(:active):after {
+    animation: ripple 1s ease-out; }
+  @media all and (max-width: 350px) {
+    .btn-blanc {
+      font-size: 100%; } }
+
+.titre-card {
+  color: white;
+  font-size: 50px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+  .titre-card:hover {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    color: white; }
 
 /*# sourceMappingURL=app.css.map */
