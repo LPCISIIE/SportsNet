@@ -16,6 +16,11 @@ $capsule->bootEloquent();
 
 $sentinel = (new Sentinel(new SentinelBootstrapper(__DIR__ . '/sentinel.php')))->getSentinel();
 
+Manager::schema()->dropIfExists('organisateur');
+Manager::schema()->dropIfExists('participe');
+Manager::schema()->dropIfExists('sportif');
+Manager::schema()->dropIfExists('epreuve');
+Manager::schema()->dropIfExists('evenement');
 Manager::schema()->dropIfExists('activations');
 Manager::schema()->dropIfExists('persistences');
 Manager::schema()->dropIfExists('reminders');
@@ -154,10 +159,43 @@ $sentinel->getRoleRepository()->createModel()->create(array(
     )
 ));
 
-$sentinel->getRoleRepository()->createModel()->create(array(
+$role = $sentinel->getRoleRepository()->createModel()->create(array(
     'name' => 'User',
     'slug' => 'user',
     'permissions' => array(
         'user.update' => true
     )
 ));
+
+$organisateurUser = $sentinel->registerAndActivate([
+    'email' => 'organisateur@sportnet.com',
+    'password' => 'root',
+    'permissions' => [
+        'user.delete' => 0
+    ]
+]);
+
+$sportifUser = $sentinel->registerAndActivate([
+    'email' => 'sportif@sportnet.com',
+    'password' => 'root',
+    'permissions' => [
+        'user.delete' => 0
+    ]
+]);
+
+$organisateur = new App\Model\Organisateur([
+    'nom' => 'Nom',
+    'prenom' => 'Prénom'
+]);
+
+$sportif = new App\Model\Sportif([
+    'nom' => 'Nom',
+    'prenom' => 'Prénom',
+    'email' => 'sportif@sportnet.com'
+]);
+
+$organisateurUser->organisateur()->save($organisateur);
+$sportifUser->sportif()->save($sportif);
+
+$role->users()->attach($organisateurUser);
+$role->users()->attach($sportifUser);
