@@ -329,10 +329,19 @@ class EpreuveController extends Controller
     public function join($request, $response, $args)
     {
         $evenement_id = $args['id_evenement'];
-        $evenement = Evenement::find($args["id_evenement"]);
+        $evenement = Evenement::find($args['id_evenement']);
         $epreuves = $evenement->epreuves()->get()->toArray();
-        $evenement = $evenement;
 
+        if (!$evenement) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        if ($evenement->etat == Evenement::ANNULE) {
+            return $this->view->render($response, 'Error/error.twig', [
+                'title' => 'Événement annulé',
+                'description' => 'L\'événement a été annulé. Vous ne pouvez plus rejoindre une épreuve.'
+            ]);
+        }
 
         if ($request->isPost()) {
             $nom = $request->getParam('nom');
