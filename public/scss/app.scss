@@ -183,18 +183,6 @@ $epreuveHeight: 75px;
   padding: 2px 4px;
 }
 
-.auth-card {
-  input[type="submit"], .btn {
-    display: block;
-    width: 100%;
-  }
-
-  & > .card-title {
-    display: block;
-    text-align: center;
-  }
-}
-
 .absolute-flash {
   position: absolute;
   left: 0;
