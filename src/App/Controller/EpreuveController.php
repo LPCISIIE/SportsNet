@@ -212,11 +212,6 @@ class EpreuveController extends Controller
             throw $this->notFoundException($request, $response);
         }
 
-        if ($evenement->user_id !== $this->user()->id) {
-            $this->flash('danger', 'Cet événement ne vous appartient pas !');
-            return $this->redirect($response, 'home');
-        }
-
         $epreuve = Epreuve::find($args['trial_id']);
 
         if (!$epreuve) {
