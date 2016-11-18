@@ -3,16 +3,17 @@
 {% import 'Macro/form.twig' as form %}
 
 {% block body %}
-<div class="page-header" style="background-image:url('{{ base_url() }}/{{ evenement.webPath }}')">
+
+<div class="page-header evenement-header" style="background-image: url('{{ base_url() }}/{{ evenement.webPath }}')">
     <div class="page-header-content">
-        {{evenement.nom}}
+        {{ evenement.nom }}
     </div>
 </div>
 <div class="container">
     <a href="{{ path_for('epreuve.join', {id_evenement: evenement.id}) }}" class="btn btn-default btn-extra-large">Rejoindre une épreuve</a>
     <div class="evenement-information">
-        <div class="evenement-information-item">Date début : {{ evenement.date_debut }} </div>
-        <div class="evenement-information-item">Date fin : {{ evenement.date_fin }} </div>
+        <div class="evenement-information-item">Date début : {{ evenement.date_debut|date('d/m/Y') }} </div>
+        <div class="evenement-information-item">Date fin : {{ evenement.date_fin|date('d/m/Y') }} </div>
         <div class="evenement-information-item">Adresse : {{ evenement.adresse }} </div>
         <div class="evenement-information-item">Discipline : {{ evenement.discipline }} </div>
         <div class="evenement-information-item">Telephone : {{ evenement.telephone }} </div>
@@ -21,12 +22,11 @@
 
     <hr>
 
-
     {% for epreuve in epreuves %}
-        <a href="{{ path_for('epreuve.show', {'trial_id' : epreuve['id'], 'event_id' : evenement['id']}) }}">
+        <a href="{{ path_for('epreuve.show', {'trial_id': epreuve['id'], 'event_id': evenement['id']}) }}">
             <div class="evenement_description row well" style="background-image:url('{{ base_url() }}/{{ epreuve.webPath }}')">
                 <div class="nom_epreuve">
-                    {{epreuve['nom']}}
+                    {{ epreuve['nom'] }}
                 </div>
             </div>
         </a>
@@ -38,8 +38,6 @@
             <img src="{{ base_url() }}/{{ picture }}"/>
         </div>
     {% endfor %}
-
-
 </div>
 
 {% endblock %}
