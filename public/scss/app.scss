@@ -12,7 +12,10 @@ body, html {
 
 body {
   padding-top: 100px;
+<<<<<<< 050a1583103636a96509934f7d2f62848d64ba52
   text-align: left !important;
+=======
+>>>>>>> Galerie de photo
 }
 
 a {
@@ -26,9 +29,13 @@ a {
 a.btn:hover {
   color: #FFF;
 }
-
+.btn{
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+}
 header {
-  a, a:hover, input {
+  a, input {
     color: #FFF;
   }
 
@@ -46,14 +53,9 @@ header {
   }
 }
 
-.tiny-form {
-  font-size: 0.7em;
-  padding: 2px 4px;
-}
-
 .card {
   margin-bottom: 20px;
-
+  padding: 20px;
   background-color: #FFF;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
@@ -107,6 +109,19 @@ $epreuveHeight: 75px;
     background-color: rgba(0, 0, 0, 0.6);
   }
 }
+.galerie_evenement{
+  display: flex;
+  flex-direction: row;
+    flex-wrap: wrap;
+  .img_galerie{
+    img{
+      width: 100%;
+    }
+  }
+
+
+}
+
 
 .bg-404 {
 

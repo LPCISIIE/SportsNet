@@ -33,11 +33,17 @@
     {% endfor %}
 
     <hr>
-    {% for picture in pic_links %}
-        <div class="img_galerie col-md-3">
-            <img src="{{ base_url() }}/{{ picture }}"/>
-        </div>
-    {% endfor %}
+
+
+    <h2>Galerie de photo:</h2>
+    <div class="galerie_evenement">
+        {% for picture in pic_links %}
+            <div class="img_galerie col-xs-6">
+                <img src="{{ base_url() }}/{{ picture }}"/>
+            </div>
+        {% endfor %}
+    </div>
+
 </div>
 
 {% endblock %}

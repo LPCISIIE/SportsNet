@@ -58,12 +58,12 @@ table {
 /**  2. Couleurs : */
 /** 3. Media Queries */
 /** 4. Variables autres */
-.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy, .btn-blanc {
+.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none; }
 
-ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus, .btn-blanc:hover, .btn-blanc:active, .btn-blanc:focus {
+ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.22), 0 2px 10px 0 rgba(0, 0, 0, 0.18); }
 
 .centrer {
@@ -2255,8 +2255,7 @@ body, html {
   min-height: 100%; }
 
 body {
-  padding-top: 100px;
-  text-align: left !important; }
+  padding-top: 100px; }
 
 a {
   color: #607D8B; }
@@ -2266,7 +2265,12 @@ a {
 a.btn:hover {
   color: #FFF; }
 
-header a, header a:hover, header input {
+.btn {
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0; }
+
+header a, header input {
   color: #FFF; }
 header > form {
   float: right;
@@ -2278,12 +2282,9 @@ header > form {
     header > form > input[type="text"]:focus {
       border-color: #617d8b; }
 
-.tiny-form {
-  font-size: 0.7em;
-  padding: 2px 4px; }
-
 .card {
   margin-bottom: 20px;
+  padding: 20px;
   background-color: #FFF;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
   .card img {
@@ -2324,8 +2325,16 @@ header > form {
     color: white;
     background-color: rgba(0, 0, 0, 0.6); }
 
+.galerie_evenement {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+  .galerie_evenement .img_galerie img {
+    width: 100%; }
+
 .bg-404 > img {
   width: 35%; }
+
 
 .card-bg {
   background-size: cover;
@@ -2417,5 +2426,6 @@ header > form {
 
 #disqus_thread {
   margin-top: 100px; }
+
 
 /*# sourceMappingURL=app.css.map */
