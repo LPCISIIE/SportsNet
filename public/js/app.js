@@ -1,8 +1,10 @@
 
 $(function () {
 
-    $('.close-alert').click((e) => {
-        $(e.target).parents('.alerte').remove();
+    $('.close-alert').click(function (e) {
+        $(e.target).parents('.alerte').fadeOut('fast', function () {
+            this.remove();
+        });
     });
 
 });

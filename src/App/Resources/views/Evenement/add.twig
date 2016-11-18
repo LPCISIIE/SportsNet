@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container card">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <form action="" method="POST" enctype="multipart/form-data">
@@ -21,9 +21,10 @@
                 {{ form.group('discipline', null, 'discipline', 'Discipline') }}
                 {{ form.group('telephone', null, 'telephone', 'Téléphone', null, 'number') }}
 
-                <div class="form-group{% if hasError('description') %} has-error{% endif %}">
+                <div class="formulaire{% if hasError('description') %} has-error{% endif %}">
+                    <textarea name="description" id="description" class=""></textarea>
+                    <span class="barre"></span>
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" class="form-control" placeholder="Description"></textarea>
                     <span class="help-block">{{ error('description') }}</span>
                 </div>
 
