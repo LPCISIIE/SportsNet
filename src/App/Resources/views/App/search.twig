@@ -9,12 +9,10 @@
     {% if not evenements.empty %}
         {% for event in evenements %}
 
-
-
             <div style='background-image: url("{{ base_url() }}/{{ event.webPath }}");' class="card card-bg">
                 <div class='card-filtre'>
                     <a href="{{ path_for('evenement.show', {'id_evenement': event.id}) }}" class="titre-card">{{ event.nom }}</a>
-                    <p>{{ event.description }}</p>
+                    <p class="blanc">{{ event.description }}</p>
                     <p>
                         {% if
                               event.getState() == "Ouvert"
