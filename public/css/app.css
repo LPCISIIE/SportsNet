@@ -58,12 +58,12 @@ table {
 /**  2. Couleurs : */
 /** 3. Media Queries */
 /** 4. Variables autres */
-.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy {
+.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy, .btn-blanc {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none; }
 
-ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus {
+ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus, .btn-blanc:hover, .btn-blanc:active, .btn-blanc:focus {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.22), 0 2px 10px 0 rgba(0, 0, 0, 0.18); }
 
 .centrer {
@@ -2242,7 +2242,6 @@ input {
     background-color: rgba(0, 0, 0, 0.7);
     font-size: 2em;
     width: 100%; }
-
     .page-header .page-header-content .formulaire, .page-header .page-header-content input {
       width: 100%;
       margin: 0;
@@ -2256,7 +2255,8 @@ body, html {
   min-height: 100%; }
 
 body {
-  padding-top: 100px; }
+  padding-top: 100px;
+  text-align: left !important; }
 
 a {
   color: #607D8B; }
@@ -2285,7 +2285,6 @@ header > form {
 
 .card {
   margin-bottom: 20px;
-  padding: 20px;
   background-color: #FFF;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
   .card img {
@@ -2426,6 +2425,10 @@ header > form {
 
 #disqus_thread {
   margin-top: 100px; }
+
+.tiny-form {
+  font-size: 0.7em;
+  padding: 2px 4px; }
 
 
 /*# sourceMappingURL=app.css.map */
