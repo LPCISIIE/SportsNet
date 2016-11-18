@@ -54,7 +54,7 @@ table {
 * Fichier des variables globales
 * @author: Xavier CHOPIN
 */
-/**  1. Police d'écriture : */
+/**  1. Police d'├®criture : */
 /**  2. Couleurs : */
 /** 3. Media Queries */
 /** 4. Variables autres */
@@ -2011,7 +2011,7 @@ input.simple-vert {
   to {
     background: transparent;
     width: 0; } }
-/* - - - - - - -  Maestro, à toi de jouer  - - - - - - - - - */
+/* - - - - - - -  Maestro, ├á toi de jouer  - - - - - - - - - */
 body {
   padding-top: 75px;
   height: 100%; }
@@ -2032,7 +2032,7 @@ hr {
 pre {
   font-family: 'Source Code Pro', monospace;
   white-space: pre-wrap;
-  /* Depuis la préhistoire */
+  /* Depuis la pr├®histoire */
   white-space: -moz-pre-wrap;
   /* Mozifox, depuis 1999 */
   white-space: -pre-wrap;
@@ -2135,6 +2135,18 @@ footer {
 
 .form-group {
   margin-bottom: 10px; }
+
+.form-input {
+  display: flex;
+  align-items: center; }
+  .form-input input {
+    margin-left: auto;
+    margin-right: auto; }
+
+.form-btn {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0; }
 
 .formulaire .checkbox {
   width: auto;
