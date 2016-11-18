@@ -37,6 +37,9 @@ header {
   }
 
   & > form {
+    @media screen and (max-width: 1240px) {
+      display: none;
+    }
     float: right;
     padding: 20px;
     & > input[type="text"] {

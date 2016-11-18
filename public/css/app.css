@@ -2275,6 +2275,9 @@ header a, header input {
 header > form {
   float: right;
   padding: 20px; }
+  @media screen and (max-width: 1240px) {
+    header > form {
+      display: none; } }
   header > form > input[type="text"] {
     background-color: #4c626d;
     border-color: #2d3940;
