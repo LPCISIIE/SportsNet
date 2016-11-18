@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Model;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Evenement extends Model
@@ -71,6 +72,12 @@ class Evenement extends Model
     public function getWebPath()
     {
         $webPath = 'uploads/evenements/' . $this->id . '/header';
+        $rootPath =  __DIR__ . '/../../../public/' . $webPath;
+        return file_exists($rootPath . '.jpg') ? $webPath . '.jpg' : $webPath . '.png';
+    }
+
+    public function getImageWebPath($id) {
+        $webPath = 'uploads/evenements/' . $this->id . '/' . $id;
         $rootPath =  __DIR__ . '/../../../public/' . $webPath;
         return file_exists($rootPath . '.jpg') ? $webPath . '.jpg' : $webPath . '.png';
     }

@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% import 'Macro/form.twig' as form %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="jumbotron">
+            <h3>Résultat pour {{ participant.Prénom }} {{ participant.Nom }} </h3> <hr>
+            Epreuve : {{ epreuve.nom }} à l'évenement {{ evenement.nom }} <br><br>
+            {% if participant.Classement == 1 %}
+                Félicitations vous êtes premier ! <br><br>
+            {% else %}
+                Votre classement : Vous êtes {{ participant.Classement }}e <br><br>
+            {% endif %}
+
+            <a href = '{{ path_for('recherchePerso', {'event_id': evenement.id, 'trial_id': epreuve.id}) }}'
+               class = "btn btn-success"> Retourner aux recherches</a>
+        </div>
+    </div>
+
+{% endblock %}

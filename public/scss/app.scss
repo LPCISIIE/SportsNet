@@ -1,45 +1,51 @@
 
 $navbarColor: #37474F;
+
 $linkColor: #607D8B;
+
+
+
+@import "../maestro/sass/style";
+@import 'form';
+@import "header";
+
 body,html {
   min-height: 100%;
 }
+
 body {
   padding-top: 100px;
 }
 
 a {
-  color: $linkColor;
-}
+  color: #607D8B;
 
-header > form {
-  float: right;
-  padding: 20px;
-  input[type="text"] {
-    background-color: lighten($navbarColor, 10);
-    border-color: darken($navbarColor, 5);
-    color: #FFF;
-    &:focus {
-      border-color: lighten($navbarColor, 20);
-    }
+  &:hover {
+    color: $navbarColor;
   }
 }
 
-.close-alert {
-  position: relative;
-  top: -4px;
-  background: transparent;
-  border: none;
-  float: right;
-  font-size: 1.2em;
-  font-weight: bold;
+a.btn:hover {
   color: #FFF;
-  cursor: pointer;
 }
 
-.page-header {
-  padding-left: 50px;
-  padding-right: 50px;
+header {
+  a, input {
+    color: #FFF;
+  }
+
+  & > form {
+    float: right;
+    padding: 20px;
+    & > input[type="text"] {
+      background-color: lighten($navbarColor, 10);
+      border-color: darken($navbarColor, 5);
+      color: #FFF;
+      &:focus {
+        border-color: lighten($navbarColor, 20);
+      }
+    }
+  }
 }
 
 .card {
@@ -59,18 +65,16 @@ header > form {
   }
 }
 
-.help-block {
-  color: #B0413E;
-}
-
-.has-error, .has-error {
-  input, textarea {
-    border-color: #B0413E;
-  }
-
-  .barre:before, .barre:after {
-    background-color: #B0413E;
-  }
+.close-alert {
+  position: relative;
+  top: -2px;
+  background: transparent;
+  border: none;
+  float: right;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #FFF;
+  cursor: pointer;
 }
 
 

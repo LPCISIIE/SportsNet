@@ -9,11 +9,12 @@ class ImageSize extends AbstractRule
 
 	public function validate($input)
 	{
-		$image = $_FILES["epreuve_pic_link"];
-		$size = explode(".",$image['size']);
+		$image = $_FILES['galerie']['size'];
 		$b = false;
-		if($size[0] <= 500000) {
-			$b = true;
+		foreach ($image as $size) {
+			if($size <= 2000000) {
+				$b = true;
+			}
 		}
 		return $b;
 	}

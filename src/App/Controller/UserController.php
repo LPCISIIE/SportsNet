@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\User;
+use App\Model\Sportif;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Respect\Validation\Validator as V;
@@ -19,6 +20,7 @@ class UserController extends Controller
                 'nom' => V::length(1, 50),
                 'prenom' => V::length(1, 50),
                 'paypal' => V::optional(V::email()),
+                'birthday' => V::optional(V::date('d/m/Y')),
                 'email' => V::email()
             ]);
 
@@ -26,12 +28,22 @@ class UserController extends Controller
                 $user->email = $request->getParam('email');
                 $user->save();
 
-                $organisateur->fill([
-                    'nom' => $request->getParam('nom'),
-                    'prenom' => $request->getParam('prenom'),
-                    'paypal' => $request->getParam('paypal')
-                ]);
-                $organisateur->save();
+                if ($organisateur) {
+                    $organisateur->fill([
+                        'nom' => $request->getParam('nom'),
+                        'prenom' => $request->getParam('prenom'),
+                        'paypal' => $request->getParam('paypal')
+                    ]);
+                    $organisateur->save();
+                } else {
+                    $sportif = $user->sportif;
+                    $sportif->fill([
+                        'nom' => $request->getParam('nom'),
+                        'prenom' => $request->getParam('prenom'),
+                        'birthday' => $request->getParam('birthday') ? \DateTime::createFromFormat('d/m/Y', $request->getParam('birthday')) : null
+                    ]);
+                    $sportif->save();
+                }
 
                 $this->flash('success', 'Votre compte a bien été modifié !');
                 return $this->redirect($response, 'user.compte');
@@ -39,7 +51,8 @@ class UserController extends Controller
         }
 
         return $this->view->render($response, 'User/mon-compte.twig', [
-            'organisateur' => $organisateur
+            'organisateur' => $organisateur,
+            'sportif' => $organisateur ? null : $user->sportif
         ]);
     }
 
@@ -61,6 +74,19 @@ class UserController extends Controller
     {
         return $this->view->render($response, 'User/mes-evenements.twig', [
             'evenements' => $this->user()->evenements
+        ]);
+    }
+
+    public function mesEpreuves(Request $request, Response $response)
+    {
+        $sportif = Sportif::where('user_id', $this->user()->id)->first();
+        $epreuves = null;
+        if ($sportif) {
+            $epreuves = $sportif->epreuves;
+        }
+
+        return $this->view->render($response, 'User/mes-epreuves.twig', [
+            'epreuves' => $epreuves
         ]);
     }
 }

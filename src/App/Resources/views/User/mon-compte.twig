@@ -11,9 +11,16 @@
 
     <form action="{{ path_for('user.compte') }}" method="POST">
 
-        {{ form.group('nom', organisateur.nom, 'nom', 'Nom') }}
-        {{ form.group('prenom', organisateur.prenom, 'prenom', 'Prénom') }}
-        {{ form.group('paypal', organisateur.paypal, 'paypal', 'Adresse Paypal', null, 'email') }}
+        {% if organisateur %}
+            {{ form.group('nom', organisateur.nom, 'nom', 'Nom') }}
+            {{ form.group('prenom', organisateur.prenom, 'prenom', 'Prénom') }}
+            {{ form.group('paypal', organisateur.paypal, 'paypal', 'Adresse Paypal', null, 'email') }}
+        {% else %}
+            {{ form.group('nom', sportif.nom, 'nom', 'Nom') }}
+            {{ form.group('prenom', sportif.prenom, 'prenom', 'Prénom') }}
+            {{ form.group('birthday', sportif.birthday|date('d/m/Y'), 'birthday', 'Date de naissance') }}
+        {% endif %}
+
         {{ form.group('email', auth.user.email, 'email', 'Email', null, 'email') }}
         {{ csrf() }}
 

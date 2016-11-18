@@ -27,6 +27,24 @@
     <p class="well">{{ epreuve.description }}</p>
     <p class="text-center">Capacité maximum : {{ epreuve.capacite }}</p>
     <p class="text-center">Prix de participation : {{ epreuve.prix }} €</p>
-</div>
+    <a href="{{ path_for('resultat', {'event_id': evenement.id, 'trial_id': epreuve.id})  }}" class="btn btn-danger">Voir le classement</a>
+    <a href="{{ path_for('recherchePerso', {'event_id': evenement.id, 'trial_id': epreuve.id})  }}" class="btn btn-success">Voir mon résultat</a>
+    <hr> <div id="disqus_thread"></div>
+    <script id="dsq-count-scr" src="//sports-net.disqus.com/count.js" async></script>
+
+    <script>
+
+
+        (function() {
+            var d = document, s = d.createElement('script');
+
+            s.src = '//sports-net.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
 
 {% endblock %}

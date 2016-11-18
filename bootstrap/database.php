@@ -16,6 +16,11 @@ $capsule->bootEloquent();
 
 $sentinel = (new Sentinel(new SentinelBootstrapper(__DIR__ . '/sentinel.php')))->getSentinel();
 
+Manager::schema()->dropIfExists('organisateur');
+Manager::schema()->dropIfExists('participe');
+Manager::schema()->dropIfExists('sportif');
+Manager::schema()->dropIfExists('epreuve');
+Manager::schema()->dropIfExists('evenement');
 Manager::schema()->dropIfExists('activations');
 Manager::schema()->dropIfExists('persistences');
 Manager::schema()->dropIfExists('reminders');
@@ -87,6 +92,61 @@ Manager::schema()->create('throttle', function (Blueprint $table) {
     $table->foreign('user_id')->references('id')->on('user');
 });
 
+Manager::schema()->create('organisateur', function (Blueprint $table) {
+    $table->increments('id');
+    $table->string('nom');
+    $table->string('prenom');
+    $table->string('paypal')->nullable();
+    $table->integer('user_id')->unsigned();
+    $table->foreign('user_id')->references('id')->on('user');
+});
+
+Manager::schema()->create('sportif', function (Blueprint $table) {
+    $table->increments('id');
+    $table->string('nom');
+    $table->string('prenom');
+    $table->string('email');
+    $table->date('birthday')->nullable();
+    $table->integer('user_id')->unsigned();
+    $table->foreign('user_id')->references('id')->on('user');
+});
+
+Manager::schema()->create('evenement', function (Blueprint $table) {
+    $table->increments('id');
+    $table->string('nom');
+    $table->text('adresse');
+    $table->date('date_debut');
+    $table->date('date_fin');
+    $table->string('telephone', 10);
+    $table->string('discipline');
+    $table->text('description');
+    $table->tinyInteger('etat');
+    $table->integer('user_id')->unsigned();
+    $table->foreign('user_id')->references('id')->on('user');
+});
+
+Manager::schema()->create('epreuve', function (Blueprint $table) {
+    $table->increments('id');
+    $table->string('nom');
+    $table->integer('capacite');
+    $table->dateTime('date_debut');
+    $table->dateTime('date_fin');
+    $table->text('description');
+    $table->tinyInteger('etat');
+    $table->integer('prix');
+    $table->integer('evenement_id')->unsigned();
+    $table->foreign('evenement_id')->references('id')->on('evenement');
+});
+
+Manager::schema()->create('participe', function (Blueprint $table) {
+    $table->integer('sportif_id')->unsigned();
+    $table->integer('epreuve_id')->unsigned();
+    $table->integer('numero_participant');
+    $table->primary(['sportif_id', 'epreuve_id']);
+    $table->foreign('sportif_id')->references('id')->on('sportif');
+    $table->foreign('epreuve_id')->references('id')->on('epreuve');
+});
+
 /* -------------------------------------------------- */
 
 $sentinel->getRoleRepository()->createModel()->create(array(
@@ -99,10 +159,43 @@ $sentinel->getRoleRepository()->createModel()->create(array(
     )
 ));
 
-$sentinel->getRoleRepository()->createModel()->create(array(
+$role = $sentinel->getRoleRepository()->createModel()->create(array(
     'name' => 'User',
     'slug' => 'user',
     'permissions' => array(
         'user.update' => true
     )
 ));
+
+$organisateurUser = $sentinel->registerAndActivate([
+    'email' => 'organisateur@sportnet.com',
+    'password' => 'root',
+    'permissions' => [
+        'user.delete' => 0
+    ]
+]);
+
+$sportifUser = $sentinel->registerAndActivate([
+    'email' => 'sportif@sportnet.com',
+    'password' => 'root',
+    'permissions' => [
+        'user.delete' => 0
+    ]
+]);
+
+$organisateur = new App\Model\Organisateur([
+    'nom' => 'Nom',
+    'prenom' => 'Prénom'
+]);
+
+$sportif = new App\Model\Sportif([
+    'nom' => 'Nom',
+    'prenom' => 'Prénom',
+    'email' => 'sportif@sportnet.com'
+]);
+
+$organisateurUser->organisateur()->save($organisateur);
+$sportifUser->sportif()->save($sportif);
+
+$role->users()->attach($organisateurUser);
+$role->users()->attach($sportifUser);

@@ -1,0 +1,24 @@
+
+$headerMarginTopBottom:180px;
+$headerPaddingTopBottom:20px;
+
+.container{
+  position: relative;
+}
+.page-header{
+  margin-top: 0;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 0;
+  .page-header-content{
+    @extend %centre;
+    font-weight: bold;
+    margin-top: $headerMarginTopBottom;
+    padding-top: $headerPaddingTopBottom;
+    padding-bottom: $headerPaddingTopBottom;
+    background-color: rgba(0,0,0,0.7);
+    font-size: 2em;
+  }
+
+}
