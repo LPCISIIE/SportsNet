@@ -6,51 +6,114 @@
 
     <div class="container">
         <div class="jumbotron">
-            <h3>Modification d'épreuve</h3>
+            <h3 class="centre">Modification d'épreuve</h3>
 
             <form action="" method="POST" enctype="multipart/form-data">
-                {{ form.group('nom', epreuve.nom, 'nom', 'Nom de l\'épreuve') }}
-                {{ form.group('date_debut', epreuve.date_debut|date('d/m/Y'), 'date_debut', 'Début', null, 'text', 'JJ/MM/AAAA') }}
-                {{ form.group('heure_debut', epreuve.date_debut|date('H:i'), 'heure_debut', 'Heure', null, 'text', '12:00') }}
+                <div class="page-header flex-row" style="background-image:url('{{ base_url() }}/{{ evenement.webPath }}')">
+                    <div class="page-header-content">{{ form.group_noerror('nom', epreuve.nom, 'nom', 'Nom de l\'épreuve') }}</div>
+                </div>
+                
+                <div class="flex-row" id="form-triple-row-flex">
+                    <div class="col-md-4 centrer">
+                        <div class="row-flex">
+                            <div class="col-md-8 offset-md-2 centre">
+                                {{ form.group_noerror('date_debut',  epreuve.date_debut|date('d/m/Y'), 'date_debut', 'Début (jj/mm/yyyy)', null, 'text', 'JJ/MM/AAAA') }}
+                            </div>
+                        </div>
 
-                <div class="form-group{% if hasError('epreuve_pic_link') %} has-error{% endif %}">
-                    <input type="file" name="epreuve_pic_link" id="epreuve_pic_link">
-                    <span class="help-block">{{ error('epreuve_pic_link') }}</span>
+                        <div class="row-flex">
+                            <div class="col-md-4 offset-md-4 centre tiny-form">
+                                {{ form.group_noerror('heure_debut', epreuve.date_debut|date('H:i'), 'heure_debut', 'Heure', null, 'text', '12:00') }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 centrer">
+                        <div class="flex-row centre">
+                            <span class="centre col-md-12">Changer d'image : </span>
+                        </div>
+
+                        <div class="flex-row">
+                            <div class="form-group{% if hasError('epreuve_pic_link') %} has-error{% endif %} form-input col-md-12 centre centrer">
+                                <input type="file" name="epreuve_pic_link" id="epreuve_pic_link">
+                                <span class="help-block">{{ error('epreuve_pic_link') }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 centrer">
+                        <div class="row-flex">
+                            <div class="col-md-8 offset-md-2 centre">
+                                {{ form.group_noerror('date_fin', epreuve.date_fin|date('d/m/Y'), 'date_fin', 'Fin (jj/mm/yyyy)', null, 'text', 'JJ/MM/AAAA') }}
+                            </div>
+                        </div>
+
+                        <div class="row-flex">
+                            <div class="col-md-4 offset-md-4 centre tiny-form">
+                                {{ form.group_noerror('heure_fin', epreuve.date_fin|date('H:i'), 'heure_fin', 'Heure', null, 'text', '12:00') }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                {{ form.group('date_fin', epreuve.date_fin|date('d/m/Y'), 'date_fin', 'Fin', null, 'text', 'JJ/MM/AAAA') }}
-                {{ form.group('heure_fin', epreuve.date_fin|date('H:i'), 'heure_fin', 'Heure', null, 'text', '12:00') }}
-
-                <div class="form-group{% if hasError('description') %} has-error{% endif %}">
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" placeholder="Donnez les détails concernant cette épreuve" class="form-control">{{ epreuve.description }}</textarea>
-                    <span class="help-block">{{ error('description') }}</span>
+                <div class="flex-row">
+                    <div class="form-group{% if hasError('description') %} has-error{% endif %} col-md-10 offset-md-1 centre centrer">
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" rows="7" class="form-resized" placeholder="Donnez les détails concernant cette épreuve" class="form-control"></textarea>
+                        <span class="help-block">{{ error('description') }}</span>
+                    </div>
                 </div>
 
-                {{ form.group('capacite', epreuve.capacite, 'capacite', 'Capacité maximum', null, 'number') }}
-                {{ form.group('prix', epreuve.prix, 'prix', 'Prix de participation (€)', null, 'number') }}
-
-                <div class="form-group{% if hasError('etat') %} has-error{% endif %}">
-                    <label for="etat">État</label>
-                    <select name="etat" id="etat" class="form-control">
-                        <option value="0"{% if epreuve.etat == 0 %} selected{% else %} disabled{% endif %}>Choisir un état</option>
-                        <option value="1"{% if epreuve.etat == 1 %} selected{% endif %}>Validé</option>
-                        <option value="2"{% if epreuve.etat == 2 %} selected{% endif %}>Ouvert à l'inscription</option>
-                        <option value="4"{% if epreuve.etat == 4 %} selected{% endif %}>Clos à l'inscription</option>
-                        <option value="3"{% if epreuve.etat == 3 %} selected{% endif %}>En cours</option>
-                        <option value="5"{% if epreuve.etat == 5 %} selected{% endif %}>Expiré</option>
-                        <option value="6"{% if epreuve.etat == 6 %} selected{% endif %}>Annulé</option>
-                    </select>
-                    <span class="help-block">{{ error('etat') }}</span>
+                <div class="flex-row">
+                    <div class="col-md-6 offset-md-3 centre centrer">
+                        {{ form.group_noerror('capacite', epreuve.capacite, 'capacite', 'Capacité maximum', null, 'number') }}
+                    </div>
                 </div>
 
-                <div class="form-group{% if hasError('result_csv') %} has-error{% endif %}">
-                    <input type="file" name="result_csv" id="result_csv">
-                    <span class="help-block">{{ error('result_csv') }}</span>
+                <div class="flex-row">
+                    <div class="col-md-6 offset-md-3 centre centrer">
+                        {{ form.group_noerror('prix', epreuve.prix, 'prix', 'Prix de participation (€)', null, 'number') }}
+                    </div>
+                </div>
+
+                <div class="flex-row">
+                    <div class="form-group{% if hasError('etat') %} has-error{% endif %} col-md-6 offset-md-3 centrer">
+                        <label for="etat">État</label>
+                        <select name="etat" id="etat" class="form-control">
+                            <option value="0"{% if epreuve.etat == 0 %} selected{% else %} disabled{% endif %}>Choisir un état</option>
+                            <option value="1"{% if epreuve.etat == 1 %} selected{% endif %}>Validé</option>
+                            <option value="2"{% if epreuve.etat == 2 %} selected{% endif %}>Ouvert à l'inscription</option>
+                            <option value="4"{% if epreuve.etat == 4 %} selected{% endif %}>Clos à l'inscription</option>
+                            <option value="3"{% if epreuve.etat == 3 %} selected{% endif %}>En cours</option>
+                            <option value="5"{% if epreuve.etat == 5 %} selected{% endif %}>Expiré</option>
+                            <option value="6"{% if epreuve.etat == 6 %} selected{% endif %}>Annulé</option>
+                        </select>
+                        <span class="help-block">{{ error('etat') }}</span>
+                    </div>
+                </div>
+                <br>
+
+                <div class="flex-row">
+                    <div class="col-md-4 offset-md-4 centre centrer">
+                        <div class="flex-row centre">
+                                <span class="centre col-md-12">Changer d'image : </span>
+                        </div>
+
+                        <div class="flex-row">
+                            <div class="form-group{% if hasError('result_csv') %} has-error{% endif %} col-md-12">
+                                <input type="file" name="result_csv" id="result_csv">
+                                <span class="help-block">{{ error('result_csv') }}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {{ csrf() }}
-                <input type="submit" class="btn btn-primary" value="Modifier l'épreuve">
+                <div class="flex-row">
+                    <div class="col-md-6 offset-md-3 centre centrer">
+                        <input type="submit" class="btn btn-primary form-resized" value="Créer l'épreuve">
+                    </div>
+                </div>
             </form>
         </div>
     </div>
