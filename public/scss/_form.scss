@@ -38,3 +38,17 @@ $form-border-color-focus: lighten(#37474F, 20);
 input{
   background-color: transparent;
 }
+
+.help-block {
+  color: #B0413E;
+}
+
+.has-error, .has-error {
+  input, textarea {
+    border-color: #B0413E;
+  }
+
+  .barre:before, .barre:after {
+    background-color: #B0413E;
+  }
+}
