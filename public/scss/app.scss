@@ -75,7 +75,7 @@ header {
 
 .close-alert {
   position: relative;
-  top: -2px;
+  top: -4px;
   background: transparent;
   border: none;
   float: right;
@@ -193,4 +193,11 @@ $epreuveHeight: 75px;
     display: block;
     text-align: center;
   }
+}
+
+.absolute-flash {
+  position: absolute;
+  left: 0;
+  right: 0;
+  right: 0;
 }

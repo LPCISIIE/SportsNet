@@ -2301,7 +2301,7 @@ header > form {
 
 .close-alert {
   position: relative;
-  top: -2px;
+  top: -4px;
   background: transparent;
   border: none;
   float: right;
@@ -2438,5 +2438,11 @@ header > form {
 .auth-card > .card-title {
   display: block;
   text-align: center; }
+
+.absolute-flash {
+  position: absolute;
+  left: 0;
+  right: 0;
+  right: 0; }
 
 /*# sourceMappingURL=app.css.map */
