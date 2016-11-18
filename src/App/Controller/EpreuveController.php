@@ -289,7 +289,7 @@ class EpreuveController extends Controller
         $evenement_id=$args['id_evenement'];
         $evenement=Evenement::find($args["id_evenement"]);
         $epreuves = $evenement->epreuves()->get()->toArray();
-        $evenement = $evenement->toArray();
+        $evenement = $evenement;
 
 
         if ($request->isPost()) {
@@ -371,4 +371,3 @@ class EpreuveController extends Controller
         return file_exists($path . '.jpg') ? $path . '.jpg' : $path . '.png';
     }
 }
-
