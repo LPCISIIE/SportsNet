@@ -54,7 +54,7 @@ table {
 * Fichier des variables globales
 * @author: Xavier CHOPIN
 */
-/**  1. Police d'├®criture : */
+/**  1. Police d'écriture : */
 /**  2. Couleurs : */
 /** 3. Media Queries */
 /** 4. Variables autres */
@@ -2011,7 +2011,7 @@ input.simple-vert {
   to {
     background: transparent;
     width: 0; } }
-/* - - - - - - -  Maestro, ├á toi de jouer  - - - - - - - - - */
+/* - - - - - - -  Maestro, à toi de jouer  - - - - - - - - - */
 body {
   padding-top: 75px;
   height: 100%; }
@@ -2032,7 +2032,7 @@ hr {
 pre {
   font-family: 'Source Code Pro', monospace;
   white-space: pre-wrap;
-  /* Depuis la pr├®histoire */
+  /* Depuis la préhistoire */
   white-space: -moz-pre-wrap;
   /* Mozifox, depuis 1999 */
   white-space: -pre-wrap;
@@ -2248,14 +2248,8 @@ input {
       margin: 0;
       color: white; }
 
-
 .evenement-header {
   margin-top: -23px; }
-
-
-.evenement-header {
-  margin-top: -23px; }
-
 
 body, html {
   min-height: 100%; }
@@ -2299,6 +2293,9 @@ header > form {
     margin-bottom: 10px;
     font-size: 1.5em; }
 
+.card-lg {
+  padding: 20px; }
+
 .close-alert {
   position: relative;
   top: -2px;
@@ -2330,10 +2327,10 @@ header > form {
 .bg-404 > img {
   width: 35%; }
 
-
 .card-bg {
   background-size: cover;
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+  background-position: center; }
 
 .card-filtre {
   background-color: rgba(0, 0, 0, 0.5);

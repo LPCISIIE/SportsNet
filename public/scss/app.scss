@@ -1,22 +1,18 @@
-
 $navbarColor: #37474F;
-
 $linkColor: #607D8B;
-
-
 
 @import "../maestro/sass/style";
 @import "../maestro/sass/presets/typographie";
 @import 'form';
 @import "header";
 
-body,html {
+body, html {
   min-height: 100%;
 }
 
 body {
   padding-top: 100px;
-  text-align:left !important;
+  text-align: left !important;
 }
 
 a {
@@ -72,6 +68,9 @@ header {
   }
 }
 
+.card-lg {
+  padding: 20px;
+}
 
 .close-alert {
   position: relative;
@@ -85,31 +84,29 @@ header {
   cursor: pointer;
 }
 
-
-
-$epreuveHeight:75px;
-.evenement-information{
+$epreuveHeight: 75px;
+.evenement-information {
   @extend %centre;
   padding-bottom: 20px;
-  .evenement-information-item{
+  .evenement-information-item {
     padding-bottom: 10px;
   }
 }
-.evenement_description{
-  height: $epreuveHeight ;
+
+.evenement_description {
+  height: $epreuveHeight;
   background-size: cover;
   background-position: center;
   margin-bottom: 10px;
-  .nom_epreuve{
+  .nom_epreuve {
     @extend %centre;
     line-height: $epreuveHeight;
     font-size: 2em;
     height: 100%;
     color: white;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }
-
 
 .bg-404 {
 
@@ -119,10 +116,10 @@ $epreuveHeight:75px;
 
 }
 
-
 .card-bg {
-  background-size:cover;
-  background-repeat : no-repeat;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .card-filtre {
@@ -131,9 +128,9 @@ $epreuveHeight:75px;
 }
 
 .btn-blanc {
-  @include bouton(#fff,white,#e2e2e2,$blancEffet);
-  color:black;
-  @include tailleBouton(1.1em 1em,1em);
+  @include bouton(#fff, white, #e2e2e2, $blancEffet);
+  color: black;
+  @include tailleBouton(1.1em 1em, 1em);
 }
 
 .titre-card {
