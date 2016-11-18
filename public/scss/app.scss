@@ -6,6 +6,7 @@ $linkColor: #607D8B;
 
 
 @import "../maestro/sass/style";
+@import "../maestro/sass/presets/typographie";
 @import 'form';
 @import "header";
 
@@ -31,7 +32,7 @@ a.btn:hover {
 }
 
 header {
-  a, input {
+  a, a:hover, input {
     color: #FFF;
   }
 
@@ -79,6 +80,31 @@ header {
 }
 
 
+
+$epreuveHeight:75px;
+.evenement-information{
+  @extend %centre;
+  padding-bottom: 20px;
+  .evenement-information-item{
+    padding-bottom: 10px;
+  }
+}
+.evenement_description{
+  height: $epreuveHeight ;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px;
+  .nom_epreuve{
+    @extend %centre;
+    line-height: $epreuveHeight;
+    font-size: 2em;
+    height: 100%;
+    color: white;
+    background-color: rgba(0,0,0,0.6);
+  }
+}
+
+
 .bg-404 {
 
   & > img {
@@ -87,6 +113,7 @@ header {
 
 }
 
+<<<<<<< HEAD
 
 
 
@@ -116,3 +143,26 @@ header {
     color: white;
   }
 }
+
+.show-epreuve-debut, .show-epreuve-fin {
+  padding-top: 50px;
+  text-align: center;
+
+  & > p:first-child {
+    font-weight: bold;
+  }
+}
+
+.show-epreuve-image > img {
+  max-width: 100%;
+}
+
+.etat-epreuve {
+  padding: 20px 0;
+  font-weight: bold;
+}
+
+#disqus_thread {
+  margin-top: 100px;
+}
+

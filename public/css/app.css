@@ -87,7 +87,7 @@ ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:fo
 .droite {
   text-align: right; }
 
-.centre, .formulaire .checkbox, .page-header .page-header-content {
+.centre, .formulaire .checkbox, .page-header .page-header-content, .evenement-information, .evenement_description .nom_epreuve {
   text-align: center; }
 
 .justifie, p.details, blockquote p {
@@ -2124,6 +2124,58 @@ footer {
       padding-top: 100px !important;
       padding-bottom: 100px !important; } }
 
+/**
+* Maestro Framework
+* Fichier typographique
+* @author: Xavier CHOPIN
+*/
+.sub {
+  font-size: 90%;
+  color: #9c9c9c;
+  letter-spacing: 1px; }
+
+.gauche {
+  text-align: left; }
+
+.droite {
+  text-align: right; }
+
+.centre, .formulaire .checkbox, .page-header .page-header-content, .evenement-information, .evenement_description .nom_epreuve {
+  text-align: center; }
+
+.justifie, p.details, blockquote p {
+  text-align: justify; }
+
+.majuscule {
+  text-transform: uppercase; }
+
+.minuscule {
+  text-transform: lowercase; }
+
+.gras {
+  font-weight: bolder; }
+
+.forcer-droite {
+  float: right; }
+
+.forcer-gauche {
+  float: left; }
+
+.noir {
+  color: black; }
+
+.blanc {
+  color: white; }
+
+.rouge {
+  color: #F44336; }
+
+.vert {
+  color: #4CAF50; }
+
+.orange {
+  color: orange; }
+
 .form-control {
   display: block;
   width: 100%;
@@ -2170,12 +2222,18 @@ input {
   padding: 0; }
   .page-header .page-header-content {
     font-weight: bold;
-    margin-top: 180px;
+    margin-top: 300px;
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     font-size: 2em; }
 
+<<<<<<< HEAD
+=======
+.evenement-header {
+  margin-top: -23px; }
+
+>>>>>>> design
 body, html {
   min-height: 100%; }
 
@@ -2191,7 +2249,7 @@ a {
 a.btn:hover {
   color: #FFF; }
 
-header a, header input {
+header a, header a:hover, header input {
   color: #FFF; }
 header > form {
   float: right;
@@ -2225,8 +2283,26 @@ header > form {
   color: #FFF;
   cursor: pointer; }
 
+.evenement-information {
+  padding-bottom: 20px; }
+  .evenement-information .evenement-information-item {
+    padding-bottom: 10px; }
+
+.evenement_description {
+  height: 75px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px; }
+  .evenement_description .nom_epreuve {
+    line-height: 75px;
+    font-size: 2em;
+    height: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6); }
+
 .bg-404 > img {
   width: 35%; }
+
 
 .card-bg {
   background-size: cover;
@@ -2301,5 +2377,21 @@ header > form {
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
     color: white; }
+
+.show-epreuve-debut, .show-epreuve-fin {
+  padding-top: 50px;
+  text-align: center; }
+  .show-epreuve-debut > p:first-child, .show-epreuve-fin > p:first-child {
+    font-weight: bold; }
+
+.show-epreuve-image > img {
+  max-width: 100%; }
+
+.etat-epreuve {
+  padding: 20px 0;
+  font-weight: bold; }
+
+#disqus_thread {
+  margin-top: 100px; }
 
 /*# sourceMappingURL=app.css.map */
