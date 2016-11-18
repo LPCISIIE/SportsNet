@@ -10,25 +10,31 @@
     </div>
 </div>
 <div class="container">
-    <form action="{{ path_for('epreuve.join', {'id_evenement': evenement.id}) }}" method="POST"
-          enctype="multipart/form-data">
+    {% if not epreuves is empty %}
+        <form action="{{ path_for('epreuve.join', {'id_evenement': evenement.id}) }}" method="POST"
+              enctype="multipart/form-data">
 
-        <div class="checkbox{% if hasError(name) %} has-error{% endif %}">
-            {% for epreuve in epreuves %}
-                <div class="checkbox-item">
-                    <input type="checkbox" name="epreuves[]" value="{{ epreuve.id }}" class="epreuve"> {{ epreuve.nom }}
-                </div>
-            {% endfor %}
-        </div>
+            <div class="checkbox{% if hasError(name) %} has-error{% endif %}">
+                {% for epreuve in epreuves %}
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="epreuves[]" value="{{ epreuve.id }}" class="epreuve"> {{ epreuve.nom }}
+                    </div>
+                {% endfor %}
+            </div>
 
-        {{ form.group('nom', null, 'nom', 'Nom', null, 'nom') }}
-        {{ form.group('prenom', null, 'prenom', 'Prenom', null, 'prenom') }}
-        {% if not auth.check() %}
-            {{ form.group('email', null, 'email', 'Email', null, 'email') }}
-        {% endif %}
-        {{ csrf() }}
-        <input type="submit" value="S'inscrire" class="btn btn-primary">
-    </form>
+            {{ form.group('nom', null, 'nom', 'Nom', null, 'nom') }}
+            {{ form.group('prenom', null, 'prenom', 'Prenom', null, 'prenom') }}
+            {% if not auth.check() %}
+                {{ form.group('email', null, 'email', 'Email', null, 'email') }}
+            {% endif %}
+            {{ csrf() }}
+            <input type="submit" value="S'inscrire" class="btn btn-primary">
+        </form>
+    {% else %}
+        <p class="card">
+            Cet événement ne contient aucune épreuve. Revenez plus tard !
+        </p>
+    {% endif %}
 </div>
 
 {% endblock %}
