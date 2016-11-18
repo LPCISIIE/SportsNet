@@ -1,9 +1,17 @@
 
 $navbarColor: #37474F;
 
+$linkColor: #607D8B;
+
+
+
 @import "../maestro/sass/style";
 @import 'form';
 @import "header";
+
+body,html {
+  min-height: 100%;
+}
 
 body {
   padding-top: 100px;
@@ -67,4 +75,13 @@ header {
   font-weight: bold;
   color: #FFF;
   cursor: pointer;
+}
+
+
+.bg-404 {
+
+  & > img {
+    width: 35%;
+  }
+
 }
