@@ -2174,11 +2174,14 @@ input {
   padding: 0; }
   .page-header .page-header-content {
     font-weight: bold;
-    margin-top: 180px;
+    margin-top: 300px;
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     font-size: 2em; }
+
+.evenement-header {
+  margin-top: -23px; }
 
 body {
   padding-top: 100px; }
@@ -2191,7 +2194,7 @@ a {
 a.btn:hover {
   color: #FFF; }
 
-header a, header input {
+header a, header a:hover, header input {
   color: #FFF; }
 header > form {
   float: right;
