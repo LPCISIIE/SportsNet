@@ -54,7 +54,7 @@ table {
 * Fichier des variables globales
 * @author: Xavier CHOPIN
 */
-/**  1. Police d'écriture : */
+/**  1. Police d'├®criture : */
 /**  2. Couleurs : */
 /** 3. Media Queries */
 /** 4. Variables autres */
@@ -2011,7 +2011,7 @@ input.simple-vert {
   to {
     background: transparent;
     width: 0; } }
-/* - - - - - - -  Maestro, à toi de jouer  - - - - - - - - - */
+/* - - - - - - -  Maestro, ├á toi de jouer  - - - - - - - - - */
 body {
   padding-top: 75px;
   height: 100%; }
@@ -2032,7 +2032,7 @@ hr {
 pre {
   font-family: 'Source Code Pro', monospace;
   white-space: pre-wrap;
-  /* Depuis la préhistoire */
+  /* Depuis la pr├®histoire */
   white-space: -moz-pre-wrap;
   /* Mozifox, depuis 1999 */
   white-space: -pre-wrap;
@@ -2188,6 +2188,21 @@ footer {
 .form-group {
   margin-bottom: 10px; }
 
+.form-input {
+  display: flex;
+  align-items: center; }
+  .form-input input {
+    margin-left: auto;
+    margin-right: auto; }
+
+.form-resized {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0; }
+
+@media screen and (min-width: 200px) and (max-width: 1000px) and (orientation: portrait) {
+  #form-triple-row-flex {
+    flex-direction: column; } }
 .formulaire .checkbox {
   width: auto;
   display: inline-block;
@@ -2226,7 +2241,12 @@ input {
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: rgba(0, 0, 0, 0.7);
-    font-size: 2em; }
+    font-size: 2em;
+    width: 100%; }
+    .page-header .page-header-content .formulaire, .page-header .page-header-content input {
+      width: 100%;
+      margin: 0;
+      color: white; }
 
 
 .evenement-header {
@@ -2263,6 +2283,10 @@ header > form {
     color: #FFF; }
     header > form > input[type="text"]:focus {
       border-color: #617d8b; }
+
+.tiny-form {
+  font-size: 0.7em;
+  padding: 2px 4px; }
 
 .card {
   margin-bottom: 20px;

@@ -77,6 +77,7 @@ class EpreuveController extends Controller
                 $epreuve->evenement()->associate($evenement);
                 $epreuve->save();
 
+                $file->setName($epreuve->id);
                 $file->upload();
 
                 $this->flash('success', 'L\'épreuve a bien été créée !');
@@ -84,7 +85,7 @@ class EpreuveController extends Controller
             }
         }
 
-        return $this->view->render($response, 'Epreuve/add.twig');
+        return $this->view->render($response, 'Epreuve/add.twig', compact('evenement'));
     }
 
     public function edit(Request $request, Response $response, array $args)
