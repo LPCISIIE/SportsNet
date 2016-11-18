@@ -6,7 +6,7 @@ $headerPaddingTopBottom: 20px;
 }
 
 .page-header {
-  margin-top: 0;
+  margin-top: -25px;
   background-size: cover;
   background-position: center;
   color: white;
@@ -19,6 +19,7 @@ $headerPaddingTopBottom: 20px;
     padding-bottom: $headerPaddingTopBottom;
     background-color: rgba(0, 0, 0, 0.7);
     font-size: 2em;
+    width:100%;
   }
 }
 

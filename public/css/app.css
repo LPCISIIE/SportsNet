@@ -2215,7 +2215,7 @@ input {
   position: relative; }
 
 .page-header {
-  margin-top: 0;
+  margin-top: -25px;
   background-size: cover;
   background-position: center;
   color: white;
@@ -2225,7 +2225,8 @@ input {
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: rgba(0, 0, 0, 0.7);
-    font-size: 2em; }
+    font-size: 2em;
+    width: 100%; }
 
 .evenement-header {
   margin-top: -23px; }
