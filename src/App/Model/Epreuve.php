@@ -44,19 +44,19 @@ class Epreuve extends Model
     {
         switch ($state) {
             case self::CREE:
-                return 'Créé';
+                return 'Créée';
             case self::VALIDE:
-                return 'Validé';
+                return 'Validée';
             case self::OUVERT:
-                return 'Ouvert à l\'inscription';
+                return 'Ouverte à l\'inscription';
             case self::EN_COURS:
-                return 'Validé';
+                return 'En cours';
             case self::CLOS:
-                return 'Clos à l\'inscription';
+                return 'Close à l\'inscription';
             case self::EXPIRE:
-                return 'Expiré';
+                return 'Expirée';
             case self::ANNULE:
-                return 'Annulé';
+                return 'Annulée';
 
             default:
                 return '';
