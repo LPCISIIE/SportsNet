@@ -766,7 +766,7 @@ header .menu-icon a:before {
     }
 }
 
-.alerte-theme {
+.alerte-info {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
@@ -775,7 +775,7 @@ header .menu-icon a:before {
     background-color: #78909C
 }
 
-.alerte-orange {
+.alerte-warning {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
@@ -784,7 +784,7 @@ header .menu-icon a:before {
     background-color: #FFB74D
 }
 
-.alerte-rouge {
+.alerte-danger {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
@@ -793,7 +793,7 @@ header .menu-icon a:before {
     background-color: #E57373
 }
 
-.alerte-vert {
+.alerte-success {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
