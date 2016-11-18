@@ -28,6 +28,12 @@
                     <span class="help-block">{{ error('description') }}</span>
                 </div>
 
+                <div class="checkbox">
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="validate" checked> Valider après création
+                    </div>
+                </div>
+
                 {{ csrf() }}
                 <input type="submit" class="btn" value="Créer">
             </form>
