@@ -1,16 +1,16 @@
 <header>
-    <a href="{{ path_for('home') }}" class="logo-header">SportNet</a>
+    <a href="{{ path_for('home') }}" class="logo-header blanc">SportNet</a>
     <nav>
         <a href="#" class="menu-icon"></a>
         <ul>
             {% if auth.check() %}
-                <li><a href="{{ path_for('user.events') }}">Mes événements</a></li>
-                <li><a href="{{ path_for('evenement.create') }}">Créer un événement</a></li>
-                <li><a href="{{ path_for('user.compte') }}">Mon compte</a></li>
-                <li><a href="{{ path_for('logout') }}">Déconnexion</a></li>
+                <li><a class="blanc" href="{{ path_for('user.events') }}">Mes événements</a></li>
+                <li><a class="blanc" href="{{ path_for('evenement.create') }}">Créer un événement</a></li>
+                <li><a class="blanc" href="{{ path_for('user.compte') }}">Mon compte</a></li>
+                <li><a class="blanc" href="{{ path_for('logout') }}">Déconnexion</a></li>
             {% else %}
-                <li><a href="{{ path_for('register') }}">Register</a></li>
-                <li><a href="{{ path_for('login') }}">Login</a></li>
+                <li><a class="blanc" href="{{ path_for('register') }}">Register</a></li>
+                <li><a class="blanc" href="{{ path_for('login') }}">Login</a></li>
             {% endif %}
         </ul>
     </nav>
