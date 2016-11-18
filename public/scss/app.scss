@@ -6,6 +6,7 @@ $linkColor: #607D8B;
 
 
 @import "../maestro/sass/style";
+@import "../maestro/sass/presets/typographie";
 @import 'form';
 @import "header";
 
@@ -75,6 +76,31 @@ header {
   font-weight: bold;
   color: #FFF;
   cursor: pointer;
+}
+
+
+
+$epreuveHeight:75px;
+.evenement-information{
+  @extend %centre;
+  padding-bottom: 20px;
+  .evenement-information-item{
+    padding-bottom: 10px;
+  }
+}
+.evenement_description{
+  height: $epreuveHeight ;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px;
+  .nom_epreuve{
+    @extend %centre;
+    line-height: $epreuveHeight;
+    font-size: 2em;
+    height: 100%;
+    color: white;
+    background-color: rgba(0,0,0,0.6);
+  }
 }
 
 
