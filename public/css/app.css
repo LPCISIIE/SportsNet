@@ -99,7 +99,7 @@ ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:fo
 .minuscule {
   text-transform: lowercase; }
 
-.gras {
+.gras, .page-header .page-header-content {
   font-weight: bolder; }
 
 .forcer-droite {
@@ -2152,7 +2152,7 @@ footer {
 .minuscule {
   text-transform: lowercase; }
 
-.gras {
+.gras, .page-header .page-header-content {
   font-weight: bolder; }
 
 .forcer-droite {
@@ -2236,7 +2236,6 @@ input {
   color: white;
   padding: 0; }
   .page-header .page-header-content {
-    font-weight: bold;
     margin-top: 300px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -2334,7 +2333,6 @@ header > form {
 
 .bg-404 > img {
   width: 35%; }
-
 
 .card-bg {
   background-size: cover;
