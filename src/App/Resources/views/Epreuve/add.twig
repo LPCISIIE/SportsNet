@@ -9,49 +9,58 @@
 
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="page-header flex-row">
-                    <div class="centre col-md-4 offset-md-4">{{ form.group('nom', null, 'nom', 'Nom de l\'épreuve') }}</div>
+                    <div class="centre col-md-4 offset-md-4">{{ form.group_noerror('nom', null, 'nom', 'Nom de l\'épreuve') }}</div>
                 </div>
                 
                 <div class="flex-row">
-                    <div class="flex-row">
-                        <div class="col-md-3 centre">
-                            {{ form.group('date_debut', null, 'date_debut', 'Début', null, 'text', 'JJ/MM/AAAA') }}
+                    <div class="col-md-4">
+                        <div class="row-flex">
+                            <div class="col-md-8 offset-md-2 centre">
+                                {{ form.group_noerror('date_debut', null, 'date_debut', 'Début', null, 'text', 'JJ/MM/AAAA') }}
+                            </div>
                         </div>
-                        <div class="col-md-3 offset-md-1 centre">
-                            {{ form.group('heure_debut', null, 'heure_debut', 'Heure', null, 'text', '12:00') }}
+
+                        <div class="row-flex">
+                            <div class="col-md-4 offset-md-4 centre tiny-form">
+                                {{ form.group_noerror('heure_debut', null, 'heure_debut', 'Heure', null, 'text', '12:00') }}
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group{% if hasError('epreuve_pic_link') %} has-error{% endif %} col-md-3 offset-md-1 centre">
+                    <div class="form-group col-md-4 centre">
                         <input type="file" name="epreuve_pic_link" id="epreuve_pic_link">
-                        <span class="help-block">{{ error('epreuve_pic_link') }}</span>
                     </div>
 
-                    <div class="flex-row">
-                        <div class="col-md-3 offset-md-1 centre">
-                            {{ form.group('date_fin', null, 'date_fin', 'Fin', null, 'text', 'JJ/MM/AAAA') }}
+                    <div class="col-md-4">
+                        <div class="row-flex">
+                            <div class="col-md-8 offset-md-2 centre">
+                                {{ form.group_noerror('date_fin', null, 'date_fin', 'Fin', null, 'text', 'JJ/MM/AAAA') }}
+                            </div>
                         </div>
-                        <div class="col-md-3 centre">
-                            {{ form.group('heure_fin', null, 'heure_fin', 'Heure', null, 'text', '12:00') }}
+
+                        <div class="row-flex">
+                            <div class="col-md-4 offset-md-4 centre tiny-form">
+                                {{ form.group_noerror('heure_fin', null, 'heure_fin', 'Heure', null, 'text', '12:00') }}
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group{% if hasError('description') %} has-error{% endif %}">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" placeholder="Donnez les détails concernant cette épreuve" class="form-control"></textarea>
+                    <textarea name="description" id="description" rows="7" placeholder="Donnez les détails concernant cette épreuve" class="form-control"></textarea>
                     <span class="help-block">{{ error('description') }}</span>
                 </div>
 
                 <div class="flex-row">
                     <div class="col-md-12">
-                        {{ form.group('capacite', null, 'capacite', 'Capacité maximum', null, 'number') }}
+                        {{ form.group_noerror('capacite', null, 'capacite', 'Capacité maximum', null, 'number') }}
                     </div>
                 </div>
 
                 <div class="flex-row">
                     <div class="col-md-12">
-                        {{ form.group('prix', null, 'prix', 'Prix de participation (€)', null, 'number') }}
+                        {{ form.group_noerror('prix', null, 'prix', 'Prix de participation (€)', null, 'number') }}
                     </div>
                 </div>
 

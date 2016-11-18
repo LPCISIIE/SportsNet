@@ -9,3 +9,10 @@
 {% endmacro %}
 
 
+{% macro group_noerror(name, value, id, label, class, type) %}
+    <div class="formulaire">
+        <input type="{{ type|default('text') }}" name="{{ name }}" value="{{ value }}" id="{{ id }}" class="{{ class }}">
+        <span class="barre"></span>
+        <label for="{{ id }}">{{ label }}</label>
+    </div>
+{% endmacro %}
