@@ -1,4 +1,5 @@
-
+@import "../maestro/sass/style";
+@import "../maestro/sass/presets/typographie";
 $headerMarginTopBottom: 300px;
 $headerPaddingTopBottom: 20px;
 
@@ -19,7 +20,7 @@ $headerPaddingTopBottom: 20px;
     padding-top: $headerPaddingTopBottom;
     padding-bottom: $headerPaddingTopBottom;
     background-color: rgba(0, 0, 0, 0.7);
-    font-size: 2em;
+    font-size: 1.5em;
   }
 }
 
