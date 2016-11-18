@@ -2213,7 +2213,8 @@ footer {
   .formulaire .checkbox input {
     display: inline-block; }
 .formulaire label {
-  position: relative; }
+  position: relative;
+  top: -5px; }
 
 input {
   background-color: transparent; }
