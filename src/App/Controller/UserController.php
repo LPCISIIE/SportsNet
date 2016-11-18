@@ -72,8 +72,10 @@ class UserController extends Controller
 
     public function mesEvenements(Request $request, Response $response)
     {
+
+
         return $this->view->render($response, 'User/mes-evenements.twig', [
-            'evenements' => $this->user()->evenements
+            'evenements' => $this->user()->evenements()->orderBy('id', 'desc')->get()
         ]);
     }
 
