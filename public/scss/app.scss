@@ -3,7 +3,7 @@ $linkColor: #607D8B;
 
 @import "../maestro/sass/style";
 @import "../maestro/sass/presets/typographie";
-@import 'form';
+@import "form";
 @import "header";
 
 body, html {
@@ -178,4 +178,16 @@ $epreuveHeight: 75px;
 .tiny-form {
   font-size: 0.7em;
   padding: 2px 4px;
-} 
+}
+
+.auth-card {
+  input[type="submit"], .btn {
+    display: block;
+    width: 100%;
+  }
+
+  & > .card-title {
+    display: block;
+    text-align: center;
+  }
+}

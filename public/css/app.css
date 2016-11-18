@@ -2429,4 +2429,11 @@ header > form {
   font-size: 0.7em;
   padding: 2px 4px; }
 
+.auth-card input[type="submit"], .auth-card .btn {
+  display: block;
+  width: 100%; }
+.auth-card > .card-title {
+  display: block;
+  text-align: center; }
+
 /*# sourceMappingURL=app.css.map */
