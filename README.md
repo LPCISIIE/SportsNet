@@ -35,6 +35,25 @@ $ php bootstrap/database.php
 ```
 or import `bootstrap/installation.sql` in your database manager
 
+## Key files
+
+- `bootstrap/`
+    - `dependencies.php`: Register services in application container
+    - `controllers.php`: Register controllers in container for easy routing
+    - `middleware.php`: Add global middleware to the application
+    - `sentinel.php`: Sentinel authentication library configuration
+    - `settings.php`: Application configuration
+- `src/`
+    - `App/`
+        - `Controller/`: Apllication controllers
+        - `Middleware/`: Application middleware
+        - `Model/`: Eloquent models
+        - `Service/`: Additional services
+        - `TwigExtension/`: Twig extensions
+        - `Validation/`: Custom validation rules
+        - `Resources/`
+            - `routes/`: Routes definition
+            - `views/`: Twig templates
 
 ## License
 
