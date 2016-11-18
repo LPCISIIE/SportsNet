@@ -91,7 +91,7 @@ ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:fo
 .droite {
   text-align: right; }
 
-.centre, .formulaire .checkbox, .page-header .page-header-content {
+.centre, .formulaire .checkbox, .page-header .page-header-content, .evenement-information, .evenement_description .nom_epreuve {
   text-align: center; }
 
 .justifie, p.details, blockquote p {
@@ -2128,6 +2128,58 @@ footer {
       padding-top: 100px !important;
       padding-bottom: 100px !important; } }
 
+/**
+* Maestro Framework
+* Fichier typographique
+* @author: Xavier CHOPIN
+*/
+.sub {
+  font-size: 90%;
+  color: #9c9c9c;
+  letter-spacing: 1px; }
+
+.gauche {
+  text-align: left; }
+
+.droite {
+  text-align: right; }
+
+.centre, .formulaire .checkbox, .page-header .page-header-content, .evenement-information, .evenement_description .nom_epreuve {
+  text-align: center; }
+
+.justifie, p.details, blockquote p {
+  text-align: justify; }
+
+.majuscule {
+  text-transform: uppercase; }
+
+.minuscule {
+  text-transform: lowercase; }
+
+.gras {
+  font-weight: bolder; }
+
+.forcer-droite {
+  float: right; }
+
+.forcer-gauche {
+  float: left; }
+
+.noir {
+  color: black; }
+
+.blanc {
+  color: white; }
+
+.rouge {
+  color: #F44336; }
+
+.vert {
+  color: #4CAF50; }
+
+.orange {
+  color: orange; }
+
 .form-control {
   display: block;
   width: 100%;
@@ -2225,6 +2277,23 @@ header > form {
   font-weight: bold;
   color: #FFF;
   cursor: pointer; }
+
+.evenement-information {
+  padding-bottom: 20px; }
+  .evenement-information .evenement-information-item {
+    padding-bottom: 10px; }
+
+.evenement_description {
+  height: 75px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px; }
+  .evenement_description .nom_epreuve {
+    line-height: 75px;
+    font-size: 2em;
+    height: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6); }
 
 .bg-404 > img {
   width: 35%; }
