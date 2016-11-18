@@ -133,7 +133,7 @@ class EvenementController extends Controller
             $file_count = count($_FILES['galerie']['name']);
             $files_galerie = $_FILES['galerie'];
 
-            for($i=0; $i < $file_count; $i++) { 
+            for ($i = 0; $i < $file_count; $i++) {
                 $img = array();
                 $img['name'] = $files_galerie['name'][$i];
                 $img['tmp_name'] = $files_galerie['tmp_name'][$i];
@@ -174,20 +174,18 @@ class EvenementController extends Controller
                     $file->upload();
                 }
 
-
                 $galerie = array();
-                $files = glob($this->settings['events_upload'].$args['id'].'/*.{jpg,png,gif}', GLOB_BRACE);
+                $files = glob($this->settings['events_upload'] . $args['id'] . '/*.{jpg,png,gif}', GLOB_BRACE);
                 $name_to_upload = sizeof($files);
                 $a = 0;
                 foreach ($file_ary as $file_ary_img) {
-                    $tmp_name = $file_ary_img["tmp_name"];
-                    $extension = explode(".",$file_ary_img["name"]);
+                    $tmp_name = $file_ary_img['tmp_name'];
+                    $extension = explode('.', $file_ary_img['name']);
                     //echo "<pre>";
                     //print_r($this->settings['events_upload'].$args['id'].'/'.$name_to_upload.".".$extension[1]);
-                    move_uploaded_file($tmp_name, $this->settings['events_upload'].$args['id'].'/'.$name_to_upload.".".$extension[1]);
+                    move_uploaded_file($tmp_name, $this->settings['events_upload'] . $args['id'] . '/' . $name_to_upload . '.' . $extension[1]);
                     $name_to_upload += 1;
                 }
-                //
 
                 $this->flash('success', 'L\'événement "' . $evenement->nom . '" a bien été modifié !');
                 return $this->redirect($response, 'home');
@@ -198,7 +196,6 @@ class EvenementController extends Controller
             'evenement' => $evenement
         ]);
     }
-
 
     public function cancel(Request $request, Response $response, array $args)
     {
@@ -257,13 +254,12 @@ class EvenementController extends Controller
 
             foreach ($participants as $participant) {
 
-
-                if(sizeof($tab_csv) < ($nb+1)) {
+                if (sizeof($tab_csv) < ($nb + 1)) {
                     $tab_csv[$nb] = array();
                 }
 
-                array_push($tab_csv[$nb],$participant['nom']." ".$participant['prenom']);
-                $nb+=1;
+                array_push($tab_csv[$nb], $participant['nom'] . ' ' . $participant['prenom']);
+                $nb += 1;
 
                 if (sizeof($tab_csv) < ($nb + 1)) {
                     $tab_csv[$nb] = array();
@@ -274,8 +270,8 @@ class EvenementController extends Controller
             }
         }
 
-        $filename = "liste_participant.csv";
-        $delimiter = ",";
+        $filename = 'liste_participant.csv';
+        $delimiter = ',';
 
         header('Content-Type: application/csv');
         header('Content-Disposition: attachment; filename="' . $filename . '";');
