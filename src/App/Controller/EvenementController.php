@@ -57,7 +57,9 @@ class EvenementController extends Controller
                 $file->upload('header');
 
                 $this->flash('success', 'L\'événement "' . $request->getParam('nom') . '" a bien été crée !');
-                return $this->redirect($response, 'home');
+                return $this->redirect($response, 'evenement.show', [
+                    'id_evenement' => $evenement->id
+                ]);
             }
         }
 
