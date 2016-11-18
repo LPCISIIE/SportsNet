@@ -1,0 +1,19 @@
+{% extends 'layout.twig' %}
+
+{% import 'Macro/form.twig' as form %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="jumbotron">
+            <h3>Rechercher mon résultat</h3>
+
+            <form action="" method="POST" enctype="multipart/form-data">
+                {{ form.group('numeroSportif', null, 'numeroSportif', 'Numéro qui vous a été atribué à l\'épreuve', null, 'number', 'Numéro de participant', 'required') }}
+                {{ csrf() }}
+                <input type="submit" class="btn btn-primary" value="Recherche">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Mes epreuves:</h1>
+    {% if epreuves %}
+        {% for epreuve in epreuves %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>{{ epreuve.nom }}</h2>
+                    <p>{{ epreuve.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        Vous ne participez à aucune épreuve pour le moment
+    {% endif %}
+
+</div>
+
+{% endblock %}

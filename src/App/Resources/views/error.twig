@@ -1,0 +1,14 @@
+{% extends 'layout.twig' %}
+
+{% import 'Macro/form.twig' as form %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>{{titreErreur}}</h1>
+        <p>
+            {{descriptionErreur}}
+        </p>
+    </div>
+
+{% endblock %}
