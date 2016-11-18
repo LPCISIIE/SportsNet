@@ -107,7 +107,7 @@ class EvenementController extends Controller
                 'discipline' => V::length(1, 50),
                 'description' => V::notBlank(),
                 'etat' => V::intVal(),
-                'galerie' => V::ImageSize()->ImageFormat()
+                'galerie' => V::optional(V::ImageSize()->ImageFormat())
             ]);
 
             $etat = $request->getParam('etat');
