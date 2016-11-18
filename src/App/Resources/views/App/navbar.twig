@@ -3,9 +3,12 @@
     <nav>
         <a href="#" class="menu-icon"></a>
         <ul>
-            {% if auth.check() %}
+            {% if auth.user.checkOrganisateur() %}
+                <li><a href="{{ path_for('user.epreuves') }}">Mes épreuves</a></li>
                 <li><a href="{{ path_for('user.events') }}">Mes événements</a></li>
                 <li><a href="{{ path_for('evenement.create') }}">Créer un événement</a></li>
+            {% endif %}
+            {% if auth.check() %}
                 <li><a href="{{ path_for('user.compte') }}">Mon compte</a></li>
                 <li><a href="{{ path_for('logout') }}">Déconnexion</a></li>
             {% else %}

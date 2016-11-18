@@ -2,21 +2,30 @@
 
 {% import 'Macro/form.twig' as form %}
 
-{% block body %}
-<div class="jumbotron">{{evenement.nom}} </div>
+{% block body %}<div class="page-header" style="background-image:url('{{ base_url() }}/{{ evenement.webPath }}')">
+      <div class="page-header-content">
+          {{evenement.nom}}
+      </div>
+
+  </div>
 <div class="container">
 <form action="{{ path_for('epreuve.join', {'id_evenement': evenement.id}) }}" method="POST" enctype="multipart/form-data">
-    <div class="form-group{% if hasError(name) %} has-error{% endif %}">
+
+    <div class="checkbox{% if hasError(name) %} has-error{% endif %}">
     {% for epreuve in epreuves%}
-            <input type="checkbox" name="epreuves[]" value="{{epreuve.id}}"  class="epreuve">{{ epreuve.nom }}
+      <div class="checkbox-item">
+          <input type="checkbox" name="epreuves[]" value="{{epreuve.id}}"  class="epreuve">{{ epreuve.nom }}
+      </div>
+
     {% endfor%}
     </div>
 
-    <hr>
+
     {{ form.group('nom', null, 'nom', 'Nom', null, 'nom') }}
     {{ form.group('prenom', null, 'prenom', 'Prenom', null, 'prenom') }}
-    {{ form.group('email', null, 'email', 'Email', null, 'email') }}
-    {{ form.group('birthday', null, 'birthday', 'Birthday', null, 'date') }}
+    {% if not auth.check() %}
+        {{ form.group('email', null, 'email', 'Email', null, 'email') }}
+    {% endif %}
     {{ csrf() }}
     <input type="submit" value="Submit" class="btn btn-primary">
 </form>

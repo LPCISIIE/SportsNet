@@ -1,0 +1,40 @@
+
+$form-border-color: #CCC;
+$form-border-color-focus: lighten(#37474F, 20);
+
+.form-control {
+  display: block;
+  width: 100%;
+  border: 1px $form-border-color solid;
+  border-radius: 2px;
+  padding: 8px 15px;
+
+  &:focus {
+    border-color: $form-border-color-focus;
+  }
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.formulaire{
+  .checkbox{
+    width: auto;
+    display: inline-block;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    @extend %centre ;
+    input{
+      display: inline-block;
+    }
+  }
+  label{
+    position: relative;
+  }
+}
+input{
+  background-color: transparent;
+}

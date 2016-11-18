@@ -1,19 +1,18 @@
 
 $navbarColor: #37474F;
-$linkColor: #607D8B;
+
+@import "../maestro/sass/style";
+@import 'form';
+@import "header";
 
 body {
   padding-top: 100px;
 }
 
-a {
-  color: $linkColor;
-}
-
 header > form {
   float: right;
   padding: 20px;
-  input[type="text"] {
+  & > input[type="text"] {
     background-color: lighten($navbarColor, 10);
     border-color: darken($navbarColor, 5);
     color: #FFF;
@@ -30,7 +29,7 @@ header > form {
 
 .close-alert {
   position: relative;
-  top: -4px;
+  top: -2px;
   background: transparent;
   border: none;
   float: right;
@@ -38,40 +37,4 @@ header > form {
   font-weight: bold;
   color: #FFF;
   cursor: pointer;
-}
-
-.page-header {
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
-.card {
-  margin-bottom: 20px;
-  padding: 20px;
-  background-color: #FFF;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-
-  img {
-    max-width: 100%;
-  }
-
-  .card-title {
-    display: inline-block;
-    margin-bottom: 10px;
-    font-size: 1.5em;
-  }
-}
-
-.help-block {
-  color: #B0413E;
-}
-
-.has-error, .has-error {
-  input, textarea {
-    border-color: #B0413E;
-  }
-
-  .barre:before, .barre:after {
-    background-color: #B0413E;
-  }
 }
