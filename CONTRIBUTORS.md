@@ -1,7 +1,7 @@
 # SportsNet contributors
 
 * [Corentin Labroche](https://github.com/iryu54)
-    * Organizer registration
+    * Organizer authentication
     * Athlete authentication
     * Join trial
     * Design
@@ -15,12 +15,10 @@
     
 * [Alexis Wurth](https://github.com/awurth)
     * Slim boilerplate
-    * Organizer login
     * Organizer events list
-    * Edit trial
+    * Edit, show trial
     * Edit event
     * Edit profile
-    * Show trial
     * Search
     * Design
     
