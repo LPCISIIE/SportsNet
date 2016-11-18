@@ -336,7 +336,12 @@ class EpreuveController extends Controller
             throw $this->notFoundException($request, $response);
         }
 
-        if ($evenement->etat == Evenement::ANNULE) {
+        if (
+            $evenement->etat == Evenement::ANNULE ||
+            $evenement->etat == Evenement::CLOS ||
+            $evenement->etat == Evenement::EXPIRE ||
+            $evenement->etat == Evenement::CREE
+        ) {
             return $this->view->render($response, 'Error/error.twig', [
                 'title' => 'Événement annulé',
                 'description' => 'L\'événement a été annulé. Vous ne pouvez plus rejoindre une épreuve.'
