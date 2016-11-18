@@ -13,7 +13,6 @@ use Upload\Validation\Extension;
 use Upload\Validation\Size;
 use App\Model\Epreuve;
 use App\Model\Sportif;
-use App\Model\Participe;
 use App\Model\Evenement;
 
 class EpreuveController extends Controller
@@ -78,8 +77,6 @@ class EpreuveController extends Controller
                 $epreuve->evenement()->associate($evenement);
                 $epreuve->save();
 
-                $storage = new FileSystem($this->getUploadDir($evenement->id));
-                $file = new File('epreuve_pic_link', $storage);
                 $file->setName($epreuve->id);
                 $file->upload();
 
@@ -215,11 +212,6 @@ class EpreuveController extends Controller
             throw $this->notFoundException($request, $response);
         }
 
-        if ($evenement->user_id !== $this->user()->id) {
-            $this->flash('danger', 'Cet événement ne vous appartient pas !');
-            return $this->redirect($response, 'home');
-        }
-
         $epreuve = Epreuve::find($args['trial_id']);
 
         if (!$epreuve) {
@@ -232,25 +224,73 @@ class EpreuveController extends Controller
         ]);
     }
 
+    public function resultat(Request $request, Response $response, array $args)
+    {
+        $idEpreuve = $args['trial_id'];
+        $idEvenement = $args['event_id'];
+        $file = $this->getUploadDir($idEvenement) . '/' . $idEpreuve . '.csv';
 
+        if (file_exists($file)) {
+            $file = fopen($file, 'r');
+            $head = fgetcsv($file, 4096, ';', '"');
+
+            $participants = [];
+            $i = 0;
+
+            while ($column = fgetcsv($file, 4096, ';', '"')) {
+                $column = array_combine($head, $column);
+
+                if (!empty($column['Classement'])) {
+                    $participants[$i++] = $column;
+                }
+            }
+
+            function sort($tab)
+            {
+                $temp = [];
+                foreach ($tab as $p) {
+                    if (empty($temp[(int) $p['Classement'] - 1])) {
+                        $temp[(int) $p['Classement'] - 1] = $p;
+                    } else {
+                        $temp[(int) $p['Classement']] = $p;
+                    }
+                }
+            }
+
+            return $this->view->render($response, 'Epreuve/classement.twig', [
+                'participants' => $participants,
+                'epreuve' => Epreuve::find($idEpreuve),
+                'evenement' => Evenement::find($idEvenement),
+            ]);
+        }
+
+        $tel = Evenement::find($idEvenement)->telephone;
+
+        $message = ($tel) ? 'Aucun fichier de résultat pour cet épreuve veuillez contacter le ' . $tel : 'Evenement innexistant';
+
+        $this->flash('danger', $message);
+        return $this->redirect($response, 'recherchePerso', [
+            'event_id' => $idEvenement,
+            'trial_id' => $idEpreuve
+        ]);
+    }
 
     public function resultatPerso(Request $request, Response $response, array $args)
     {
         if ($request->isPost()) {
-
-            $idEpreuve   = $args['trial_id'];
+            $idEpreuve = $args['trial_id'];
             $idEvenement = $args['event_id'];
-            $file        = $this->getUploadDir($idEvenement) . '/' . $idEpreuve . '.csv';
+            $file = $this->getUploadDir($idEvenement) . '/' . $idEpreuve . '.csv';
 
             if (file_exists($file)) {
 
                 $target = $request->getParam('numeroSportif'); // not the supermarket lol
-                $file   = fopen($file, 'r');
-                $head   = fgetcsv($file, 4096, ';', '"');
+                $file = fopen($file, 'r');
+                $head = fgetcsv($file, 4096, ';', '"');
 
                 $participant = NULL;
 
-                while($column = fgetcsv($file, 4096, ';', '"')) {
+                while ($column = fgetcsv($file, 4096, ';', '"')) {
 
                     $column = array_combine($head, $column);
                     if ($column['Numéro participant'] == $target) {
@@ -259,26 +299,26 @@ class EpreuveController extends Controller
                 }
 
                 if ($participant == NULL) {
-                    $this->flash('danger','Participant introuvable');
-                    return $this->redirect($response, 'recherchePerso',['event_id' => $idEvenement, 'trial_id' => $idEpreuve]);
+                    $this->flash('danger', 'Participant introuvable');
+                    return $this->redirect($response, 'recherchePerso', ['event_id' => $idEvenement, 'trial_id' => $idEpreuve]);
                 };
 
 
                 return $this->view->render($response, 'Epreuve/afficherResultat.twig',
-                    [ 'participant' => $participant,
-                      'epreuve' => Epreuve::find($idEpreuve),
-                      'evenement' => Evenement::find($idEvenement),
+                    ['participant' => $participant,
+                        'epreuve' => Epreuve::find($idEpreuve),
+                        'evenement' => Evenement::find($idEvenement),
                     ]);
 
             }
 
             $tel = Evenement::find($idEvenement)->telephone;
 
-            $message = ($tel) ? 'Aucun fichier de résultat pour cet épreuve veuillez contacter le '.$tel : 'Evenement innexistant';
+            $message = ($tel) ? 'Aucun fichier de résultat pour cet épreuve veuillez contacter le ' . $tel : 'Evenement innexistant';
 
             $this->flash('danger', $message);
 
-            return $this->redirect($response, 'recherchePerso',['event_id' => $idEvenement, 'trial_id' => $idEpreuve]);
+            return $this->redirect($response, 'recherchePerso', ['event_id' => $idEvenement, 'trial_id' => $idEpreuve]);
 
         }
 
@@ -286,11 +326,10 @@ class EpreuveController extends Controller
     }
 
 
-
-    public function join($request, $response,$args)
+    public function join($request, $response, $args)
     {
-        $evenement_id=$args['id_evenement'];
-        $evenement=Evenement::find($args["id_evenement"]);
+        $evenement_id = $args['id_evenement'];
+        $evenement = Evenement::find($args["id_evenement"]);
         $epreuves = $evenement->epreuves()->get()->toArray();
         $evenement = $evenement;
 
@@ -301,28 +340,24 @@ class EpreuveController extends Controller
             $email = $request->getParam('email');
             $epreuvesSelection = $request->getParam('epreuves');
 
-            if(!$this->user()){
+            if (!$this->user()) {
                 $validation = $this->validator->validate($request, [
                     'nom' => V::notEmpty()->length(1, 50),
                     'prenom' => V::notEmpty()->length(1, 50),
                     'email' => V::notEmpty()->noWhitespace()->email(),
                 ]);
-            }
-            else {
+            } else {
                 $validation = $this->validator->validate($request, [
                     'nom' => V::notEmpty()->length(1, 50),
                     'prenom' => V::notEmpty()->length(1, 50),
                 ]);
             }
 
-
-            if ($validation->isValid() ) {
-                /*Test si pas deja inscrit*/
-                $sportif=null;
+            if ($validation->isValid()) {
+                $sportif = null;
                 if (!$this->user()) {
                     $sportif = Sportif::where('email', $email)->first();
-                }
-                elseif($this->user()){
+                } else if ($this->user()) {
                     $email = $this->user()->email;
                     $sportif = Sportif::where('email', $email)->first();
                 }
