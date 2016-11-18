@@ -9,8 +9,6 @@
                 <li><a href="{{ path_for('evenement.create') }}">Créer un événement</a></li>
             {% endif %}
             {% if auth.check() %}
-                <li><a href="{{ path_for('user.events') }}">Mes événements</a></li>
-                <li><a href="{{ path_for('evenement.create') }}">Créer un événement</a></li>
                 <li><a href="{{ path_for('user.compte') }}">Mon compte</a></li>
                 <li><a href="{{ path_for('logout') }}">Déconnexion</a></li>
             {% else %}
@@ -21,6 +19,8 @@
     </nav>
 
     <form action="{{ path_for('search') }}" class="navbar-form navbar-right">
-        <input type="text" name="q" class="form-control" placeholder="Recherche">
+        <div class="formulaire">
+            <input type="text" name="q" class="form-control" placeholder="Recherche">
+        </div>
     </form>
 </header>
