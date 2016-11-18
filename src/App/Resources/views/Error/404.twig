@@ -2,11 +2,20 @@
 
 {% block body %}
 
-<div class="container text-center">
-    <div class="page-header">
-        <h1>Page non trouvée</h1>
+
+<div class="container boite boite-center">
+    <div class="bg-404">
+        <img class="centrer" src="{{ base_url() }}/img/404.gif" alt="404"/>
+        <h2 class="centre" >Erreur 404 </h2>
+        <p class="centre"> Il n'y a rien ici.
+            La page que vous cherchiez n'existe plus à cette adresse, sauf si vous cherchiez la page d'erreur. Dans ce cas
+            bravo, vous l'avez trouvé !
+        </p>
     </div>
-    <p>Erreur 404</p>
-</div>
+
+</div> <br><br>
+
+
+
 
 {% endblock %}

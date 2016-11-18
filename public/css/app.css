@@ -49,6 +49,10 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+
+body, html {
+  min-height: 100%;
+}
 /**
 * Maestro Framework
 * Fichier des variables globales
@@ -2221,5 +2225,8 @@ header > form {
   font-weight: bold;
   color: #FFF;
   cursor: pointer; }
+
+.bg-404 > img {
+  width: 35%; }
 
 /*# sourceMappingURL=app.css.map */
