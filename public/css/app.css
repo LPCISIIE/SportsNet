@@ -49,10 +49,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-
-body, html {
-  min-height: 100%;
-}
 /**
 * Maestro Framework
 * Fichier des variables globales
@@ -2183,6 +2179,9 @@ input {
 .evenement-header {
   margin-top: -23px; }
 
+body, html {
+  min-height: 100%; }
+
 body {
   padding-top: 100px; }
 
@@ -2231,5 +2230,21 @@ header > form {
 
 .bg-404 > img {
   width: 35%; }
+
+.show-epreuve-debut, .show-epreuve-fin {
+  padding-top: 50px;
+  text-align: center; }
+  .show-epreuve-debut > p:first-child, .show-epreuve-fin > p:first-child {
+    font-weight: bold; }
+
+.show-epreuve-image > img {
+  max-width: 100%; }
+
+.etat-epreuve {
+  padding: 20px 0;
+  font-weight: bold; }
+
+#disqus_thread {
+  margin-top: 100px; }
 
 /*# sourceMappingURL=app.css.map */

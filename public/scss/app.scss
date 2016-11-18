@@ -85,3 +85,25 @@ header {
   }
 
 }
+
+.show-epreuve-debut, .show-epreuve-fin {
+  padding-top: 50px;
+  text-align: center;
+
+  & > p:first-child {
+    font-weight: bold;
+  }
+}
+
+.show-epreuve-image > img {
+  max-width: 100%;
+}
+
+.etat-epreuve {
+  padding: 20px 0;
+  font-weight: bold;
+}
+
+#disqus_thread {
+  margin-top: 100px;
+}
