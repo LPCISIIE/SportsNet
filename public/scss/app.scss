@@ -1,7 +1,9 @@
 
 $navbarColor: #37474F;
 $linkColor: #607D8B;
-
+body,html {
+  min-height: 100%;
+}
 body {
   padding-top: 100px;
 }
@@ -69,4 +71,13 @@ header > form {
   .barre:before, .barre:after {
     background-color: #B0413E;
   }
+}
+
+
+.bg-404 {
+
+  & > img {
+    width: 35%;
+  }
+
 }
