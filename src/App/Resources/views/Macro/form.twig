@@ -1,10 +1,8 @@
-
-{% macro group(name, value, id, label, class, type, placeholder, required) %}
-    <div class="form-group{% if hasError(name) %} has-error{% endif %}">
-        <label for="{{ id }}">{{ label }}</label>
-        <input type="{{ type|default('text') }}" name="{{ name }}" value="{{ value }}" id="{{ id }}" class="form-control {{ class }}" aria-describedby="{{ id }}-help-block" placeholder="{{ placeholder }}" {{ required }}>
-        <span id="{{ id }}-help-block" class="help-block">{{ error(name) }}</span>
-    </div>
+{% macro group(name, value, id, label, class, type) %}
+  <div class="formulaire{% if hasError(name) %} has-error{% endif %}">
+      <label for="{{ id }}">{{ label }}</label>
+      <input type="{{ type|default('text') }}" name="{{ name }}" value="{{ value }}" id="{{ id }}" class="{{ class }}">
+      <span class="barre"></span>
+      <span class="help-block">{{ error(name) }}</span>
+  </div>
 {% endmacro %}
-
-

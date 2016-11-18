@@ -3,5 +3,7 @@ vendor/
 cache/*
 !cache/.gitkeep
 bootstrap/db.php
+public/.sass-cache
+public/css/app.css.map
 public/uploads/evenements/*
 !public/uploads/evenements/.gitkeep

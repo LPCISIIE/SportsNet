@@ -1,0 +1,70 @@
+
+$navbarColor: #37474F;
+
+@import "../maestro/sass/style";
+@import 'form';
+@import "header";
+
+body {
+  padding-top: 100px;
+}
+
+a {
+  color: #607D8B;
+
+  &:hover {
+    color: $navbarColor;
+  }
+}
+
+a.btn:hover {
+  color: #FFF;
+}
+
+header {
+  a, input {
+    color: #FFF;
+  }
+
+  & > form {
+    float: right;
+    padding: 20px;
+    & > input[type="text"] {
+      background-color: lighten($navbarColor, 10);
+      border-color: darken($navbarColor, 5);
+      color: #FFF;
+      &:focus {
+        border-color: lighten($navbarColor, 20);
+      }
+    }
+  }
+}
+
+.card {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #FFF;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+  img {
+    max-width: 100%;
+  }
+
+  .card-title {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+  }
+}
+
+.close-alert {
+  position: relative;
+  top: -2px;
+  background: transparent;
+  border: none;
+  float: right;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #FFF;
+  cursor: pointer;
+}

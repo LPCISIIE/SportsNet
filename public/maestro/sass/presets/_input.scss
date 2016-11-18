@@ -21,7 +21,7 @@
   position:relative;
   margin-bottom:2em;
 
-  input {
+  input, textarea {
     font-size: 1em;
     display:block;
     padding: 10px 10px 10px 5px;
@@ -41,7 +41,7 @@
     top:10px;
   }
 
-  input:focus ~ label {
+  input:focus ~ label, textarea:focus ~ label {
     top:-20px;
     color: $couleur;
   }
@@ -74,7 +74,7 @@
      left:0;
    }
 
-   input:focus ~ .selection {
+   input:focus ~ .selection, textarea:focus ~ .selection {
      -webkit-animation:materialAnimation 0.3s ease;
      -moz-animation:materialAnimation 0.3s ease;
      animation:materialAnimation 0.3s ease;
