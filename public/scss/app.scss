@@ -1,7 +1,9 @@
 
 $navbarColor: #37474F;
 
+@import "../maestro/sass/style";
 @import 'form';
+@import "header";
 
 body {
   padding-top: 100px;
@@ -30,9 +32,4 @@ header > form {
   font-weight: bold;
   color: #FFF;
   cursor: pointer;
-}
-
-.page-header {
-  padding-left: 50px;
-  padding-right: 50px;
 }
