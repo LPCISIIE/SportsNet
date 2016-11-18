@@ -16,6 +16,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ auth.user.email }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path_for('user.compte') }}">Mon compte</a></li>
+                            <li><a href="{{ path_for('user.epreuves') }}">Mes épreuves</a></li>
                             {% if auth.user.checkOrganisateur() %}
                                 <li><a href="{{ path_for('user.events') }}">Mes événements</a></li>
                                 <li><a href="{{ path_for('evenement.create') }}">Créer un événement</a></li>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\User;
+use App\Model\Sportif;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Respect\Validation\Validator as V;
@@ -65,6 +66,19 @@ class UserController extends Controller
     {
         return $this->view->render($response, 'User/mes-evenements.twig', [
             'evenements' => $this->user()->evenements
+        ]);
+    }
+
+    public function mesEpreuves(Request $request, Response $response)
+    {
+        $sportif = Sportif::where('user_id', $this->user()->id)->first();
+        $epreuves = null;
+        if ($sportif) {
+            $epreuves = $sportif->epreuves;
+        }
+
+        return $this->view->render($response, 'User/mes-epreuves.twig', [
+            'epreuves' =>  $epreuves
         ]);
     }
 }
