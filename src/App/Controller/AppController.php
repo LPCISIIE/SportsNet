@@ -14,7 +14,7 @@ class AppController extends Controller
             return $this->redirect($response, 'login');
         }
 
-        $evenements = Evenement::query()->orderBy('id', 'desc')->take(10)->get();
+        $evenements = Evenement::where('etat', '<>', Evenement::CREE)->orderBy('id', 'desc')->take(10)->get();
 
         return $this->view->render($response, 'App/home.twig', [
             'evenements' => $evenements
