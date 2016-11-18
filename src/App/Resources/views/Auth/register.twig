@@ -3,34 +3,34 @@
 {% import 'Macro/form.twig' as form %}
 
 {% block body %}
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form action="{{ path_for('register') }}" method="POST">
-                        <div class="form-group{% if hasError('type') %} has-error{% endif %}">
-                            <select  name='type' class='form-control' id='type'>
-                                <option value='organisateur'>Organisateur</option>
-                                <option value='sportif'>Sportif</option>
-                            </select>
-                            <span id="type-help-block" class="help-block">{{ error('type') }}</span>
-                        </div>
-                        {{ form.group('nom', null, 'nom', 'Nom', null, 'nom') }}
-                        {{ form.group('prenom', null, 'prenom', 'Prenom', null, 'prenom') }}
-                        {{ form.group('email', null, 'email', 'Email', null, 'email') }}
-                        {{ form.group('password', null, 'password', 'Password', null, 'password') }}
-                        {{ form.group('password-confirm', null, 'password-confirm', 'Confirm password', null, 'password') }}
-
-                        {{ csrf() }}
-                        <input type="submit" value="Register" class="btn btn-primary">
-                    </form>
-                </div>
-            </div>
+    <div class="page-header" style="background-image:url('{{ base_url() }}/img/intro.jpg')">
+        <div class="page-header-content">
+            <span class="majuscule">Créer et participer à des événements sportifs</span>
         </div>
     </div>
-</div>
+<div class="container">
+                    <form action="{{ path_for('register') }}" method="POST">
+                        <div class="form-group{% if hasError('type') %} has-error{% endif %}">
+                            <div class="formulaire">
+                                 <label for="0">Compte</label> <br><br><br>
+                                <select required name='type' class='form-control' id='type'>
+                                    <option disabled selected value='0'>Choisir un type de compte</option>
+                                    <option value='organisateur'>Je veux créer des événements</option>
+                                    <option value='sportif'>Je suis un sportif</option>
+                                </select>
+                                <span id="type-help-block" class="help-block">{{ error('type') }}</span>
+                            </div>
+                        </div>
+                        {{ form.group('nom', null, 'nom', 'Nom', null, 'nom') }}
+                        {{ form.group('prenom', null, 'prenom', 'Prénom', null, 'prenom') }}
+                        {{ form.group('email', null, 'email', 'Adresse email', null, 'email') }}
+                        {{ form.group('password', null, 'password', 'Mot de passe', null, 'password') }}
+                        {{ form.group('password-confirm', null, 'password-confirm', 'Confirmer votre mot de passe', null, 'password') }}
+
+                        {{ csrf() }}
+                        <input type="submit" value="Inscription" class="btn btn-vert forcer-droite">
+                    </form>
+                </div>
+
 
 {% endblock %}
