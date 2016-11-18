@@ -1,0 +1,32 @@
+{% extends 'layout.twig' %}
+
+{% import 'Macro/form.twig' as form %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="jumbotron">
+
+            <h3>[Résultat] : {{ epreuve.nom }} à l'évenement {{ evenement.nom }} </h3> <hr>
+                <table style="width:100%">
+                    <thead>
+                         <tr>
+                           <th>Prénom</th>
+                           <th>Nom</th>
+                           <th>Classement</th>
+                         </tr>
+                    </thead>
+            {% for participant in participants %}
+                <tr>
+                <td> {{ participant.Prénom }}</td>
+                <td>{{ participant.Nom }}</td>
+                <td>{{ participant.Classement }}</td>
+                </tr>
+            {% endfor %}
+                </table>
+            <a href = '{{ path_for('epreuve.show', {'event_id': evenement.id, 'trial_id': epreuve.id}) }}'
+               class = "btn btn-success"> Retourner à l'épreuve</a>
+        </div>
+    </div>
+
+{% endblock %}

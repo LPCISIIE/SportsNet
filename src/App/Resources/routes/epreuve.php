@@ -10,3 +10,4 @@ $app->group('', function () {
 })->add(new App\Middleware\AuthMiddleware($container));
 
 $app->map(['GET', 'POST'], '/{event_id:[0-9]+}/{trial_id:[0-9]+}/searchMe', 'EpreuveController:resultatPerso')->setName('recherchePerso');
+$app->map(['GET', 'POST'], '/{event_id:[0-9]+}/{trial_id:[0-9]+}/result', 'EpreuveController:resultat')->setName('resultat');
