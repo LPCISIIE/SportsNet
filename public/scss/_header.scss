@@ -6,7 +6,7 @@ $headerPaddingTopBottom: 20px;
 }
 
 .page-header {
-  margin-top: 0;
+  margin-top: -25px;
   background-size: cover;
   background-position: center;
   color: white;
@@ -18,14 +18,15 @@ $headerPaddingTopBottom: 20px;
     padding-top: $headerPaddingTopBottom;
     padding-bottom: $headerPaddingTopBottom;
     background-color: rgba(0, 0, 0, 0.7);
-    width: 100%;
+
     .formulaire,input{
       width:100%;
       margin: 0;
       color: white;
     }
 
-    font-size: 1.5em;
+    font-size: 2em;
+    width:100%;
 
   }
 }
