@@ -13,7 +13,6 @@ use Upload\Validation\Extension;
 use Upload\Validation\Size;
 use App\Model\Epreuve;
 use App\Model\Sportif;
-use App\Model\Participe;
 use App\Model\Evenement;
 
 class EpreuveController extends Controller

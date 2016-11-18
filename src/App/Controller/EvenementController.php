@@ -72,11 +72,11 @@ class EvenementController extends Controller
             throw $this->notFoundException($request, $response);
         }
 
-        $files = glob($this->settings['events_upload'].$args['id_evenement'].'/*.{jpg,png,gif}', GLOB_BRACE);
-        $size = sizeof($files)-1;
+        $files = glob($this->settings['events_upload'] . $args['id_evenement'] . '/*.{jpg,png,gif}', GLOB_BRACE);
+        $size = sizeof($files) - 1;
         $files_link = array();
-        for ($i=1; $i <= $size; $i++) { 
-            array_push($files_link,$evenement->getImageWebPath($i));
+        for ($i = 1; $i <= $size; $i++) {
+            array_push($files_link, $evenement->getImageWebPath($i));
         }
 
         return $this->view->render($response, 'Evenement/show.twig', [
@@ -135,14 +135,13 @@ class EvenementController extends Controller
 
             for($i=0; $i < $file_count; $i++) { 
                 $img = array();
-                $img["name"] = $files_galerie["name"][$i];
-                $img["tmp_name"] = $files_galerie["tmp_name"][$i];
-                $img["type"] = $files_galerie["type"][$i];
-                $img["size"] = $files_galerie["size"][$i];
-                $img["error"] = $files_galerie["error"][$i];
-                array_push($file_ary,$img);
+                $img['name'] = $files_galerie['name'][$i];
+                $img['tmp_name'] = $files_galerie['tmp_name'][$i];
+                $img['type'] = $files_galerie['type'][$i];
+                $img['size'] = $files_galerie['size'][$i];
+                $img['error'] = $files_galerie['error'][$i];
+                array_push($file_ary, $img);
             }
-            //
 
             $file->addValidations([
                 new Mimetype(['image/png', 'image/jpeg']),
