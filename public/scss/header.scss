@@ -1,11 +1,12 @@
 
-$headerMarginTopBottom:180px;
-$headerPaddingTopBottom:20px;
+$headerMarginTopBottom: 300px;
+$headerPaddingTopBottom: 20px;
 
-.container{
+.container {
   position: relative;
 }
-.page-header{
+
+.page-header {
   margin-top: 0;
   background-size: cover;
   background-position: center;
@@ -17,8 +18,17 @@ $headerPaddingTopBottom:20px;
     margin-top: $headerMarginTopBottom;
     padding-top: $headerPaddingTopBottom;
     padding-bottom: $headerPaddingTopBottom;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     font-size: 2em;
+    width: 100%;
+    .formulaire,input{
+      width:100%;
+      margin: 0;
+      color: white;
+    }
   }
+}
 
+.evenement-header {
+  margin-top: -23px;
 }

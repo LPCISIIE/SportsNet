@@ -1,12 +1,18 @@
-
 $navbarColor: #37474F;
+$linkColor: #607D8B;
 
 @import "../maestro/sass/style";
+@import "../maestro/sass/presets/typographie";
 @import 'form';
 @import "header";
 
+body, html {
+  min-height: 100%;
+}
+
 body {
   padding-top: 100px;
+  text-align: left !important;
 }
 
 a {
@@ -22,7 +28,7 @@ a.btn:hover {
 }
 
 header {
-  a, input {
+  a, a:hover, input {
     color: #FFF;
   }
 
@@ -40,9 +46,14 @@ header {
   }
 }
 
+.tiny-form {
+  font-size: 0.7em;
+  padding: 2px 4px;
+}
+
 .card {
   margin-bottom: 20px;
-  padding: 20px;
+
   background-color: #FFF;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
@@ -57,6 +68,10 @@ header {
   }
 }
 
+.card-lg {
+  padding: 20px;
+}
+
 .close-alert {
   position: relative;
   top: -2px;
@@ -68,3 +83,86 @@ header {
   color: #FFF;
   cursor: pointer;
 }
+
+$epreuveHeight: 75px;
+.evenement-information {
+  @extend %centre;
+  padding-bottom: 20px;
+  .evenement-information-item {
+    padding-bottom: 10px;
+  }
+}
+
+.evenement_description {
+  height: $epreuveHeight;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px;
+  .nom_epreuve {
+    @extend %centre;
+    line-height: $epreuveHeight;
+    font-size: 2em;
+    height: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.bg-404 {
+
+  & > img {
+    width: 35%;
+  }
+
+}
+
+.card-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card-filtre {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+
+.btn-blanc {
+  @include bouton(#fff, white, #e2e2e2, $blancEffet);
+  color: black;
+  @include tailleBouton(1.1em 1em, 1em);
+}
+
+.titre-card {
+  color: white;
+  font-size: 50px;
+  @include transition(0.3s);
+
+  &:hover {
+    @include transition(0.3s);
+    color: white;
+  }
+}
+
+.show-epreuve-debut, .show-epreuve-fin {
+  padding-top: 50px;
+  text-align: center;
+
+  & > p:first-child {
+    font-weight: bold;
+  }
+}
+
+.show-epreuve-image > img {
+  max-width: 100%;
+}
+
+.etat-epreuve {
+  padding: 20px 0;
+  font-weight: bold;
+}
+
+#disqus_thread {
+  margin-top: 100px;
+}
+

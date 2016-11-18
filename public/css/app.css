@@ -58,12 +58,12 @@ table {
 /**  2. Couleurs : */
 /** 3. Media Queries */
 /** 4. Variables autres */
-.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy {
+.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy, .btn-blanc {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none; }
 
-ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus {
+ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus, .btn-blanc:hover, .btn-blanc:active, .btn-blanc:focus {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.22), 0 2px 10px 0 rgba(0, 0, 0, 0.18); }
 
 .centrer {
@@ -87,7 +87,7 @@ ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:fo
 .droite {
   text-align: right; }
 
-.centre, .formulaire .checkbox, .page-header .page-header-content {
+.centre, .formulaire .checkbox, .page-header .page-header-content, .evenement-information, .evenement_description .nom_epreuve {
   text-align: center; }
 
 .justifie, p.details, blockquote p {
@@ -2124,6 +2124,58 @@ footer {
       padding-top: 100px !important;
       padding-bottom: 100px !important; } }
 
+/**
+* Maestro Framework
+* Fichier typographique
+* @author: Xavier CHOPIN
+*/
+.sub {
+  font-size: 90%;
+  color: #9c9c9c;
+  letter-spacing: 1px; }
+
+.gauche {
+  text-align: left; }
+
+.droite {
+  text-align: right; }
+
+.centre, .formulaire .checkbox, .page-header .page-header-content, .evenement-information, .evenement_description .nom_epreuve {
+  text-align: center; }
+
+.justifie, p.details, blockquote p {
+  text-align: justify; }
+
+.majuscule {
+  text-transform: uppercase; }
+
+.minuscule {
+  text-transform: lowercase; }
+
+.gras {
+  font-weight: bolder; }
+
+.forcer-droite {
+  float: right; }
+
+.forcer-gauche {
+  float: left; }
+
+.noir {
+  color: black; }
+
+.blanc {
+  color: white; }
+
+.rouge {
+  color: #F44336; }
+
+.vert {
+  color: #4CAF50; }
+
+.orange {
+  color: orange; }
+
 .form-control {
   display: block;
   width: 100%;
@@ -2136,6 +2188,21 @@ footer {
 .form-group {
   margin-bottom: 10px; }
 
+.form-input {
+  display: flex;
+  align-items: center; }
+  .form-input input {
+    margin-left: auto;
+    margin-right: auto; }
+
+.form-resized {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0; }
+
+@media screen and (min-width: 200px) and (max-width: 1000px) and (orientation: portrait) {
+  #form-triple-row-flex {
+    flex-direction: column; } }
 .formulaire .checkbox {
   width: auto;
   display: inline-block;
@@ -2170,14 +2237,26 @@ input {
   padding: 0; }
   .page-header .page-header-content {
     font-weight: bold;
-    margin-top: 180px;
+    margin-top: 300px;
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: rgba(0, 0, 0, 0.7);
-    font-size: 2em; }
+    font-size: 2em;
+    width: 100%; }
+    .page-header .page-header-content .formulaire, .page-header .page-header-content input {
+      width: 100%;
+      margin: 0;
+      color: white; }
+
+.evenement-header {
+  margin-top: -23px; }
+
+body, html {
+  min-height: 100%; }
 
 body {
-  padding-top: 100px; }
+  padding-top: 100px;
+  text-align: left !important; }
 
 a {
   color: #607D8B; }
@@ -2187,7 +2266,7 @@ a {
 a.btn:hover {
   color: #FFF; }
 
-header a, header input {
+header a, header a:hover, header input {
   color: #FFF; }
 header > form {
   float: right;
@@ -2199,9 +2278,12 @@ header > form {
     header > form > input[type="text"]:focus {
       border-color: #617d8b; }
 
+.tiny-form {
+  font-size: 0.7em;
+  padding: 2px 4px; }
+
 .card {
   margin-bottom: 20px;
-  padding: 20px;
   background-color: #FFF;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
   .card img {
@@ -2210,6 +2292,9 @@ header > form {
     display: inline-block;
     margin-bottom: 10px;
     font-size: 1.5em; }
+
+.card-lg {
+  padding: 20px; }
 
 .close-alert {
   position: relative;
@@ -2221,5 +2306,116 @@ header > form {
   font-weight: bold;
   color: #FFF;
   cursor: pointer; }
+
+.evenement-information {
+  padding-bottom: 20px; }
+  .evenement-information .evenement-information-item {
+    padding-bottom: 10px; }
+
+.evenement_description {
+  height: 75px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px; }
+  .evenement_description .nom_epreuve {
+    line-height: 75px;
+    font-size: 2em;
+    height: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6); }
+
+.bg-404 > img {
+  width: 35%; }
+
+.card-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.card-filtre {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px; }
+
+.btn-blanc {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  margin: 0.5em;
+  color: #fff;
+  background-color: white;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: .5px;
+  font-weight: bolder;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  border: none;
+  border-radius: 2px;
+  line-height: 0px;
+  outline: 0;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: black;
+  padding: 1.1em 1em;
+  font-size: 1em; }
+  .btn-blanc:hover, .btn-blanc:active, .btn-blanc:focus {
+    background-color: #e2e2e2; }
+  .btn-blanc:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120%;
+    height: 120px;
+    margin-left: -60%;
+    margin-top: -60px;
+    background: #f0f0f0;
+    border-radius: 100%;
+    opacity: 0.5;
+    transform: scale(0); }
+  .btn-blanc:not(:active):after {
+    animation: ripple 1s ease-out; }
+  @media all and (max-width: 350px) {
+    .btn-blanc {
+      font-size: 100%; } }
+
+.titre-card {
+  color: white;
+  font-size: 50px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+  .titre-card:hover {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    color: white; }
+
+.show-epreuve-debut, .show-epreuve-fin {
+  padding-top: 50px;
+  text-align: center; }
+  .show-epreuve-debut > p:first-child, .show-epreuve-fin > p:first-child {
+    font-weight: bold; }
+
+.show-epreuve-image > img {
+  max-width: 100%; }
+
+.etat-epreuve {
+  padding: 20px 0;
+  font-weight: bold; }
+
+#disqus_thread {
+  margin-top: 100px; }
 
 /*# sourceMappingURL=app.css.map */
