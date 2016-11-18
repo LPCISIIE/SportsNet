@@ -2124,6 +2124,58 @@ footer {
       padding-top: 100px !important;
       padding-bottom: 100px !important; } }
 
+/**
+* Maestro Framework
+* Fichier typographique
+* @author: Xavier CHOPIN
+*/
+.sub {
+  font-size: 90%;
+  color: #9c9c9c;
+  letter-spacing: 1px; }
+
+.gauche {
+  text-align: left; }
+
+.droite {
+  text-align: right; }
+
+.centre, .formulaire .checkbox, .page-header .page-header-content {
+  text-align: center; }
+
+.justifie, p.details, blockquote p {
+  text-align: justify; }
+
+.majuscule {
+  text-transform: uppercase; }
+
+.minuscule {
+  text-transform: lowercase; }
+
+.gras {
+  font-weight: bolder; }
+
+.forcer-droite {
+  float: right; }
+
+.forcer-gauche {
+  float: left; }
+
+.noir {
+  color: black; }
+
+.blanc {
+  color: white; }
+
+.rouge {
+  color: #F44336; }
+
+.vert {
+  color: #4CAF50; }
+
+.orange {
+  color: orange; }
+
 .form-control {
   display: block;
   width: 100%;
@@ -2181,7 +2233,12 @@ input {
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: rgba(0, 0, 0, 0.7);
-    font-size: 2em; }
+    font-size: 2em;
+    width: 100%; }
+    .page-header .page-header-content .formulaire, .page-header .page-header-content input {
+      width: 100%;
+      margin: 0;
+      color: white; }
 
 body {
   padding-top: 100px; }

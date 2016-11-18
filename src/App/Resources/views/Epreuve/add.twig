@@ -8,8 +8,8 @@
         <h3 class="centre">Ajout d'épreuve</h3>
 
             <form action="" method="POST" enctype="multipart/form-data">
-                <div class="page-header flex-row">
-                    <div class="centre col-md-4 offset-md-4 centre centrer">{{ form.group_noerror('nom', null, 'nom', 'Nom de l\'épreuve') }}</div>
+                <div class="page-header flex-row" style="background-image:url('{{ base_url() }}/{{ evenement.webPath }}')">
+                    <div class="page-header-content">{{ form.group_noerror('nom', null, 'nom', 'Nom de l\'épreuve') }}</div>
                 </div>
                 
                 <div class="flex-row" id="form-triple-row-flex">
