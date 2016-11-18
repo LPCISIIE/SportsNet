@@ -18,7 +18,10 @@ class AppController extends Controller
         $query = $request->getParam('q');
 
         if (!$query) {
-            throw $this->notFoundException($request, $response);
+            return $this->view->render($response, 'error.twig', [
+                'titreErreur' => 'Recherche vide',
+                'descriptionErreur' => 'Veuillez renseigner des mots clés pour lancer la recherche'
+            ]);
         }
 
         $evenements = Evenement::where('nom', 'like', '%' . $query . '%')
