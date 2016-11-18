@@ -4,18 +4,27 @@
 
 {% block body %}
 
-<div class="container">
+<div class="boite container">
+    <div class="page-header">
+        <h4>Mon compte :</h4>
+    </div>
+
     <form action="{{ path_for('user.compte') }}" method="POST">
-        {{ form.group('nom', organisateur.nom, 'nom', 'Nom') }}
-        {{ form.group('prenom', organisateur.prenom, 'prenom', 'Prénom') }}
-        {% if is_organisateur %}
+
+        {% if organisateur %}
+            {{ form.group('nom', organisateur.nom, 'nom', 'Nom') }}
+            {{ form.group('prenom', organisateur.prenom, 'prenom', 'Prénom') }}
             {{ form.group('paypal', organisateur.paypal, 'paypal', 'Adresse Paypal', null, 'email') }}
+        {% else %}
+            {{ form.group('nom', sportif.nom, 'nom', 'Nom') }}
+            {{ form.group('prenom', sportif.prenom, 'prenom', 'Prénom') }}
+            {{ form.group('birthday', sportif.birthday|date('d/m/Y'), 'birthday', 'Date de naissance') }}
         {% endif %}
 
         {{ form.group('email', auth.user.email, 'email', 'Email', null, 'email') }}
-
         {{ csrf() }}
-        <input type="submit" value="Modifier" class="btn btn-primary">
+
+        <input type="submit" value="Modifier" class="forcer-droite btn btn-primary">
     </form>
 </div>
 

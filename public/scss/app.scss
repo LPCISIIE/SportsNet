@@ -1,24 +1,50 @@
 
 $navbarColor: #37474F;
 
+$linkColor: #607D8B;
+
+
+
 @import "../maestro/sass/style";
 @import "../maestro/sass/presets/typographie  ";
 @import 'form';
 @import "header";
 
+body,html {
+  min-height: 100%;
+}
+
 body {
   padding-top: 100px;
 }
 
-header > form {
-  float: right;
-  padding: 20px;
-  & > input[type="text"] {
-    background-color: lighten($navbarColor, 10);
-    border-color: darken($navbarColor, 5);
+a {
+  color: #607D8B;
+
+  &:hover {
+    color: $navbarColor;
+  }
+}
+
+a.btn:hover {
+  color: #FFF;
+}
+
+header {
+  a, a:hover, input {
     color: #FFF;
-    &:focus {
-      border-color: lighten($navbarColor, 20);
+  }
+
+  & > form {
+    float: right;
+    padding: 20px;
+    & > input[type="text"] {
+      background-color: lighten($navbarColor, 10);
+      border-color: darken($navbarColor, 5);
+      color: #FFF;
+      &:focus {
+        border-color: lighten($navbarColor, 20);
+      }
     }
   }
 }
@@ -27,6 +53,24 @@ header > form {
   font-size: 0.7em;
   padding: 2px 4px;
 }
+
+.card {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #FFF;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+  img {
+    max-width: 100%;
+  }
+
+  .card-title {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+  }
+}
+
 
 .close-alert {
   position: relative;
@@ -38,4 +82,35 @@ header > form {
   font-weight: bold;
   color: #FFF;
   cursor: pointer;
+}
+
+
+.bg-404 {
+
+  & > img {
+    width: 35%;
+  }
+
+}
+
+.show-epreuve-debut, .show-epreuve-fin {
+  padding-top: 50px;
+  text-align: center;
+
+  & > p:first-child {
+    font-weight: bold;
+  }
+}
+
+.show-epreuve-image > img {
+  max-width: 100%;
+}
+
+.etat-epreuve {
+  padding: 20px 0;
+  font-weight: bold;
+}
+
+#disqus_thread {
+  margin-top: 100px;
 }

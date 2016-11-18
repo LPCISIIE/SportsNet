@@ -7,6 +7,4 @@ $app->group('', function () {
     $this->get('/mes-epreuves', 'UserController:mesEpreuves')->setName('user.epreuves');
 })->add(new App\Middleware\AuthMiddleware($container));
 
-$app->group('', function () {
-  $this->get('/mes-evenements', 'UserController:mesEvenements')->setName('user.events');
-})->add(new App\Middleware\OrganisateurMiddleware($container));
+$app->get('/mes-evenements', 'UserController:mesEvenements')->setName('user.events')->add(new App\Middleware\OrganisateurMiddleware($container));

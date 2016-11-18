@@ -2218,6 +2218,14 @@ footer {
 input {
   background-color: transparent; }
 
+.help-block {
+  color: #B0413E; }
+
+.has-error input, .has-error textarea, .has-error input, .has-error textarea {
+  border-color: #B0413E; }
+.has-error .barre:before, .has-error .barre:after, .has-error .barre:before, .has-error .barre:after {
+  background-color: #B0413E; }
+
 .container {
   position: relative; }
 
@@ -2229,7 +2237,7 @@ input {
   padding: 0; }
   .page-header .page-header-content {
     font-weight: bold;
-    margin-top: 180px;
+    margin-top: 300px;
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: rgba(0, 0, 0, 0.7);
@@ -2240,9 +2248,25 @@ input {
       margin: 0;
       color: white; }
 
+.evenement-header {
+  margin-top: -23px; }
+
+body, html {
+  min-height: 100%; }
+
 body {
   padding-top: 100px; }
 
+a {
+  color: #607D8B; }
+  a:hover {
+    color: #37474F; }
+
+a.btn:hover {
+  color: #FFF; }
+
+header a, header a:hover, header input {
+  color: #FFF; }
 header > form {
   float: right;
   padding: 20px; }
@@ -2257,6 +2281,18 @@ header > form {
   font-size: 0.7em;
   padding: 2px 4px; }
 
+.card {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #FFF;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
+  .card img {
+    max-width: 100%; }
+  .card .card-title {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 1.5em; }
+
 .close-alert {
   position: relative;
   top: -2px;
@@ -2267,5 +2303,24 @@ header > form {
   font-weight: bold;
   color: #FFF;
   cursor: pointer; }
+
+.bg-404 > img {
+  width: 35%; }
+
+.show-epreuve-debut, .show-epreuve-fin {
+  padding-top: 50px;
+  text-align: center; }
+  .show-epreuve-debut > p:first-child, .show-epreuve-fin > p:first-child {
+    font-weight: bold; }
+
+.show-epreuve-image > img {
+  max-width: 100%; }
+
+.etat-epreuve {
+  padding: 20px 0;
+  font-weight: bold; }
+
+#disqus_thread {
+  margin-top: 100px; }
 
 /*# sourceMappingURL=app.css.map */

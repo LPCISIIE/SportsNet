@@ -2,32 +2,47 @@
 
 {% block body %}
 
+<div class="page-header evenement-header" style="background-image:url('{{ base_url() }}/{{ evenement.webPath }}')">
+    <div class="page-header-content">
+        {{ epreuve.nom }}
+    </div>
+</div>
 <div class="container">
-    <img src="{{ base_url() }}/{{ evenement.webPath }}" alt="Evenement" style="max-height: 200px;">
-    <h2>Épreuve : {{ epreuve.nom }}</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <h3>Début</h3>
+    <div class="row card">
+        <div class="col-md-4 show-epreuve-debut">
+            <p>Début</p>
             <p>{{ epreuve.date_debut|date('d F Y') }}</p>
             <p>{{ epreuve.date_debut|date('H') }}h{{ epreuve.date_debut|date('i') }}</p>
         </div>
-        <div class="col-md-4">
-            <img src="{{ base_url() }}/{{ epreuve.webPath }}" alt="Epreuve" style="width: 100%;">
+        <div class="col-md-4 show-epreuve-image">
+            <img src="{{ base_url() }}/{{ epreuve.webPath }}" alt="Epreuve">
         </div>
-        <div class="col-md-4">
-            <h3>Fin</h3>
+        <div class="col-md-4 show-epreuve-fin">
+            <p>Fin</p>
             <p>{{ epreuve.date_debut|date('d F Y') }}</p>
             <p>{{ epreuve.date_debut|date('H') }}h{{ epreuve.date_debut|date('i') }}</p>
         </div>
-        <div class="col-xs-12">
-            <p class="text-center">État de l'épreuve : {{ epreuve.state }}</p>
+        <div class="col-xs-12 centre">
+            <p class="etat-epreuve">État de l'épreuve : {{ epreuve.state }}</p>
+            <p>{{ epreuve.description }}</p>
+            <p>Capacité maximum : {{ epreuve.capacite }}</p>
+            <p>Prix de participation : {{ epreuve.prix }} €</p>
+            <a href="{{ path_for('resultat', {'event_id': evenement.id, 'trial_id': epreuve.id})  }}" class="btn btn-danger">Voir le classement</a>
+            <a href="{{ path_for('recherchePerso', {'event_id': evenement.id, 'trial_id': epreuve.id})  }}" class="btn btn-success">Voir mon résultat</a>
         </div>
     </div>
-    <hr>
-    <p class="well">{{ epreuve.description }}</p>
-    <p class="text-center">Capacité maximum : {{ epreuve.capacite }}</p>
-    <p class="text-center">Prix de participation : {{ epreuve.prix }} €</p>
-    <a href="{{ path_for('recherchePerso', {'event_id': evenement.id, 'trial_id': epreuve.id})  }}" class="btn btn-success">Voir mon résultat</a>
+    <div id="disqus_thread"></div>
 </div>
+<script id="dsq-count-scr" src="//sports-net.disqus.com/count.js" async></script>
+<script>
+    (function () {
+        var d = document, s = d.createElement('script');
+
+        s.src = '//sports-net.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
 {% endblock %}

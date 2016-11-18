@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Model;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Evenement extends Model
@@ -50,7 +51,7 @@ class Evenement extends Model
             case self::OUVERT:
                 return 'Ouvert à l\'inscription';
             case self::EN_COURS:
-                return 'Validé';
+                return 'En cours';
             case self::CLOS:
                 return 'Clos à l\'inscription';
             case self::EXPIRE:

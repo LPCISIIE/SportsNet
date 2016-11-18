@@ -1,8 +1,10 @@
 <header>
-    <a href="{{ path_for('home') }}" class="logo-header">SportNet</a>
+    <a href="{{ path_for('home') }}" class="logo-header">Sportsnet</a>
     <nav>
         <a href="#" class="menu-icon"></a>
         <ul>
+
+
             {% if auth.user.checkOrganisateur() %}
                 <li><a href="{{ path_for('user.epreuves') }}">Mes épreuves</a></li>
                 <li><a href="{{ path_for('user.events') }}">Mes événements</a></li>

@@ -30,10 +30,12 @@ class User extends EloquentUser
     {
         return $this->hasMany('App\Model\Evenement');
     }
+
     public function epreuves()
     {
         return $this->hasMany('App\Model\Epreuve');
     }
+
     public function checkOrganisateur()
     {
         return (Organisateur::where('user_id', $this->id)->first()) ? true : false;
