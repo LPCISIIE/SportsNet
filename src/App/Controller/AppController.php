@@ -10,6 +10,10 @@ class AppController extends Controller
 {
     public function home(Request $request, Response $response)
     {
+        if (!$this->auth->check()) {
+            return $this->redirect($response, 'login');
+        }
+
         return $this->view->render($response, 'App/home.twig');
     }
 
@@ -18,7 +22,10 @@ class AppController extends Controller
         $query = $request->getParam('q');
 
         if (!$query) {
-            throw $this->notFoundException($request, $response);
+            return $this->view->render($response, 'Error/error.twig', [
+                'title' => 'Recherche vide',
+                'description' => 'Veuillez renseigner des mots clés pour lancer la recherche'
+            ]);
         }
 
         $evenements = Evenement::where('nom', 'like', '%' . $query . '%')

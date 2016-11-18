@@ -102,7 +102,7 @@ class Controller
      */
     public function isOrganisateur()
     {
-        return (empty(Organisateur::where('user_id', $this->user()->id)->first())) ? false : true;
+        return Organisateur::where('user_id', $this->user()->id)->first() ? false : true;
     }
 
     public function __get($property)
