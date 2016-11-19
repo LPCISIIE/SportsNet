@@ -33,7 +33,7 @@ $(function () {
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var li=$('<li class="col-xs-6"></li>')
-                    var img=$('<img src="'+e.target.result+'"/>')
+                    var img=$('<img alt="image de la galerie" src="'+e.target.result+'"/>')
                     li.append(img);
                     $('.galleryPreview').append(li)
 
