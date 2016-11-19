@@ -3,7 +3,11 @@
 {% import 'Macro/form.twig' as form %}
 
 {% block body %}
-
+<div class="page-header pull-up" style="background-image: url('{{ base_url() }}/{{ evenement.webPath }}')">
+    <div class="page-header-content">
+            {{ form.group('nom', evenement.nom, 'nom', 'Nom') }}
+    </div>
+</div>
 <div class="container">
     <div class="page-header">
         <h1>Modifier un événement</h1>
