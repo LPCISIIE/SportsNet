@@ -3,7 +3,7 @@ $linkColor: #607D8B;
 
 @import "../maestro/sass/style";
 @import "../maestro/sass/presets/typographie";
-@import 'form';
+@import "form";
 @import "header";
 
 body, html {
@@ -37,6 +37,9 @@ header {
   }
 
   & > form {
+    @media screen and (max-width: 1240px) {
+      display: none;
+    }
     float: right;
     padding: 20px;
     & > input[type="text"] {
@@ -72,7 +75,7 @@ header {
 
 .close-alert {
   position: relative;
-  top: -2px;
+  top: -4px;
   background: transparent;
   border: none;
   float: right;
@@ -181,7 +184,6 @@ $epreuveHeight: 75px;
   padding: 2px 4px;
 }
 
-
 .material-icons {
    vertical-align: middle;
    margin-bottom: 0.1em;
@@ -190,4 +192,37 @@ $epreuveHeight: 75px;
   .md-24 { font-size: 24px; }
   .md-36 { font-size: 36px; }
   .md-48 { font-size: 48px; }
+}
+=======
+.absolute-flash {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+
+.modifyPicHeader{
+  position: absolute;
+  top: 0;
+  right: 0;
+  label{
+    width: 50px;
+    display: inline-block;
+    background-color: rgba(0,0,0,0.6);
+    padding: 10px;
+    border-radius: 10px;
+    img{
+      width: 100%;
+    }
+  }
+  input{
+    display: none;
+  }
+}
+
+.galleryPreview{
+  list-style: none;
+  img{
+    width: 100%;
+  }
 }

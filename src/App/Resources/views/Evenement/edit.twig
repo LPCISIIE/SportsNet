@@ -3,56 +3,81 @@
 {% import 'Macro/form.twig' as form %}
 
 {% block body %}
+<form  method="POST" enctype="multipart/form-data">
 
-<div class="container">
-    <div class="page-header">
-        <h1>Modifier un événement</h1>
-    </div>
+    <div class="page-header pull-up" style="background-image: url('{{ base_url() }}/{{ evenement.webPath }}')">
 
-    <a href="{{ path_for('epreuve.add', {'event_id': evenement.id}) }}" class="btn btn-default">Ajouter une épreuve</a>
-
-    <form action="" method="POST" enctype="multipart/form-data">
-        <div class="form-group{% if hasError('etat') %} has-error{% endif %}">
-            <label for="etat">État</label>
-            <select name="etat" id="etat" class="form-control">
-                <option value="0"{% if evenement.etat == 0 %} selected{% else %} disabled{% endif %}>Choisir un état</option>
-                <option value="1"{% if evenement.etat == 1 %} selected{% endif %}>Validé</option>
-                <option value="2"{% if evenement.etat == 2 %} selected{% endif %}>Ouvert à l'inscription</option>
-                <option value="4"{% if evenement.etat == 4 %} selected{% endif %}>Clos à l'inscription</option>
-                <option value="3"{% if evenement.etat == 3 %} selected{% endif %}>En cours</option>
-                <option value="5"{% if evenement.etat == 5 %} selected{% endif %}>Expiré</option>
-                <option value="6"{% if evenement.etat == 6 %} selected{% endif %}>Annulé</option>
-            </select>
-            <span class="help-block">{{ error('etat') }}</span>
-        </div>
-
-        <div class="form-group{% if hasError('image') %} has-error{% endif %}">
-            <label for="image">Image</label>
+        <div class="form-group{% if hasError('image') %} has-error{% endif %} modifyPicHeader">
+            <label for="image"><img alt="header" src="/img/photo.png" /></label>
             <input type="file" name="image" id="image">
             <span class="help-block">{{ error('image') }}</span>
         </div>
 
-        <div class="form-group">
-            <label for="image">Images de galerie</label>
-            <input type="file" name="galerie[]" id="galerie" multiple>
+        <div class="page-header-content">
+            {{ form.group('nom', evenement.nom, 'nom', 'Nom') }}
         </div>
 
-        {{ form.group('nom', evenement.nom, 'nom', 'Nom') }}
-        {{ form.group('date_debut', evenement.date_debut|date('d/m/Y'), 'date_debut', 'Commence le') }}
-        {{ form.group('date_fin', evenement.date_fin|date('d/m/Y'), 'date_fin', 'Se termine le') }}
-        {{ form.group('adresse', evenement.adresse, 'adresse', 'Lieu') }}
-        {{ form.group('discipline', evenement.discipline, 'discipline', 'Discipline') }}
-        {{ form.group('telephone', evenement.telephone, 'telephone', 'Téléphone de contact', null, 'number') }}
+    </div>
+    <div class="container">
+            <div class="formulaire{% if hasError('etat') %} has-error{% endif %}">
+                <label for="etat">État:</label>
+                <select name="etat" id="etat" class="form-control">
+                    <option value="0"{% if evenement.etat == 0 %} selected{% else %} disabled{% endif %}>Choisir un état</option>
+                    <option value="1"{% if evenement.etat == 1 %} selected{% endif %}>Validé</option>
+                    <option value="2"{% if evenement.etat == 2 %} selected{% endif %}>Ouvert à l'inscription</option>
+                    <option value="4"{% if evenement.etat == 4 %} selected{% endif %}>Clos à l'inscription</option>
+                    <option value="3"{% if evenement.etat == 3 %} selected{% endif %}>En cours</option>
+                    <option value="5"{% if evenement.etat == 5 %} selected{% endif %}>Expiré</option>
+                    <option value="6"{% if evenement.etat == 6 %} selected{% endif %}>Annulé</option>
+                </select>
+                <span class="help-block">{{ error('etat') }}</span>
+            </div>
 
-        <div class="form-group{% if hasError('description') %} has-error{% endif %}">
-            <label for="description">Description</label>
-            <textarea name="description" id="description" class="form-control" placeholder="Description">{{ evenement.description }}</textarea>
-            <span class="help-block">{{ error('description') }}</span>
+
+            {{ form.group('nom', evenement.nom, 'evenement_nom', 'Nom:') }}
+            {{ form.group('date_debut', evenement.date_debut|date('d/m/Y'), 'date_debut', 'Commence le: (dd/mm/yyyy)') }}
+            {{ form.group('date_fin', evenement.date_fin|date('d/m/Y'), 'date_fin', 'Se termine le: (dd/mm/yyyy)') }}
+            {{ form.group('adresse', evenement.adresse, 'adresse', 'Lieu:') }}
+            {{ form.group('discipline', evenement.discipline, 'discipline', 'Discipline:') }}
+            {{ form.group('telephone', evenement.telephone, 'telephone', 'Téléphone de contact:', null, 'number') }}
+
+            <div class="formulaire{% if hasError('description') %} has-error{% endif %}">
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" class="form-control" placeholder="Description">{{ evenement.description }}</textarea>
+                <span class="help-block">{{ error('description') }}</span>
+            </div>
+
+
+            <div class="form-group{% if hasError('galerie') %} has-error{% endif %} galerryAddPic">
+                <label for="image">Images de galerie</label>
+                <input type="file" name="galerie[]" id="galerie" multiple>
+                <ul class="galleryPreview">
+
+                </ul>
+                <span class="help-block">{{ error('galerie') }}</span>
+            </div>
+
+            {{ csrf() }} <br>
+            <input type="submit" class="btn btn-primary btn-extra-large">
+    </div>
+
+</form>
+
+    <div class="container">
+        <h3>Les épreuves:</h3>
+        <a href="{{ path_for('epreuve.add', {'event_id': evenement.id}) }}" class="btn btn-default btn-extra-large">Ajouter une épreuve</a>
+
+
+        {% for epreuve in epreuves %}
+        <div style="background-image:url('{{ base_url() }}/{{ epreuve.webPath }}')" class="card card-bg">
+            <div class='card-filtre'>
+                <a href="{{ path_for('epreuve.show', {'event_id': evenement.id, 'trial_id':epreuve.id})  }}" class="titre-card">{{ epreuve.nom }}</a>
+                <p class="blanc">{{ epreuve.description }}</p>
+                <a href="{{ path_for('trial.edit', {'event_id': evenement.id, 'trial_id':epreuve.id}) }}" class="btn btn-default">Modifier</a>
+                <a href="{{ path_for('epreuve.show', {'event_id': evenement.id, 'trial_id':epreuve.id}) }}" class="btn-orange">Voir</a>
+            </div>
         </div>
-
-        {{ csrf() }} <br>
-        <input type="submit" class="btn btn-primary">
-    </form>
-</div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
