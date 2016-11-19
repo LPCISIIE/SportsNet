@@ -3,11 +3,11 @@
 {% import 'Macro/form.twig' as form %}
 
 {% block body %}
-
-<div class="boite container">
-    <div class="page-header">
-        <h4>Mon compte :</h4>
+    <div class="page-header container">
+        <h3>Mon compte</h3>
     </div>
+<div class="boite container">
+
 
     <form action="{{ path_for('user.compte') }}" method="POST">
 
