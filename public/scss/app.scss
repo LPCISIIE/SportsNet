@@ -209,6 +209,24 @@ $epreuveHeight: 75px;
   }
 }
 
+.modifyPic {
+  label{
+    margin: auto;
+    width: 50px;
+    display: inline-block;
+    background-color: rgba(0,0,0,0.6);
+    padding: 10px;
+    border-radius: 10px;
+    img{
+      width: 100%;
+    }
+   
+  }
+   input{
+      display: none;
+    }
+}
+
 .galleryPreview{
   list-style: none;
   img{
