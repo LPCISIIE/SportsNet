@@ -329,10 +329,30 @@ class EpreuveController extends Controller
     public function join($request, $response, $args)
     {
         $evenement_id = $args['id_evenement'];
-        $evenement = Evenement::find($args["id_evenement"]);
+        $evenement = Evenement::find($args['id_evenement']);
         $epreuves = $evenement->epreuves()->get()->toArray();
-        $evenement = $evenement;
 
+        if (!$evenement) {
+            throw $this->notFoundException($request, $response);
+        }
+
+        if (
+            $evenement->etat == Evenement::ANNULE ||
+            $evenement->etat == Evenement::CLOS ||
+            $evenement->etat == Evenement::EXPIRE
+        ) {
+            return $this->view->render($response, 'Error/error.twig', [
+                'title' => 'Événement ' . lcfirst($evenement->getState()),
+                'description' => 'L\'événement est ' . lcfirst($evenement->getState()) . '. Vous ne pouvez pas rejoindre une épreuve.'
+            ]);
+        }
+
+        if ($evenement->etat == Evenement::CREE) {
+            return $this->view->render($response, 'Error/error.twig', [
+                'title' => 'Événement en cours de création',
+                'description' => 'L\'événement est n\'a pas encore été validé. Vous ne pouvez pas rejoindre une épreuve.'
+            ]);
+        }
 
         if ($request->isPost()) {
             $nom = $request->getParam('nom');

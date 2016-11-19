@@ -120,6 +120,7 @@ $epreuveHeight: 75px;
 
 }
 
+
 .bg-404 {
 
   & > img {
@@ -183,6 +184,16 @@ $epreuveHeight: 75px;
   padding: 2px 4px;
 }
 
+.material-icons {
+   vertical-align: middle;
+   margin-bottom: 0.1em;
+
+  .md-18 { font-size: 18px; }
+  .md-24 { font-size: 24px; }
+  .md-36 { font-size: 36px; }
+  .md-48 { font-size: 48px; }
+}
+=======
 .absolute-flash {
   position: absolute;
   left: 0;
