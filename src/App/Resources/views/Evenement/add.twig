@@ -22,10 +22,16 @@
                 {{ form.group('telephone', null, 'telephone', 'Téléphone', null, 'number') }}
 
                 <div class="formulaire{% if hasError('description') %} has-error{% endif %}">
+                    <label for="description">Description</label>
                     <textarea name="description" id="description" class=""></textarea>
                     <span class="barre"></span>
-                    <label for="description">Description</label>
                     <span class="help-block">{{ error('description') }}</span>
+                </div>
+
+                <div class="checkbox">
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="validate" checked> Valider après création
+                    </div>
                 </div>
 
                 {{ csrf() }}

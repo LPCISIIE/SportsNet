@@ -58,12 +58,12 @@ table {
 /**  2. Couleurs : */
 /** 3. Media Queries */
 /** 4. Variables autres */
-.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy {
+.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy, .btn-blanc {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none; }
 
-ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus {
+ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus, .btn-blanc:hover, .btn-blanc:active, .btn-blanc:focus {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.22), 0 2px 10px 0 rgba(0, 0, 0, 0.18); }
 
 .centrer {
@@ -99,7 +99,7 @@ ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:fo
 .minuscule {
   text-transform: lowercase; }
 
-.gras {
+.gras, .page-header .page-header-content {
   font-weight: bolder; }
 
 .forcer-droite {
@@ -2152,7 +2152,7 @@ footer {
 .minuscule {
   text-transform: lowercase; }
 
-.gras {
+.gras, .page-header .page-header-content {
   font-weight: bolder; }
 
 .forcer-droite {
@@ -2213,7 +2213,8 @@ footer {
   .formulaire .checkbox input {
     display: inline-block; }
 .formulaire label {
-  position: relative; }
+  position: relative;
+  top: -5px; }
 
 input {
   background-color: transparent; }
@@ -2230,13 +2231,12 @@ input {
   position: relative; }
 
 .page-header {
-  margin-top: 0;
+  margin-top: -25px;
   background-size: cover;
   background-position: center;
   color: white;
   padding: 0; }
   .page-header .page-header-content {
-    font-weight: bold;
     margin-top: 300px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -2248,14 +2248,15 @@ input {
       margin: 0;
       color: white; }
 
-.evenement-header {
+.pull-up {
   margin-top: -23px; }
 
 body, html {
   min-height: 100%; }
 
 body {
-  padding-top: 100px; }
+  padding-top: 100px;
+  text-align: left !important; }
 
 a {
   color: #607D8B; }
@@ -2275,6 +2276,9 @@ header a, header input {
 header > form {
   float: right;
   padding: 20px; }
+  @media screen and (max-width: 1240px) {
+    header > form {
+      display: none; } }
   header > form > input[type="text"] {
     background-color: #4c626d;
     border-color: #2d3940;
@@ -2284,7 +2288,6 @@ header > form {
 
 .card {
   margin-bottom: 20px;
-  padding: 20px;
   background-color: #FFF;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
   .card img {
@@ -2299,7 +2302,7 @@ header > form {
 
 .close-alert {
   position: relative;
-  top: -2px;
+  top: -4px;
   background: transparent;
   border: none;
   float: right;
@@ -2425,5 +2428,14 @@ header > form {
 
 #disqus_thread {
   margin-top: 100px; }
+
+.tiny-form {
+  font-size: 0.7em;
+  padding: 2px 4px; }
+
+.absolute-flash {
+  position: absolute;
+  left: 0;
+  right: 0; }
 
 /*# sourceMappingURL=app.css.map */

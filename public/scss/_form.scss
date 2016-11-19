@@ -57,6 +57,7 @@ $form-border-color-focus: lighten(#37474F, 20);
   }
   label{
     position: relative;
+    top: -5px;
   }
 }
 input{

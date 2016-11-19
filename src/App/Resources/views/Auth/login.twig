@@ -2,29 +2,31 @@
 
 {% import 'Macro/form.twig' as form %}
 
+{% block flash %}
+    <div class="absolute-flash">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
 {% block body %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form action="{{ path_for('login') }}" method="POST">
-                        {{ form.group('email', null, 'email', 'Email', null, 'email') }}
-                        {{ form.group('password', null, 'password', 'Password', null, 'password') }}
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="remember"> Remember me
-                            </label>
-                        </div>
-                        {{ csrf() }}
-                        <input type="submit" value="Login" class="btn btn-primary">
-                    </form>
-                </div>
-            </div>
-        </div>
+<div class="page-header pull-up" style="background-image:url('{{ base_url() }}/img/intro.jpg')">
+    <div class="page-header-content">
+        <span class="majuscule">SportsNet, le sport commence ici</span>
     </div>
+</div>
+
+<div class="container">
+    <form action="" method="POST">
+        {{ form.group('email', null, 'email', 'Adresse email', null, 'email') }}
+        {{ form.group('password', null, 'password', 'Mot de passe', null, 'password') }}
+
+        {{ csrf() }}
+        <div class="forcer-droite">
+            <input type="submit" value="Connexion" class="btn btn-vert">
+            <input type="checkbox" name="remember"> Se souvenir de moi
+        </div>
+    </form>
 </div>
 
 {% endblock %}
