@@ -33,7 +33,7 @@ Execute the following command in a terminal:
 ```bash
 $ php bootstrap/database.php
 ```
-or import `bootstrap/installation.sql` in your database manager
+or import `bootstrap/sportnet.sql` in your database manager
 
 ## Key files
 
