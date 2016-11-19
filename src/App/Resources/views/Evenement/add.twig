@@ -4,41 +4,44 @@
 
 {% block body %}
 
-<div class="container card">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <form action="" method="POST" enctype="multipart/form-data">
-                <div class="form-group{% if hasError('image') %} has-error{% endif %}">
-                    <label for="image">Image</label>
-                    <input type="file" name="image" id="image">
-                    <span class="help-block">{{ error('image') }}</span>
-                </div>
+<form method="POST" enctype="multipart/form-data">
 
-                {{ form.group('nom', null, 'nom', 'Nom') }}
-                {{ form.group('date_debut', null , 'date_debut', 'Début', null ) }}
-                {{ form.group('date_fin', null, 'date_fin', 'Fin', null) }}
-                {{ form.group('adresse', null, 'adresse', 'Lieu') }}
-                {{ form.group('discipline', null, 'discipline', 'Discipline') }}
-                {{ form.group('telephone', null, 'telephone', 'Téléphone', null, 'number') }}
-
-                <div class="formulaire{% if hasError('description') %} has-error{% endif %}">
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" class=""></textarea>
-                    <span class="barre"></span>
-                    <span class="help-block">{{ error('description') }}</span>
-                </div>
-
-                <div class="checkbox">
-                    <div class="checkbox-item">
-                        <input type="checkbox" name="validate" checked> Valider après création
-                    </div>
-                </div>
-
-                {{ csrf() }}
-                <input type="submit" class="btn" value="Créer">
-            </form>
-        </div>
+  <div class="page-header pull-up" style="background-image: url('{{ base_url() }}/{{ evenement.webPath }}')">
+    <div class="form-group{% if hasError('image') %} has-error{% endif %} modifyPicHeader">
+        <label for="image"><img alt="header" src="/img/photo.png" /></label>
+        <input type="file" name="image" id="image">
+        <span class="help-block">{{ error('image') }}</span>
     </div>
-</div>
+
+    <div class="page-header-content">
+        {{ form.group('nom', null, 'nom', 'Nom') }}
+    </div>
+  </div>
+
+  <div class="container">
+                  {{ form.group('date_debut', null , 'date_debut', 'Début', null ) }}
+                  {{ form.group('date_fin', null, 'date_fin', 'Fin', null) }}
+                  {{ form.group('adresse', null, 'adresse', 'Lieu') }}
+                  {{ form.group('discipline', null, 'discipline', 'Discipline') }}
+                  {{ form.group('telephone', null, 'telephone', 'Téléphone', null, 'number') }}
+
+                  <div class="formulaire{% if hasError('description') %} has-error{% endif %}">
+                      <label for="description">Description</label>
+                      <textarea name="description" id="description" class=""></textarea>
+                      <span class="barre"></span>
+                      <span class="help-block">{{ error('description') }}</span>
+                  </div>
+
+                  <div class="checkbox">
+                      <div class="checkbox-item">
+                          <input type="checkbox" name="validate" checked> Valider après création
+                      </div>
+                  </div>
+
+                  {{ csrf() }}
+                  <input type="submit" class="btn" value="Créer">
+  </div>
+
+</form>
 
 {% endblock %}
