@@ -18,7 +18,7 @@ $ composer install
 
 ### 3. Setup permissions
 ```bash
-chmod -R 777 cache
+chmod -R 777 cache/ public/
 ```
 
 ### 4. Link your database
