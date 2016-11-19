@@ -2231,6 +2231,7 @@ input {
   position: relative; }
 
 .page-header {
+  position: relative;
   margin-top: -25px;
   background-size: cover;
   background-position: center;
@@ -2437,5 +2438,20 @@ header > form {
   position: absolute;
   left: 0;
   right: 0; }
+
+.modifyPicHeader {
+  position: absolute;
+  top: 0;
+  right: 0; }
+  .modifyPicHeader label {
+    width: 50px;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 10px; }
+    .modifyPicHeader label img {
+      width: 100%; }
+  .modifyPicHeader input {
+    display: none; }
 
 /*# sourceMappingURL=app.css.map */
