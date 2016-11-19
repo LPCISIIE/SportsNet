@@ -10,10 +10,10 @@ class ImageSize extends AbstractRule
 	public function validate($input)
 	{
 		$image = $_FILES['galerie']['size'];
-		$b = false;
+		$b = true;
 		foreach ($image as $size) {
-			if($size <= 2000000) {
-				$b = true;
+			if($size >= 2000000) {
+				$b = false;
 			}
 		}
 		return $b;

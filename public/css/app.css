@@ -99,7 +99,7 @@ ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:fo
 .minuscule {
   text-transform: lowercase; }
 
-.gras {
+.gras, .page-header .page-header-content {
   font-weight: bolder; }
 
 .forcer-droite {
@@ -2152,7 +2152,7 @@ footer {
 .minuscule {
   text-transform: lowercase; }
 
-.gras {
+.gras, .page-header .page-header-content {
   font-weight: bolder; }
 
 .forcer-droite {
@@ -2230,13 +2230,12 @@ input {
   position: relative; }
 
 .page-header {
-  margin-top: 0;
+  margin-top: -25px;
   background-size: cover;
   background-position: center;
   color: white;
   padding: 0; }
   .page-header .page-header-content {
-    font-weight: bold;
     margin-top: 300px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -2247,6 +2246,7 @@ input {
       width: 100%;
       margin: 0;
       color: white; }
+
 
 .evenement-header {
   margin-top: -23px; }
@@ -2266,7 +2266,12 @@ a {
 a.btn:hover {
   color: #FFF; }
 
-header a, header a:hover, header input {
+.btn {
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0; }
+
+header a, header input {
   color: #FFF; }
 header > form {
   float: right;
@@ -2277,10 +2282,6 @@ header > form {
     color: #FFF; }
     header > form > input[type="text"]:focus {
       border-color: #617d8b; }
-
-.tiny-form {
-  font-size: 0.7em;
-  padding: 2px 4px; }
 
 .card {
   margin-bottom: 20px;
@@ -2323,6 +2324,13 @@ header > form {
     height: 100%;
     color: white;
     background-color: rgba(0, 0, 0, 0.6); }
+
+.galerie_evenement {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+  .galerie_evenement .img_galerie img {
+    width: 100%; }
 
 .bg-404 > img {
   width: 35%; }
@@ -2417,5 +2425,21 @@ header > form {
 
 #disqus_thread {
   margin-top: 100px; }
+
+.tiny-form {
+  font-size: 0.7em;
+  padding: 2px 4px; }
+
+.material-icons {
+  vertical-align: middle;
+  margin-bottom: 0.1em; }
+  .material-icons .md-18 {
+    font-size: 18px; }
+  .material-icons .md-24 {
+    font-size: 24px; }
+  .material-icons .md-36 {
+    font-size: 36px; }
+  .material-icons .md-48 {
+    font-size: 48px; }
 
 /*# sourceMappingURL=app.css.map */
