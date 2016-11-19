@@ -35,6 +35,7 @@
             <p>Prix de participation : {{ epreuve.prix }} €</p>
             <a href="{{ path_for('resultat', {'event_id': evenement.id, 'trial_id': epreuve.id})  }}" class="btn btn-danger">Voir le classement</a>
             <a href="{{ path_for('recherchePerso', {'event_id': evenement.id, 'trial_id': epreuve.id})  }}" class="btn btn-success">Voir mon résultat</a>
+            
         </div>
     </div>
     <div id="disqus_thread"></div>
