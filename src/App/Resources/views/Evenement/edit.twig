@@ -63,8 +63,21 @@
 
 </form>
 
-
+    <div class="container">
+        <h3>Les épreuves:</h3>
         <a href="{{ path_for('epreuve.add', {'event_id': evenement.id}) }}" class="btn btn-default btn-extra-large">Ajouter une épreuve</a>
 
+
+        {% for epreuve in epreuves %}
+        <div style="background-image:url('{{ base_url() }}/{{ epreuve.webPath }}')" class="card card-bg">
+            <div class='card-filtre'>
+                <a href="{{ path_for('evenement.show', {'id_evenement': epreuve.id}) }}" class="titre-card">{{ epreuve.nom }}</a>
+                <p class="blanc">{{ epreuve.description }}</p>
+                <a href="{{ path_for('trial.edit', {'event_id': evenement.id, 'trial_id':epreuve.id}) }}" class="btn btn-default">Modifier</a>
+                <a href="{{ path_for('epreuve.show', {'event_id': evenement.id, 'trial_id':epreuve.id}) }}" class="btn-orange">Voir</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
