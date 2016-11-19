@@ -2203,18 +2203,20 @@ footer {
 @media screen and (min-width: 200px) and (max-width: 1000px) and (orientation: portrait) {
   #form-triple-row-flex {
     flex-direction: column; } }
-.formulaire .checkbox {
-  width: auto;
-  display: inline-block;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap; }
-  .formulaire .checkbox input {
-    display: inline-block; }
-.formulaire label {
-  position: relative;
-  top: -5px; }
+.formulaire {
+  margin-bottom: 50px; }
+  .formulaire .checkbox {
+    width: auto;
+    display: inline-block;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap; }
+    .formulaire .checkbox input {
+      display: inline-block; }
+  .formulaire label {
+    position: relative;
+    top: -5px; }
 
 input {
   background-color: transparent; }
@@ -2226,6 +2228,13 @@ input {
   border-color: #B0413E; }
 .has-error .barre:before, .has-error .barre:after, .has-error .barre:before, .has-error .barre:after {
   background-color: #B0413E; }
+
+textarea {
+  box-sizing: border-box;
+  background-color: transparent; }
+
+select {
+  background-color: transparent; }
 
 .container {
   position: relative; }
@@ -2453,5 +2462,10 @@ header > form {
       width: 100%; }
   .modifyPicHeader input {
     display: none; }
+
+.galleryPreview {
+  list-style: none; }
+  .galleryPreview img {
+    width: 100%; }
 
 /*# sourceMappingURL=app.css.map */

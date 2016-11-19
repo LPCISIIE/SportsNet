@@ -43,6 +43,7 @@ $form-border-color-focus: lighten(#37474F, 20);
 
 
 .formulaire{
+  margin-bottom: 50px;;
   .checkbox{
     width: auto;
     display: inline-block;
@@ -76,4 +77,15 @@ input{
   .barre:before, .barre:after {
     background-color: #B0413E;
   }
+}
+
+
+textarea{
+  box-sizing: border-box;
+  background-color: transparent;
+
+}
+
+select{
+  background-color: transparent;
 }
