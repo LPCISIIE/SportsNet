@@ -71,7 +71,7 @@
 
 
 
-    @media #{$mq-tablette} {
+    @media #{$mq-desktop} {
     	position: if($fixed, fixed, relative);
         height: $hauteur;
 
