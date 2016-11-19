@@ -200,7 +200,8 @@ class EpreuveController extends Controller
         }
 
         return $this->view->render($response, 'Epreuve/edit.twig', [
-            'epreuve' => $epreuve
+            'epreuve' => $epreuve,
+            'evenement' => $evenement
         ]);
     }
 

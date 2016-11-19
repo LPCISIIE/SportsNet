@@ -29,12 +29,10 @@
                     </div>
 
                     <div class="col-md-4 centrer">
-                        <div class="flex-row centre">
-                            <span class="centre col-md-12">Changer d'image : </span>
-                        </div>
 
                         <div class="flex-row">
-                            <div class="form-group{% if hasError('epreuve_pic_link') %} has-error{% endif %} form-input col-md-12 centre centrer">
+                            <div class="form-group{% if hasError('epreuve_pic_link') %} has-error{% endif %} form-input col-md-12 centre centrer modifyPic">
+                                <label for="image"><img alt="header" src="/img/photo.png" /></label>
                                 <input type="file" name="epreuve_pic_link" id="epreuve_pic_link">
                                 <span class="help-block">{{ error('epreuve_pic_link') }}</span>
                             </div>
@@ -96,7 +94,7 @@
                 <div class="flex-row">
                     <div class="col-md-4 offset-md-4 centre centrer">
                         <div class="flex-row centre">
-                                <span class="centre col-md-12">Changer d'image : </span>
+                                <span class="centre col-md-12">Chargez les résultats (.csv) : </span>
                         </div>
 
                         <div class="flex-row">
@@ -111,7 +109,7 @@
                 {{ csrf() }}
                 <div class="flex-row">
                     <div class="col-md-6 offset-md-3 centre centrer">
-                        <input type="submit" class="btn btn-primary form-resized" value="Créer l'épreuve">
+                        <input type="submit" class="btn btn-primary form-resized" value="Valider modifications">
                     </div>
                 </div>
             </form>
