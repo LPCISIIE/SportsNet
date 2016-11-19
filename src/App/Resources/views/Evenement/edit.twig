@@ -32,9 +32,10 @@
             <span class="help-block">{{ error('image') }}</span>
         </div>
 
-        <div class="form-group">
+        <div class="form-group{% if hasError('galerie') %} has-error{% endif %}">
             <label for="image">Images de galerie</label>
             <input type="file" name="galerie[]" id="galerie" multiple>
+            <span class="help-block">{{ error('galerie') }}</span>
         </div>
 
         {{ form.group('nom', evenement.nom, 'nom', 'Nom') }}

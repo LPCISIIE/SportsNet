@@ -22,7 +22,7 @@ class EvenementController extends Controller
                 'adresse' => V::length(1, 100),
                 'date_debut' => V::date('d/m/Y'),
                 'date_fin' => V::date('d/m/Y'),
-                'telephone' => V::phone(),
+                'telephone' => V::phone()->length(10, 10),
                 'discipline' => V::length(1, 50),
                 'description' => V::notBlank()
             ]);
@@ -47,7 +47,7 @@ class EvenementController extends Controller
                     'telephone' => $request->getParam('telephone'),
                     'discipline' => $request->getParam('discipline'),
                     'description' => $request->getParam('description'),
-                    'etat' => Evenement::CREE,
+                    'etat' => $request->getParam('validate') ? Evenement::VALIDE : Evenement::CREE
                 ]);
                 $evenement->user()->associate($this->user());
                 $evenement->save();
@@ -57,7 +57,9 @@ class EvenementController extends Controller
                 $file->upload('header');
 
                 $this->flash('success', 'L\'événement "' . $request->getParam('nom') . '" a bien été crée !');
-                return $this->redirect($response, 'home');
+                return $this->redirect($response, 'evenement.show', [
+                    'id_evenement' => $evenement->id
+                ]);
             }
         }
 
@@ -105,7 +107,7 @@ class EvenementController extends Controller
                 'discipline' => V::length(1, 50),
                 'description' => V::notBlank(),
                 'etat' => V::intVal(),
-                'galerie' => V::ImageSize()->ImageFormat()
+                'galerie' => V::optional(V::ImageSize()->ImageFormat())
             ]);
 
             $etat = $request->getParam('etat');
