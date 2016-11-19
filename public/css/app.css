@@ -2203,18 +2203,20 @@ footer {
 @media screen and (min-width: 200px) and (max-width: 1000px) and (orientation: portrait) {
   #form-triple-row-flex {
     flex-direction: column; } }
-.formulaire .checkbox {
-  width: auto;
-  display: inline-block;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap; }
-  .formulaire .checkbox input {
-    display: inline-block; }
-.formulaire label {
-  position: relative;
-  top: -5px; }
+.formulaire {
+  margin-bottom: 50px; }
+  .formulaire .checkbox {
+    width: auto;
+    display: inline-block;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap; }
+    .formulaire .checkbox input {
+      display: inline-block; }
+  .formulaire label {
+    position: relative;
+    top: -5px; }
 
 input {
   background-color: transparent; }
@@ -2227,10 +2229,18 @@ input {
 .has-error .barre:before, .has-error .barre:after, .has-error .barre:before, .has-error .barre:after {
   background-color: #B0413E; }
 
+textarea {
+  box-sizing: border-box;
+  background-color: transparent; }
+
+select {
+  background-color: transparent; }
+
 .container {
   position: relative; }
 
 .page-header {
+  position: relative;
   margin-top: -25px;
   background-size: cover;
   background-position: center;
@@ -2437,5 +2447,25 @@ header > form {
   position: absolute;
   left: 0;
   right: 0; }
+
+.modifyPicHeader {
+  position: absolute;
+  top: 0;
+  right: 0; }
+  .modifyPicHeader label {
+    width: 50px;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 10px; }
+    .modifyPicHeader label img {
+      width: 100%; }
+  .modifyPicHeader input {
+    display: none; }
+
+.galleryPreview {
+  list-style: none; }
+  .galleryPreview img {
+    width: 100%; }
 
 /*# sourceMappingURL=app.css.map */

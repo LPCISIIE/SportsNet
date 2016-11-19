@@ -188,3 +188,30 @@ $epreuveHeight: 75px;
   left: 0;
   right: 0;
 }
+
+
+.modifyPicHeader{
+  position: absolute;
+  top: 0;
+  right: 0;
+  label{
+    width: 50px;
+    display: inline-block;
+    background-color: rgba(0,0,0,0.6);
+    padding: 10px;
+    border-radius: 10px;
+    img{
+      width: 100%;
+    }
+  }
+  input{
+    display: none;
+  }
+}
+
+.galleryPreview{
+  list-style: none;
+  img{
+    width: 100%;
+  }
+}
