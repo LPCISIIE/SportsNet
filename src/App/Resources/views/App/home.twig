@@ -4,8 +4,29 @@
 
 <div class="container">
     <div class="jumbotron">
-        <h1>Hello world!</h1>
+        <h3>Derniers événements</h3>
     </div>
+
+    {% for event in evenements %}
+        <div style='background-image: url("{{ base_url() }}/{{ event.webPath }}");' class="card card-bg">
+            <div class='card-filtre'>
+                <a href="{{ path_for('evenement.show', {'id_evenement': event.id}) }}" class="titre-card">{{ event.nom }}</a>
+                <p class="blanc">{{ event.description }}</p>
+                <p>
+                    {% if
+                    event.getState() == "Ouvert"
+                    or event.getState() == "Créé"
+                    or event.getState() == "Validé"
+                    or event.getState() == "Ouvert à l'inscription"
+                    %}
+                        <button class="forcer-droite btn-vert">{{ event.getState()}}</button>
+                    {% else  %}
+                        <button class="forcer-droite btn-rouge">{{ event.getState()}}</button>
+                    {% endif %}
+                </p> <br> <br> <br>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 
 {% endblock %}

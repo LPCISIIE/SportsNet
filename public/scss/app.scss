@@ -1,21 +1,18 @@
-
 $navbarColor: #37474F;
-
 $linkColor: #607D8B;
-
-
 
 @import "../maestro/sass/style";
 @import "../maestro/sass/presets/typographie";
-@import 'form';
+@import "form";
 @import "header";
 
-body,html {
+body, html {
   min-height: 100%;
 }
 
 body {
   padding-top: 100px;
+  text-align: left !important;
 }
 
 a {
@@ -29,13 +26,20 @@ a {
 a.btn:hover {
   color: #FFF;
 }
-
+.btn{
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+}
 header {
-  a, a:hover, input {
+  a, input {
     color: #FFF;
   }
 
   & > form {
+    @media screen and (max-width: 1240px) {
+      display: none;
+    }
     float: right;
     padding: 20px;
     & > input[type="text"] {
@@ -49,14 +53,8 @@ header {
   }
 }
 
-.tiny-form {
-  font-size: 0.7em;
-  padding: 2px 4px;
-}
-
 .card {
   margin-bottom: 20px;
-  padding: 20px;
   background-color: #FFF;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
@@ -71,10 +69,13 @@ header {
   }
 }
 
+.card-lg {
+  padding: 20px;
+}
 
 .close-alert {
   position: relative;
-  top: -2px;
+  top: -4px;
   background: transparent;
   border: none;
   float: right;
@@ -84,31 +85,40 @@ header {
   cursor: pointer;
 }
 
-
-
-$epreuveHeight:75px;
-.evenement-information{
+$epreuveHeight: 75px;
+.evenement-information {
   @extend %centre;
   padding-bottom: 20px;
-  .evenement-information-item{
+  .evenement-information-item {
     padding-bottom: 10px;
   }
 }
-.evenement_description{
-  height: $epreuveHeight ;
+
+.evenement_description {
+  height: $epreuveHeight;
   background-size: cover;
   background-position: center;
   margin-bottom: 10px;
-  .nom_epreuve{
+  .nom_epreuve {
     @extend %centre;
     line-height: $epreuveHeight;
     font-size: 2em;
     height: 100%;
     color: white;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }
+.galerie_evenement{
+  display: flex;
+  flex-direction: row;
+    flex-wrap: wrap;
+  .img_galerie{
+    img{
+      width: 100%;
+    }
+  }
 
+}
 
 .bg-404 {
 
@@ -116,6 +126,34 @@ $epreuveHeight:75px;
     width: 35%;
   }
 
+}
+
+.card-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card-filtre {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+
+.btn-blanc {
+  @include bouton(#fff, white, #e2e2e2, $blancEffet);
+  color: black;
+  @include tailleBouton(1.1em 1em, 1em);
+}
+
+.titre-card {
+  color: white;
+  font-size: 50px;
+  @include transition(0.3s);
+
+  &:hover {
+    @include transition(0.3s);
+    color: white;
+  }
 }
 
 .show-epreuve-debut, .show-epreuve-fin {
@@ -138,4 +176,42 @@ $epreuveHeight:75px;
 
 #disqus_thread {
   margin-top: 100px;
+}
+
+.tiny-form {
+  font-size: 0.7em;
+  padding: 2px 4px;
+}
+
+.absolute-flash {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+
+.modifyPicHeader{
+  position: absolute;
+  top: 0;
+  right: 0;
+  label{
+    width: 50px;
+    display: inline-block;
+    background-color: rgba(0,0,0,0.6);
+    padding: 10px;
+    border-radius: 10px;
+    img{
+      width: 100%;
+    }
+  }
+  input{
+    display: none;
+  }
+}
+
+.galleryPreview{
+  list-style: none;
+  img{
+    width: 100%;
+  }
 }

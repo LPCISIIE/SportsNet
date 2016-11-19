@@ -54,16 +54,16 @@ table {
 * Fichier des variables globales
 * @author: Xavier CHOPIN
 */
-/**  1. Police d'├®criture : */
+/**  1. Police d'écriture : */
 /**  2. Couleurs : */
 /** 3. Media Queries */
 /** 4. Variables autres */
-.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy {
+.btn, .btn-simple, .btn-vert, .btn-rouge, .btn-orange, .btn-theme, .btn-flat, .btn-fancy, .btn-blanc {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none; }
 
-ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus {
+ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:focus, .btn-simple:hover, .btn-simple:active, .btn-simple:focus, .btn-vert:hover, .btn-vert:active, .btn-vert:focus, .btn-rouge:hover, .btn-rouge:active, .btn-rouge:focus, .btn-orange:hover, .btn-orange:active, .btn-orange:focus, .btn-theme:hover, .btn-theme:active, .btn-theme:focus, .btn-flat:hover, .btn-flat:active, .btn-flat:focus, .btn-blanc:hover, .btn-blanc:active, .btn-blanc:focus {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.22), 0 2px 10px 0 rgba(0, 0, 0, 0.18); }
 
 .centrer {
@@ -99,7 +99,7 @@ ul.breadcrumb a:hover, ul.pagination li.active, .btn:hover, .btn:active, .btn:fo
 .minuscule {
   text-transform: lowercase; }
 
-.gras {
+.gras, .page-header .page-header-content {
   font-weight: bolder; }
 
 .forcer-droite {
@@ -2011,7 +2011,7 @@ input.simple-vert {
   to {
     background: transparent;
     width: 0; } }
-/* - - - - - - -  Maestro, ├á toi de jouer  - - - - - - - - - */
+/* - - - - - - -  Maestro, à toi de jouer  - - - - - - - - - */
 body {
   padding-top: 75px;
   height: 100%; }
@@ -2032,7 +2032,7 @@ hr {
 pre {
   font-family: 'Source Code Pro', monospace;
   white-space: pre-wrap;
-  /* Depuis la pr├®histoire */
+  /* Depuis la préhistoire */
   white-space: -moz-pre-wrap;
   /* Mozifox, depuis 1999 */
   white-space: -pre-wrap;
@@ -2152,7 +2152,7 @@ footer {
 .minuscule {
   text-transform: lowercase; }
 
-.gras {
+.gras, .page-header .page-header-content {
   font-weight: bolder; }
 
 .forcer-droite {
@@ -2203,17 +2203,20 @@ footer {
 @media screen and (min-width: 200px) and (max-width: 1000px) and (orientation: portrait) {
   #form-triple-row-flex {
     flex-direction: column; } }
-.formulaire .checkbox {
-  width: auto;
-  display: inline-block;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap; }
-  .formulaire .checkbox input {
-    display: inline-block; }
-.formulaire label {
-  position: relative; }
+.formulaire {
+  margin-bottom: 50px; }
+  .formulaire .checkbox {
+    width: auto;
+    display: inline-block;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap; }
+    .formulaire .checkbox input {
+      display: inline-block; }
+  .formulaire label {
+    position: relative;
+    top: -5px; }
 
 input {
   background-color: transparent; }
@@ -2226,17 +2229,24 @@ input {
 .has-error .barre:before, .has-error .barre:after, .has-error .barre:before, .has-error .barre:after {
   background-color: #B0413E; }
 
+textarea {
+  box-sizing: border-box;
+  background-color: transparent; }
+
+select {
+  background-color: transparent; }
+
 .container {
   position: relative; }
 
 .page-header {
-  margin-top: 0;
+  position: relative;
+  margin-top: -25px;
   background-size: cover;
   background-position: center;
   color: white;
   padding: 0; }
   .page-header .page-header-content {
-    font-weight: bold;
     margin-top: 300px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -2248,14 +2258,15 @@ input {
       margin: 0;
       color: white; }
 
-.evenement-header {
+.pull-up {
   margin-top: -23px; }
 
 body, html {
   min-height: 100%; }
 
 body {
-  padding-top: 100px; }
+  padding-top: 100px;
+  text-align: left !important; }
 
 a {
   color: #607D8B; }
@@ -2265,11 +2276,19 @@ a {
 a.btn:hover {
   color: #FFF; }
 
-header a, header a:hover, header input {
+.btn {
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0; }
+
+header a, header input {
   color: #FFF; }
 header > form {
   float: right;
   padding: 20px; }
+  @media screen and (max-width: 1240px) {
+    header > form {
+      display: none; } }
   header > form > input[type="text"] {
     background-color: #4c626d;
     border-color: #2d3940;
@@ -2277,13 +2296,8 @@ header > form {
     header > form > input[type="text"]:focus {
       border-color: #617d8b; }
 
-.tiny-form {
-  font-size: 0.7em;
-  padding: 2px 4px; }
-
 .card {
   margin-bottom: 20px;
-  padding: 20px;
   background-color: #FFF;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
   .card img {
@@ -2293,9 +2307,12 @@ header > form {
     margin-bottom: 10px;
     font-size: 1.5em; }
 
+.card-lg {
+  padding: 20px; }
+
 .close-alert {
   position: relative;
-  top: -2px;
+  top: -4px;
   background: transparent;
   border: none;
   float: right;
@@ -2321,8 +2338,90 @@ header > form {
     color: white;
     background-color: rgba(0, 0, 0, 0.6); }
 
+.galerie_evenement {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+  .galerie_evenement .img_galerie img {
+    width: 100%; }
+
 .bg-404 > img {
   width: 35%; }
+
+.card-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.card-filtre {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px; }
+
+.btn-blanc {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  margin: 0.5em;
+  color: #fff;
+  background-color: white;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: .5px;
+  font-weight: bolder;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  border: none;
+  border-radius: 2px;
+  line-height: 0px;
+  outline: 0;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: black;
+  padding: 1.1em 1em;
+  font-size: 1em; }
+  .btn-blanc:hover, .btn-blanc:active, .btn-blanc:focus {
+    background-color: #e2e2e2; }
+  .btn-blanc:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120%;
+    height: 120px;
+    margin-left: -60%;
+    margin-top: -60px;
+    background: #f0f0f0;
+    border-radius: 100%;
+    opacity: 0.5;
+    transform: scale(0); }
+  .btn-blanc:not(:active):after {
+    animation: ripple 1s ease-out; }
+  @media all and (max-width: 350px) {
+    .btn-blanc {
+      font-size: 100%; } }
+
+.titre-card {
+  color: white;
+  font-size: 50px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+  .titre-card:hover {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    color: white; }
 
 .show-epreuve-debut, .show-epreuve-fin {
   padding-top: 50px;
@@ -2339,5 +2438,34 @@ header > form {
 
 #disqus_thread {
   margin-top: 100px; }
+
+.tiny-form {
+  font-size: 0.7em;
+  padding: 2px 4px; }
+
+.absolute-flash {
+  position: absolute;
+  left: 0;
+  right: 0; }
+
+.modifyPicHeader {
+  position: absolute;
+  top: 0;
+  right: 0; }
+  .modifyPicHeader label {
+    width: 50px;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 10px; }
+    .modifyPicHeader label img {
+      width: 100%; }
+  .modifyPicHeader input {
+    display: none; }
+
+.galleryPreview {
+  list-style: none; }
+  .galleryPreview img {
+    width: 100%; }
 
 /*# sourceMappingURL=app.css.map */

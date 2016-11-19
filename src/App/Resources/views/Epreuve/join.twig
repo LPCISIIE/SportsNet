@@ -2,9 +2,15 @@
 
 {% import 'Macro/form.twig' as form %}
 
+{% block flash %}
+    <div class="absolute-flash">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
 {% block body %}
 
-<div class="page-header evenement-header" style="background-image:url('{{ base_url() }}/{{ evenement.webPath }}')">
+<div class="page-header pull-up" style="background-image:url('{{ base_url() }}/{{ evenement.webPath }}')">
     <div class="page-header-content">
         {{ evenement.nom }}
     </div>
@@ -31,7 +37,7 @@
             <input type="submit" value="S'inscrire" class="btn btn-primary">
         </form>
     {% else %}
-        <p class="card">
+        <p class="card card-lg">
             Cet événement ne contient aucune épreuve. Revenez plus tard !
         </p>
     {% endif %}

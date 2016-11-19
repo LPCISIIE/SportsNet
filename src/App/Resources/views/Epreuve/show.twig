@@ -1,8 +1,14 @@
 {% extends 'layout.twig' %}
 
+{% block flash %}
+    <div class="absolute-flash">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
 {% block body %}
 
-<div class="page-header evenement-header" style="background-image:url('{{ base_url() }}/{{ evenement.webPath }}')">
+<div class="page-header pull-up" style="background-image:url('{{ base_url() }}/{{ evenement.webPath }}')">
     <div class="page-header-content">
         {{ epreuve.nom }}
     </div>
