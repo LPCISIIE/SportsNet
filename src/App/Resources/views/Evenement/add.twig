@@ -8,7 +8,10 @@
 
   <div class="page-header pull-up" style="background-image: url('{{ base_url() }}/{{ evenement.webPath }}')">
     <div class="form-group{% if hasError('image') %} has-error{% endif %} modifyPicHeader">
-        <label for="image"><img alt="header" src="/img/photo.png" /></label>
+        <label style='width:10em;'  for="image">
+            <p class="centrer centre">
+                Ajouter une image <br> <i class="material-icons md-24">add_a_photo</i>
+           </p></label>
         <input type="file" name="image" id="image">
         <span class="help-block">{{ error('image') }}</span>
     </div>
