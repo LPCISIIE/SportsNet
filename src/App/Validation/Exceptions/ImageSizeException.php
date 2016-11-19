@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Validation\Exceptions;
 
 use Respect\Validation\Exceptions\ValidationException;
@@ -8,9 +7,9 @@ use Respect\Validation\Exceptions\ValidationException;
 class ImageSizeException extends ValidationException
 {
 	public static $defaultTemplates = [
-			self::MODE_DEFAULT => [
-					self::STANDARD => 'The picture size must be below 500 Ko.',
-			],
+        self::MODE_DEFAULT => [
+            self::STANDARD => 'L\'image ne doit pas peser plus de 500 Ko.',
+        ],
 	];
 }
 

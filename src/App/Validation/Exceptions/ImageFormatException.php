@@ -7,9 +7,9 @@ use Respect\Validation\Exceptions\ValidationException;
 class ImageFormatException extends ValidationException
 {
 	public static $defaultTemplates = [
-			self::MODE_DEFAULT => [
-					self::STANDARD => 'You can only use .jpg/.png images, sorry !',
-			],
+        self::MODE_DEFAULT => [
+            self::STANDARD => 'Extension non autorisée. Veuillez envoyer une image au format .jpg ou .png.',
+        ],
 	];
 }
 
