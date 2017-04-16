@@ -1,6 +1,6 @@
 <p align="center"><img style="margin-bottom:3em;" width="150"src="http://www.rogersmedia.com/wp-content/uploads/2013/09/sportsnet.png"> 
 <br> <br>
-[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?style=flat-square)]()  
+<img src="https://img.shields.io/packagist/l/doctrine/orm.svg?style=flat-square" alt="mit">  
    </p>  <br>
 
 SportsNet is a web application to create and manage sports events.
